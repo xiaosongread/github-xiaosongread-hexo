@@ -6,7 +6,7 @@
 	3.npm 安装
 	4.github 账号
 
-> ##### <font color=red>如果您是开发人员，这应该都有，不会的可以网上找，依照一大堆的。</font>
+> <font color=red>如果您是开发人员，这应该都有，不会的可以网上找，依照一大堆的。</font>
 
 
 [点击查看参考博客](https://www.cnblogs.com/trista222/p/8017300.html)
