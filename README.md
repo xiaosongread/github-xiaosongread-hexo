@@ -22,14 +22,25 @@
 ```javascript
 	hexo v
 ```
-出现以下，说明安装成功
+出现以下，说明安装成功   
+
 ![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/1.png)
 
 > 别着急，就快成功了，再坚持一小小下
 
-
-
-
+#### 三、初始化hexo：   
+1.继续输入
+```javascript
+	hexo init
+```
+实现初始化   
+2.下载好了，再输入
+```javascript
+	hexo s
+```
+![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/2.png)   
+>这时候我们就可以打开浏览器了，在地址栏中输入http://localhost:400/，我们就可以看到如下图的界面   
+![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/3.png)   
 
 
 
