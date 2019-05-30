@@ -45,9 +45,34 @@
 
 > #### **基本搭建完成，其实你才完成了一半**
 
-#### 四、文件目录：
+#### 四、上传项目：   
+1.在github上面先创建一个项目，特别注意，名称的命名
+>github的用户名要和创建的博客的项目名称一致，如下：   
+
+![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/5.png)
+
+> **名称格式：username.github.io**
+
+2.打开项目中_config.yml（配置文件），对它做如下修改，repository后面的内容是 git@gitbub.com:username/库地址 的形式    
+
+> **type、repository、branch冒号的后面都有一个空格**
+
+![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/6.jpg)
+
+3.#### 回到shell，输入：
+```javascript
+	npm install hexo-deployer-git --save   
+	hexo g   
+	hexo d   
+```
+
+##### 部署完之后将代码中的 **public**下的文件传到你创建的git项目下面，这样别人也可以通过域名访问我们博客了。在地址栏输入http://域名就可以访问。比如：http://xiaosongread.github.io
+
+#### 五、文件目录：
 
 ![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/4.png)   
+
+#### 六、：更换主题：   
 
 
 
