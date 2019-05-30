@@ -40,8 +40,14 @@
 ```
 ![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/2.png)   
 >这时候我们就可以打开浏览器了，在地址栏中输入http://localhost:400/，我们就可以看到如下图的界面   
+
 ![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/3.png)   
 
+> #### **基本搭建完成，其实你才完成了一半**
+
+#### 四、文件目录：
+
+![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/4.png)   
 
 
 
