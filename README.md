@@ -95,9 +95,24 @@ hexo s|本地启动服务
 hexo new 'filename'|创建md文件
 hexo s hexo g|修改内容打包文件
 
-#### 八、常见疑问：
+#### 八、常见使用疑问：
 1.此项目没有后台系统如何录数据？
+此系统录入数据的步骤是：
+* hexo new 'filename'（新建.md文件）
+* 用markdown格式排版内容
+* hexo s hexo g 重新打包上传就页面可以看见你添加的文章    
 
+2.如何为文章分类？
+添加分类列表，设置文章的 categories 字段然后访问 /categories/front-end
+
+```
+---
+title: Hello World
+date: 2017-10-20 20:00:00
+categories: front-end
+---
+```
+如何设置分页，截断文章等不会的问题可以在本项目提交issues,或者访问[本主题](https://github.com/sanonz/hexo-theme-concise)查看
 
 #### 九、配置自定义域名：
 
