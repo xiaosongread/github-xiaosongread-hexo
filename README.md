@@ -105,10 +105,6 @@ hexo s hexo g|修改内容打包文件
 2.如何为文章分类？
 添加分类列表，设置文章的 categories 字段然后访问 /categories/front-end
 
-> **需要了解markdown的基本语法**
-
-[常用markdown语法](https://github.com/xiaosongread/markdow)   
-
 ```
 ---
 title: Hello World
@@ -117,6 +113,11 @@ categories: front-end
 ---
 ```
 如何设置分页，截断文章等不会的问题可以在本项目提交issues,或者访问[本主题](https://github.com/sanonz/hexo-theme-concise)查看
+
+> **需要了解markdown的基本语法**
+
+[常用markdown语法](https://github.com/xiaosongread/markdow)   
+
 
 #### 九、配置自定义域名：
 
