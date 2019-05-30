@@ -105,6 +105,10 @@ hexo s hexo g|修改内容打包文件
 2.如何为文章分类？
 添加分类列表，设置文章的 categories 字段然后访问 /categories/front-end
 
+> **需要了解markdown的基本语法**
+
+[常用markdown语法](https://github.com/xiaosongread/markdow)   
+
 ```
 ---
 title: Hello World
