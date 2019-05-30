@@ -78,15 +78,22 @@
 将下载下来的主题中的所有文件copy到你的代码中的themes文件夹中(可以新建一个主题文件夹，比如landscape1),修改文件根目录的配置文件的主题名，如下   
 ![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/7.png)   
 
-##### 重新打包项目
+> **此主题可能最后样式可以不起作用，应为此模板用了less，需要安装 npm install hexo-renderer-less --save **
+
+##### 然后重新打包项目
 ``` 
 hexo g
 hexo d
 ```
-重新将public文件上传到你的github项目中。
+接着重新将public文件上传到你的github项目中。
 
-#### 七、使用方法：
+#### 七、使用方法：   
 
+shell|表头
+---|:--:
+hexo s|本地启动服务
+hexo new 'filename'|创建md文件
+hexo s hexo g|修改内容打包文件
 
 #### 八、常见问题：
 
