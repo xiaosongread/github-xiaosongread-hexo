@@ -76,9 +76,9 @@
 我更换的主题是：https://github.com/Sanonz/hexo-theme-concise，将次项目clone下来，其他主题：[hexo主题](https://hexo.io/themes/)   
 
 将下载下来的主题中的所有文件copy到你的代码中的themes文件夹中(可以新建一个主题文件夹，比如landscape1),修改文件根目录的配置文件的主题名，如下   
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/7.png)   
+![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/7.jpg)   
 
-> **此主题可能最后样式可以不起作用，应为此模板用了less，需要安装 npm install hexo-renderer-less --save **
+> **此主题可能最后样式可以不起作用，应为此模板用了less，需要安装 npm install hexo-renderer-less --save**
 
 ##### 然后重新打包项目
 ``` 
@@ -95,7 +95,9 @@ hexo s|本地启动服务
 hexo new 'filename'|创建md文件
 hexo s hexo g|修改内容打包文件
 
-#### 八、常见问题：
+#### 八、常见疑问：
+1.此项目没有后台系统如何录数据？
+
 
 #### 九、配置自定义域名：
 
