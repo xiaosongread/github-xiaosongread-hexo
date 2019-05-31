@@ -4,13 +4,12 @@
 
 ## 准备条件：
 
-<a name="1.1"></a>
-<a name="types--primitives"></a>
-[1.1](#types--primitives) 
+```
 	1.node 环境
 	2.git 环境 配置公钥私钥
 	3.npm 安装
 	4.github 账号
+```
 
 > ##### 如果您是开发人员，这应该都有，不会的可以网上找，依照一大堆的。
 
