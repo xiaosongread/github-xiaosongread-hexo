@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-keywords:
-author: John Doe
-language:
+title: 小宋前端技术博客
+subtitle: 
+description: 前端 css html js node markdown npm webpack
+keywords:  前端 css html js node markdown npm webpack
+author: xiaosongread
+language: chinese 中文
 timezone:
 
 # URL
