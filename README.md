@@ -2,8 +2,11 @@
 
 1. [准备条件](#一、准备条件)
 
-#### 一、准备条件：
+## 一、准备条件：
 
+<a name="1.1"></a>
+<a name="types--primitives"></a>
+[1.1](#types--primitives) 
 	1.node 环境
 	2.git 环境 配置公钥私钥
 	3.npm 安装
