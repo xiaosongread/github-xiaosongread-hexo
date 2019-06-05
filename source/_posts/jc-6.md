@@ -1,5 +1,5 @@
 ---
-title: jc-6
+title: vue 组件之间通信
 categories: gc-end
 date: 2019-04-27 18:32:52
 ---
