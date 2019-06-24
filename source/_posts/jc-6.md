@@ -15,7 +15,7 @@ vue2.0 移除：1.$dispatch() 2.$broadcast() 3.events
 ```
 
 <!-- more -->
-##### select.vue
+select.vue
 
 ```javascript
 <template>
@@ -63,7 +63,7 @@ export default{
 </script>
 ```
 
-###### selectInput.vue
+selectInput.vue
 
 ```javascript
 <template>
@@ -94,7 +94,7 @@ export default {
 </script>
 ```
 
-###### list.vue
+list.vue
 
 ```javascript
 <template>
@@ -127,7 +127,7 @@ export default {
 }
 </script>
 ```
-以上例子主要使用了父子组件之间的相互传递
+## 以上例子主要使用了父子组件之间的相互传递
 
 ---
 

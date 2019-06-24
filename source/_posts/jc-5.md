@@ -22,13 +22,13 @@ word-wrap：  允许长单词或 URL 地址换行到下一行
 
 <!-- more -->
 
-#### 自己的看法：
+#### 自己的看法
 ```css
 word-wrap： 决定句尾放不下单词时，单词是否换行
 word-break: 决定单词内该怎么换行
 ```
 
-#### 单行显示省略号：
+#### 单行显示省略号
 
 ```css
 overflow: hidden;
@@ -36,7 +36,7 @@ text-overflow: ellipsis;
 white-space: nowrap;
 ```
 
-#### 多行显示省略号：
+#### 多行显示省略号
 
 ```css
 display: -webkit-box;

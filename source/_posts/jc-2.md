@@ -5,7 +5,7 @@ categories: gc-end
 ---
 
 ### 前言
-#### 小程序实现签名并保存图片，主要的通过canvas来实现
+小程序实现签名并保存图片，主要的通过canvas来实现
 
 ```html
 <!--pages/sign/sign.wxml-->
@@ -20,6 +20,8 @@ categories: gc-end
 </view>
 ```
 <!-- more -->
+
+### css代码
 ```css
 /* pages/sign/sign.wxss */
 .canvas {
@@ -42,7 +44,7 @@ categories: gc-end
   left: 0;
 }
 ```
-
+### js代码
 ```javascript
 // canvas 全局配置
 var context = null;
