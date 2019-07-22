@@ -113,7 +113,7 @@ hexo s hexo g|修改内容打包文件
 此系统录入数据的步骤是：
 * hexo new 'filename'（新建.md文件）
 * 用markdown格式排版内容
-* hexo s hexo g 重新打包上传就页面可以看见你添加的文章    
+* hexo d hexo g 重新打包上传就页面可以看见你添加的文章    
 
 2.如何为文章分类？
 添加分类列表，设置文章的 categories 字段然后访问 /categories/front-end
