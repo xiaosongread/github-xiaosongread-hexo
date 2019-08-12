@@ -254,33 +254,3 @@ date: 2019-08-12 15:37:22
  background-color: yellowgreen;
 }
 ```
-
-## 三角形
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/notching.png)
-```css
-
-```
-
-## 三角形
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/notching.png)
-```css
-
-```
-
-## 三角形
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/notching.png)
-```css
-
-```
-
-## 三角形
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/notching.png)
-```css
-
-```
-
-## 三角形
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/notching.png)
-```css
-
-```
