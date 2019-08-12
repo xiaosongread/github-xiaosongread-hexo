@@ -15,7 +15,7 @@ date: 2019-08-12 15:37:22
  border-bottom: 100px solid yellowgreen;
 }
 ```
-
+<!-- more -->
 ## 切角
 ![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/notching.png)
 ```css
