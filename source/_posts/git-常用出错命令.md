@@ -14,6 +14,12 @@ git push origin --delete 远程分支名称
 ```javascript
 git checkout -b 本地分支名 origin/远程分支名
 ```
+
+## 查看当前详细分支信息（可看到当前分支与对应的远程追踪分支）
+```javascript
+git branch -vv
+```
+
 ## 远程分支删除 git branch -a 还有的问题
 ```javascript
 git remote prune origin  
