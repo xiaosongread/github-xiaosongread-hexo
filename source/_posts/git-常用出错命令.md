@@ -7,10 +7,10 @@ date: 2019-08-22 10:20:42
 <!-- more -->
 ## 删除远程分支
 ```javascript
-git push origin --delete songyanbin2019-04-03
+git push origin --delete 远程分支名称
 ```
 
-## 
+## 拉去远程分支到本地
 ```javascript
 git checkout -b 本地分支名 origin/远程分支名
 ```
