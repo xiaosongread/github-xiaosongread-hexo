@@ -1,6 +1,7 @@
 ---
 title: 微信小程序实现签名并保存图片
 date: 2019-02-21 09:17:20
+tags: 微信小程序 canvas
 categories: gc-end
 ---
 
