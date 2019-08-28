@@ -3,7 +3,15 @@ title: 小tips-clip-蛇形跑位
 categories: css-end
 date: 2019-08-28 17:51:11
 ---
+## 效果如下
 ![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/clip.gif)
+<!-- more -->
+```
+clip 属性剪裁绝对定位元素。
+rect (top, right, bottom, left)
+```
+> 四个参数分别设置可显示矩形上 下 左 右 的像素值。
+
 ```html
 <div class="bruce flex-ct-x">
   <div class="snakelike-border"></div>
@@ -53,4 +61,14 @@ $purple: purple;
 		clip: rect(0 5px 200px 0);
 	}
 }
+```
+## 单个测试
+![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/clip-1.png)
+```css
+clip: rect(0 200px 5px 0);
+```
+
+![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/clip-2.png)
+```css
+clip: rect(0 200px 200px 195px);
 ```
