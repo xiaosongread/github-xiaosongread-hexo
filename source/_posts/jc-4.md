@@ -2,6 +2,7 @@
 title: JS replace()方法全文替换，遇到变量怎么办？
 date: 2018-05-23 16:14:16
 categories: js-end
+tags: js replace
 ---
 
 ## replace 替换变量文本，改如何处理？

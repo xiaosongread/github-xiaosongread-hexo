@@ -2,6 +2,7 @@
 title: 一文了解js深拷贝和浅拷贝
 categories: js-end
 date: 2019-08-04 10:28:36
+tags: 深浅拷贝
 ---
 
 ## 深浅拷贝的区别

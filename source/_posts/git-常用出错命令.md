@@ -2,6 +2,7 @@
 title: git-常用出错命令
 categories: gc-end
 date: 2019-08-22 10:20:42
+tags: git
 ---
 ![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/git.jpg)
 <!-- more -->

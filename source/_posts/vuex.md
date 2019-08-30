@@ -2,6 +2,7 @@
 title: 快速掌握vuex常用的所有api用法
 categories: gc-end
 date: 2019-07-24 11:52:50
+tags: vuex
 ---
 
 ## vuex中，有默认的五种基本的对象

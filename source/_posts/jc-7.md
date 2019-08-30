@@ -2,6 +2,7 @@
 title: npm包模块发布
 categories: gc-end
 date: 2018-06-26 14:44:11
+tags: npm webpack es6
 ---
 
 现在前端开发框架特别流行，vue,react,angular，在开发中，npm包是必不可少的，这就是相当于传统开发中的插件，那么如何发布自己的包？

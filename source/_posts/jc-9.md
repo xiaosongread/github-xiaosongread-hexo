@@ -2,6 +2,7 @@
 title: 移动端（微信等）使用 vConsole调试console
 categories: gc-end
 date: 2019-06-16 15:10:29
+tags: js vConsole
 ---
 
 移动端和h5的混合开发模式，在h5中调用原生的方法来获取数据的交互特别多，但是提示比较困难，因为在应用中不像浏览器，无法打开控制台，改如何调试呢？

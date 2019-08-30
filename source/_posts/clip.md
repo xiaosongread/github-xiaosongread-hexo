@@ -2,6 +2,7 @@
 title: 小tips-clip-蛇形跑位
 categories: css-end
 date: 2019-08-28 17:51:11
+tags: css3 clip
 ---
 ## 效果如下
 ![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/clip.gif)

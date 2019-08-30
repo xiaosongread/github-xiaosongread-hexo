@@ -2,6 +2,7 @@
 title: import和require的区别
 categories: js-end
 date: 2019-06-11 11:55:32
+tags: js import require
 ---
 
 node编程中最重要的思想就是模块化，import和require都是被模块化所使用。
