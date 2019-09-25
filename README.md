@@ -1,3 +1,5 @@
+博客地址：https://www.songyanbin.com/
+## 2019
 1.[微信小程序-生成微信头像](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%94%9F%E6%88%90%E5%BE%AE%E4%BF%A1%E5%A4%B4%E5%83%8F.md)   
 2.[focus-preventScroll](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/focus-preventScroll.md)   
 3.[简单总结常用的正则表达式的Api](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/regular.md)   
@@ -13,3 +15,15 @@
 13.[代码回退](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/jc-13.md)   
 14.[<ruby> html标签](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/jc-12.md)   
 15.[react-子父组件通信](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/jc-11.md)   
+16.[GitBook](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/jc-10.md)   
+17.[移动端（微信等）使用 vConsole调试console](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/jc-9.md)   
+18.[import和require的区别](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/jc-8.md)   
+19.[hexo/github 搭建github博客教程](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/jc-1.md)   
+20.[vue 组件之间通信](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/jc-6.md)   
+21.[微信小程序实现签名并保存图片](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/jc-2.md)   
+## 2018
+1.[git把功能开发错了分支莫慌/恢复误删的本地分支](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/jc-3.md)   
+2.[npm包模块发布](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/jc-7.md)   
+3.[JS replace()方法全文替换，遇到变量怎么办？](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/jc-4.md)   
+## 2017
+1.[文本溢出显示... 和文本的断点换行](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/jc-5.md) 
