@@ -1,5 +1,5 @@
 ---
-title: git-常用出错命令
+title: git-常用命令技巧
 categories: gc-end
 date: 2019-08-22 10:20:42
 tags: git
@@ -22,6 +22,11 @@ git branch -vv
 ```
 
 ## 远程分支删除 git branch -a 还有的问题
+### 1.查看remote地址，远程分支，还有本地分支与之相对应关系等信息
+```javascript
+git remote show origin 
+```
+### 2.删除远程没有的分支
 ```javascript
 git remote prune origin  
 ```
