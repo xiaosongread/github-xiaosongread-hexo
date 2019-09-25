@@ -1,6 +1,7 @@
 博客地址：https://www.songyanbin.com/
 ## 2019
-1.[微信小程序-生成微信头像](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%94%9F%E6%88%90%E5%BE%AE%E4%BF%A1%E5%A4%B4%E5%83%8F.md)  ( 9/24 )   
+0.[简单易懂的 ES6 Iterators 指南和示例]()
+1.[微信小程序-生成微信头像](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/ES6-Iterators.md)  ( 10/1 )   
 2.[focus-preventScroll](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/focus-preventScroll.md)  ( 9/20 )   
 3.[简单总结常用的正则表达式的Api](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/regular.md)  ( 9/6 )   
 4.[nodetips](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/nodetips.md)  ( 8/30 )   
