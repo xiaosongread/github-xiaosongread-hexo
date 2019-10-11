@@ -6,6 +6,15 @@ tags: git
 ---
 ![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/git.jpg)
 <!-- more -->
+## 单独合并某个分支的某个文件
+branch-a分支有个文件的功能要合并到branch-b的上面
+```javascript
+git checkout branch-b
+git checkout --patch branch-b src/views/index/Index.vue
+弹出修改确认提示：Apply this hunk to index and worktree [y,n,q,a,d,/,K,g,e,?]?
+在弹出的都选  y 即可。最后提交代码完成更新合并同步
+```
+
 ## 删除远程分支
 ```javascript
 git push origin --delete 远程分支名称
