@@ -334,7 +334,7 @@ computed: {
 <div>watchAppConut(mapGetters简写)：{{ watchAppConut}}</div>
 ```
 
-### state
+### modules
 可以让每一个模块拥有自己的state、mutation、action、getters,使得结构非常清晰，方便管理
 ```javascript
 const moduleA = {
