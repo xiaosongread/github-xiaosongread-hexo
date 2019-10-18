@@ -334,6 +334,26 @@ computed: {
 <div>watchAppConut(mapGetters简写)：{{ watchAppConut}}</div>
 ```
 
+### state
+可以让每一个模块拥有自己的state、mutation、action、getters,使得结构非常清晰，方便管理
+```javascript
+const moduleA = {
+ state: { ... },
+ mutations: { ... },
+ actions: { ... },
+ getters: { ... }
+ }
+const moduleB = {
+ state: { ... },
+ mutations: { ... },
+ actions: { ... }
+ }
+ 
+const store = new Vuex.Store({
+ modules: {
+  a: moduleA,
+  b: moduleB})
+```
 
 
 
