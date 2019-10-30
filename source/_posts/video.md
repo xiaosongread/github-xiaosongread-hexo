@@ -9,6 +9,8 @@ date: 2019-10-30 10:04:21
 3.[音量控制](#音量控制)   
 4.[全屏控制](#全屏控制)   
 
+<!-- more -->
+
 ![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/video.png)   
 
 ## 播放/暂停   
