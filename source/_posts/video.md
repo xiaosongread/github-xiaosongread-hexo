@@ -177,4 +177,8 @@ exitFullscreen () {
 ## 源码   
 https://github.com/xiaosongread/vue-pc-cli
 
+## 参考   
+https://juejin.im/post/5daef8b6e51d4524e60e0f6a#heading-7   
+https://github.com/yuelinghunyu/blog-demo/tree/master/video-player   
+
 > 效果有点糙，优化空间还很大。
