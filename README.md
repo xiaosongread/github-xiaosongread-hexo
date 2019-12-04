@@ -1,5 +1,6 @@
 博客地址：https://www.songyanbin.com/
 ## 2019
+[vue 简易加入购物车效果](12/04)
 [IntersectionObserver懒加载](11/05)
 [video 常用api和播放器插件-vue](10/30)
 [简单易懂的 ES6 Iterators 指南和示例](10/1)   
