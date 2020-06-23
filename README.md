@@ -1,5 +1,6 @@
 博客地址：https://www.songyanbin.com/
 ## 2020
+[vue-router-打开新页面](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/vue-router-打开新页面.md)  ( 6/23 ) 
 [开发问题记录](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/开发问题记录.md)  ( 6/22 )  
 ## 2019
 [vue 简易加入购物车效果](12/04)
