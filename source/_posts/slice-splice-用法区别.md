@@ -2,6 +2,7 @@
 title: slice-splice-用法区别
 categories: js-end
 date: 2020-06-24 16:54:30
+tags: js
 ---
 ## slice(start,end)：方法可从已有数组中返回选定的元素，返回一个新数组，包含从start到end（不包含该元素）的数组元素
 
