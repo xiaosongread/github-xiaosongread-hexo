@@ -14,6 +14,8 @@ console.log(a,b)
 // [1, 2, 3, 4, 5] [1]
 ```
 
+<!-- more -->
+
 > 同时slice(start,end)可以作用于字符串的切割
 ```javascript
 var a = 'asdzxc123'
