@@ -61,9 +61,7 @@
     <main class="app">
         <%- partial('_partial/header') %>
         <div id="content" class="content">
-            <div id="wrapper" class="wrapper"<% if( theme.content_max_width ) { %> style="max-width: <%= theme.content_max_width %>"<% } %>>
-                <%- body %>
-            </div>
+            <%- body %>
         </div>
         <%- partial('_partial/footer', {}, {cache: true}) %>
     </main>

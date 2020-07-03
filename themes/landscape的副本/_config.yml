@@ -12,20 +12,15 @@ content_max_width: 800px
 
 # Sidebar
 author:
-  name: Sanonz
-  work: Web Developer &amp; Designer
-  location: Shenzhen, China
+  name: mgd
+  work: Let nature take its course
+  location: BeiJing, China
   avatar_url: /images/avatar.jpg
 
 # Links:
 links:
   - svg: ./source/svg/github.svg
-    url: https://github.com/sanonz
-  - svg: ./source/svg/more.svg
-    url: http://weibo.com/sanonz
-  - svg: ./source/svg/twitter.svg
-    url: https://twitter.com/sanonze
-
+    url: https://github.com/xiaosongread
 
 # github comment 
 git_commit:
