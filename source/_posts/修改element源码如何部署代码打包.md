@@ -5,12 +5,13 @@ date: 2020-07-30 12:01:26
 ---
 我们在项目中，在采用element框架的时候，框架本身也是有bug的或者不符合我们产品需求需要我们改动的，但是，如果是本地打包完上传到服务器的话，可以修改本地的element源码，如果是服务器打包的话，那我们就得自己发一个npm的包来进行打包了。
 ### 案例：修改element Cascader 级联选择器，清空数据，下拉框仍然回显最后选择的数据的问题
+
+<!-- more -->
+
 修改前的效果：
 ![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/npm-1.png)
 修改后的效果：
 ![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/npm-2.png)
-
-<!-- more -->
 
 ### 修改源代码
 #### 1.首先把elementUI的项目从git上克隆下来
