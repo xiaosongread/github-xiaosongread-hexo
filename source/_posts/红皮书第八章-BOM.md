@@ -46,7 +46,7 @@ window.moveBy(0,200)
 var pageWidth = window.innerWidth
 var pageHeight = window.innerHeight
 if (typeof pageWidth !== 'number') {
-  if (document.compatMode === 'CSSLCompat') {
+  if (document.compatMode === 'CSS1compat') { // 标准兼容模式开启
     pageWidth = document.documentElement.clientWidth
     pageHeight = document.documentElement.clientHeight
   } else {
@@ -61,4 +61,49 @@ resizeBy(): 接口新窗口和原窗口的宽度和高度差
 
 > 以上两个方法有可能被浏览器禁用，所以用处不是特别的大。
 
-#### 导航和打开窗口
+#### 导航和打开窗口open()
+<i>window.open()</i>有四个参数：要加载页面的url,窗口目标，一个特性字符窜以及一个表示新页面是否取代浏览器历史记录中当前加载页面的布尔值。通常只需传入第一个参数，最后一个参数只在不打开新窗口的情况下使用。
+
+```javascript
+window.open('https://www.baidu.com', 'topFrame')
+// 等同于
+<a href="https://www.baidu.com" target="topFrame">
+```
+如果有 topFrame 名称的框架就在该框架打开，否则就新开一个 topFrame 名称的页面。第二个参数还可以是<i>_self</i>、<i>_parent</i>、<i>_top</i>、<i>_blank</i>。
+
+```javascript
+var myDoor = window.open('https://www.baidu.com', 'topFrame')
+myDoor.close() // 关闭新打开的窗口
+```
+#### 间歇式调用和超时调用
+```javascript
+var num = 0
+var max = 10
+var intervalId = null
+function incrementNumber(){
+  num++
+  if(num == max) {
+    clearInterval(intervalId)
+  }
+  console.log(num)
+}
+intervalId = setInterval(incrementNumber, 10)
+// 以上方法也可以写成如下形式：
+var num = 0
+var max = 10
+function incrementNumber(){
+  num++
+  if(num <= max) {
+    setTimeout(incrementNumber, 10)
+    console.log(num)
+  } else {
+    console.log('Done')
+  }
+}
+setTimeout(incrementNumber, 10)
+```
+可见、在使用超时调用时,没有必要跟踪超时调调用 ID.因为每次执行代码之后,如果不再没置另一次超时调用, 调用会自行停止。一般认为,使用超时调用来模拟间歌词用的是一种最佳模式.在开发环境下，很少使用真正的间歇调用,原因是后一个间歇调用可能会在前一个间歇调用结束之前启动。而像前面示例中那样使用超时调用,则完全可以避免这一点。所以,最好不要使用同歇调用。
+### localtion对象
+localtion对象既是window对象的属性，也是document的属性，所以window.localtion和document.localtion结果是一样的，localtion所有的属性如下：
+![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/hps/8/1.png)    
+
