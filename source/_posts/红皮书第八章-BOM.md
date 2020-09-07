@@ -107,3 +107,88 @@ setTimeout(incrementNumber, 10)
 localtion对象既是window对象的属性，也是document的属性，所以window.localtion和document.localtion结果是一样的，localtion所有的属性如下：
 ![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/hps/8/1.png)    
 
+#### 查询字符窜参数
+```javascript
+// 返回参数集合
+function getQueryStringArgs() {
+  var qs = (location.search.length > 0 ? location.search.substring(1) : ""),
+  args = {},
+  items = qs.length ? qs.split("&") : [],
+  item = null,
+  name = null,
+  value = null,
+  len = items.length;
+  for(var i=0; i< len; i++) {
+    item = items[i].split("=")
+    name = decodeURIComponent(item[0])
+    value = decodeURIComponent(item[1])
+    if (name.length) {
+      args[name] = value
+    }
+  }
+  return args
+}
+// 返回指定属性的值
+function getQueryAttrToString(attr) {
+  var qs = (location.search.length > 0 ? location.search.substring(1) : ""),
+  items = qs.length ? qs.split("&") : [],
+  item = null,
+  name = null,
+  value = null,
+  len = items.length;
+  for(var i=0; i< len; i++) {
+    item = items[i].split("=")
+    name = decodeURIComponent(item[0])
+    if (name === attr) {
+      value = decodeURIComponent(item[1])
+    }
+  }
+  return value
+}
+```
+#### 位置操作
+使用location对象可以通过很多方式来改变浏览器的位置，首先也是最常用的是，就是使用assign()方法并为其传递一个url值，如下：
+```javascript
+location.assign('https://www.baidu.com')
+```
+这样浏览器会打开新的链接，并且在浏览器中生成一条新的浏览器历史记录。location.href和window.location设置为一个url，也会在后台调用此方法的。另外修改url的属性，也可以当前加载的页面
+假设初始的url: 'https://www.songyanbin.com'
+
+```javascript
+// 修改后的URL：https://www.songyanbin.com#setion1
+location.hash = '#setion1'
+// 修改后的URL：https://www.songyanbin.com?title=123
+location.search = '?title=123'
+// 其余方法如上表的属性集合
+```
+> 以上的所有方法，都会重新生成一条浏览器历史记录，如果想禁用生成新的历史记录，可以使用<strong>replace()</strong>方法，用户点击回退就不能回到上一个页面，这个方法只接受一个参数，就是新的url链接。
+
+与位置有关的还有<strong>reload()</strong>方法，重新加载当前显示的页面，如果要强制从服务器拉去页面信息，需要传递参数true。
+```javascript
+window.reload() // 有可能从缓存中加载
+window.reload(true) // 从服务器重新加载
+```
+位于reload()后面的代码，与可能执行也有可能不执行，取决于网络延迟和资源的加载，所以最后放到代码的最后一行执行。
+### navigator对象
+![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/hps/8/2.png)    
+
+#### 检测插件
+```javascript
+function hasPlugin(name) {
+  name = name.toLowerCase()
+  for(var i=0; i< navigator.plugins.length; i++){
+    if(navigator.plugins[i].name.toLowerCase().indexOf(name) > -1) {
+      return true
+    }
+  }
+  return false
+}
+console.log(hasPlugin('Flash'))
+```
+> 以上方法不支持IE浏览器，需要支持的，请看红皮书212页有相关的说明。
+
+### screen对象
+
+
+
+
