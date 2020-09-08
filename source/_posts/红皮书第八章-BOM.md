@@ -188,7 +188,37 @@ console.log(hasPlugin('Flash'))
 > 以上方法不支持IE浏览器，需要支持的，请看红皮书212页有相关的说明。
 
 ### screen对象
+javascript有几个对象相对编程来说意义不大，screen对象就是意义不大的一个，基本上就是用来表示客户端的能力，包括浏览器窗口外部的显示器信息，如像素宽度和高度。
+![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/hps/8/3.png)    
 
+### history对象
+history对象保存这用户上网的历史记录，从窗口打开的那一刻起，每个浏览器的窗口、标签页乃至每个框架，都有自己的history对象和特定的window相关联，处于安全的考虑，开发者获取不到具体的浏览历史实际的URL，但是可以通过类似<strong>go()</strong>来实现前进后退。
+#### go()
 
+```javascript
+history.go(1) //前进1步
+history.go(-1) //后退1步
+history.go(2) //前进2步
+```
+也可以传递一个字符窜，跳转到最近的包含字符窜的历史记录，与可能是前进也有可能是后退，具体要看哪个更近。
+```javascript
+history.go("wrox.com") //跳转到最近的包含wrox.com的页面
+```
+#### back()/forward()：表示前进和后退
+```javascript
+history.back() // 后退一页
+history.forward() // 前进一页
+```
+history.length等于0的时候，说明这个是用户打开窗口的第一个页面。
 
+### 小结
+浏览器对象模型( BOM)以 window 对象为依托,表示浏览器窗口以及页而可见区域。同时,window对象还是ECMAscript中的global对象，因而所有全局对象和函数都是它的属性，且所有原生的构造函数及其他函数也都存在与他的命名空间下本章讨论了下列 BOM 的组成部分。
+1.在传用框架时、每个框架都有自己的 window 对象以及所有原生构造函数及其他函数的副本。每个框架都保在在 frames 集合中,可以通过位置或通过名称来访问。
+2.有一些窗口指针,可以用来引用其他框架,包括父框架。
+3.top对象始终指向最外围的枢架,也就是整个浏览器窗口。
+4.parent 对象表示包含当前框架的框架,而 self 对象则回指 window,
+5.使用 location对象可以通过编程方式来访问浏览器的导航系统。设置相应的属性,可以逐段或整体性地修改浏览器的 URL,
+6.调用 replace()方法可以导航到一个新 URL,同时该 URL 会替换浏览器历史记录中当前显示的页面。
+7.navigator 对象提供了与浏览器有关的信息。到底提供哪些信息。很大程度上取决于用户的浏地器;不过,也有一些公共的属性( 如userAgent )存在于所有浏览器中。
+BOM中海油两个对象：screen和history,但他们的功能有限。secreen对象中保存着与客户端显示器有关的信息，这些信息一般只用于站点分析。 history 对象为访问浏览器的历史记录开了一个小缝隙,开发人员可以据此判断历史记录的数量,也可以在历史记录中向后或向前导航到任意页面。
 
