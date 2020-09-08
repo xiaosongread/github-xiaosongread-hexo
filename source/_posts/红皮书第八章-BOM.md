@@ -8,6 +8,8 @@ BOM对象的核心是window,它表示浏览器的实例，window是javascript和
 
 > 有一点值得注意:定义全局变量和在window上面定义变量有一个区别就是，在window上面直接定义变量，可以用delete删除，但是直接定义是不可以删除的用delete
 
+<!-- more -->
+
 ```javascript
 window.aa = 123
 var bb = 123
