@@ -2,6 +2,7 @@
 title: flex布局教程
 categories: css-end
 date: 2020-11-05 10:12:52
+type: zz
 ---
 > 推荐来自：http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html
 
