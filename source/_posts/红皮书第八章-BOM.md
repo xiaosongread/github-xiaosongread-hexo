@@ -107,7 +107,7 @@ setTimeout(incrementNumber, 10)
 可见、在使用超时调用时,没有必要跟踪超时调调用 ID.因为每次执行代码之后,如果不再没置另一次超时调用, 调用会自行停止。一般认为,使用超时调用来模拟间歌词用的是一种最佳模式.在开发环境下，很少使用真正的间歇调用,原因是后一个间歇调用可能会在前一个间歇调用结束之前启动。而像前面示例中那样使用超时调用,则完全可以避免这一点。所以,最好不要使用同歇调用。
 ### localtion对象
 localtion对象既是window对象的属性，也是document的属性，所以window.localtion和document.localtion结果是一样的，localtion所有的属性如下：
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/hps/8/1.png)    
+<img src="/images/img-folder/hps/8/1.png">    
 
 #### 查询字符窜参数
 ```javascript
@@ -172,7 +172,7 @@ window.reload(true) // 从服务器重新加载
 ```
 位于reload()后面的代码，与可能执行也有可能不执行，取决于网络延迟和资源的加载，所以最后放到代码的最后一行执行。
 ### navigator对象
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/hps/8/2.png)    
+<img src="/images/img-folder/hps/8/2.png">
 
 #### 检测插件
 ```javascript
@@ -191,7 +191,7 @@ console.log(hasPlugin('Flash'))
 
 ### screen对象
 javascript有几个对象相对编程来说意义不大，screen对象就是意义不大的一个，基本上就是用来表示客户端的能力，包括浏览器窗口外部的显示器信息，如像素宽度和高度。
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/hps/8/3.png)    
+<img src="/images/img-folder/hps/8/3.png">
 
 ### history对象
 history对象保存这用户上网的历史记录，从窗口打开的那一刻起，每个浏览器的窗口、标签页乃至每个框架，都有自己的history对象和特定的window相关联，处于安全的考虑，开发者获取不到具体的浏览历史实际的URL，但是可以通过类似<strong>go()</strong>来实现前进后退。

@@ -44,8 +44,7 @@ categories: gc-end
 	hexo v
 ```
 出现以下，说明安装成功   
-
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/1.png)
+<img src="/images/img-folder/1.png">
 
 > 别着急，就快成功了，再坚持一小小下
 
@@ -59,10 +58,11 @@ categories: gc-end
 ```javascript
 	hexo s
 ```
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/2.png)   
+<img src="/images/img-folder/2.png">
+
 >这时候我们就可以打开浏览器了，在地址栏中输入http://localhost:400/，我们就可以看到如下图的界面   
 
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/3.png)   
+<img src="/images/img-folder/3.png">
 
 > **基本搭建完成，其实你才完成了一半**
 
@@ -70,7 +70,7 @@ categories: gc-end
 1.在github上面先创建一个项目，特别注意，名称的命名
 >github的用户名要和创建的博客的项目名称一致，如下：   
 
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/5.png)
+<img src="/images/img-folder/5.png">
 
 > **名称格式：username.github.io**
 
@@ -78,7 +78,7 @@ categories: gc-end
 
 > **type、repository、branch冒号的后面都有一个空格**
 
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/6.jpg)
+<img src="/images/img-folder/6.jpg">
 
 3.回到shell，输入
 ```javascript
@@ -91,13 +91,13 @@ categories: gc-end
 
 ## 文件目录
 
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/4.png)   
+<img src="/images/img-folder/4.png">
 
 ## 更换主题   
 我更换的主题是：https://github.com/Sanonz/hexo-theme-concise，将次项目clone下来，其他主题：[hexo主题](https://hexo.io/themes/)   
 
 将下载下来的主题中的所有文件copy到你的代码中的themes文件夹中(可以新建一个主题文件夹，比如landscape1),修改文件根目录的配置文件的主题名，如下   
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/7.jpg)   
+<img src="/images/img-folder/7.jpg">
 
 > **此主题可能最后样式可以不起作用，应为此模板用了less，需要安装 npm install hexo-renderer-less --save**
 

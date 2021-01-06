@@ -5,7 +5,7 @@ date: 2019-08-28 17:51:11
 tags: css3 clip
 ---
 ## 效果如下
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/clip.gif)
+<img src="/images/img-folder/clip.gif">
 <!-- more -->
 ```
 clip 属性剪裁绝对定位元素。
@@ -64,12 +64,12 @@ $purple: purple;
 }
 ```
 ## 单个测试
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/clip-1.png)
+<img src="/images/img-folder/clip-1.png">
 ```css
 clip: rect(0 200px 5px 0);
 ```
 
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/clip-2.png)
+<img src="/images/img-folder/clip-2.png">
 ```css
 clip: rect(0 200px 200px 195px);
 ```

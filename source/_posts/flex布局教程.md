@@ -27,7 +27,7 @@ Flex 是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型�
 
 ### 基本概念
 采用 Flex 布局的元素，称为 Flex 容器（flex container），简称"容器"。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称"项目"。
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/flex/1.png)
+<img src="/images/img-folder/flex/1.png">
 
 容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end。
 
@@ -49,7 +49,7 @@ align-content
   flex-direction: row | row-reverse | column | column-reverse;
 }
 ```
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/flex/2.png)
+<img src="/images/img-folder/flex/2.png">
 ```css
 row（默认值）：主轴为水平方向，起点在左端。
 row-reverse：主轴为水平方向，起点在右端。
@@ -57,7 +57,8 @@ column：主轴为垂直方向，起点在上沿。
 column-reverse：主轴为垂直方向，起点在下沿。
 ```
 #### flex-wrap: 属性定义，如果一条轴线排不下，如何换行。
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/flex/3.png)
+<img src="/images/img-folder/flex/3.png">
+
 ```css
 .box{
   flex-wrap: nowrap | wrap | wrap-reverse;
@@ -65,11 +66,14 @@ column-reverse：主轴为垂直方向，起点在下沿。
 ```
 它可能取三个值。
 ##### nowrap（默认）：不换行。
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/flex/4.png)
+<img src="/images/img-folder/flex/4.png">
+
 ##### wrap：不换行。
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/flex/5.jpg)
+<img src="/images/img-folder/flex/5.jpg">
+
 ##### wrap-reverse：换行，第一行在下方。
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/flex/6.jpg)
+<img src="/images/img-folder/flex/6.jpg">
+
 
 #### flex-flow: 属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap
 ```css
@@ -83,7 +87,8 @@ column-reverse：主轴为垂直方向，起点在下沿。
   justify-content: flex-start | flex-end | center | space-between | space-around;
 }
 ```
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/flex/7.png)
+<img src="/images/img-folder/flex/7.png">
+
 ```css
 flex-start（默认值）：左对齐
 flex-end：右对齐
@@ -97,7 +102,8 @@ space-around：每个项目两侧的间隔相等。所以，项目之间的间�
   align-items: flex-start | flex-end | center | baseline | stretch;
 }
 ```
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/flex/8.png)
+<img src="/images/img-folder/flex/8.png">
+
 ```css
 flex-start：交叉轴的起点对齐。
 flex-end：交叉轴的终点对齐。
@@ -111,7 +117,8 @@ stretch（默认值）：如果项目未设置高度或设为auto，将占满整
   align-content: flex-start | flex-end | center | space-between | space-around | stretch;
 }
 ```
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/flex/9.png)
+<img src="/images/img-folder/flex/9.png">
+
 ```css
 flex-start：与交叉轴的起点对齐。
 flex-end：与交叉轴的终点对齐。
@@ -136,14 +143,16 @@ align-self
   order: <integer>;
 }
 ```
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/flex/10.png)
+<img src="/images/img-folder/flex/10.png">
+
 #### flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。
 ```css
 .item {
   flex-grow: <number>; /* default 0 */
 }
 ```
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/flex/11.png)
+<img src="/images/img-folder/flex/11.png">
+
 如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。
 #### flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。
 ```css
@@ -151,7 +160,8 @@ align-self
   flex-shrink: <number>; /* default 1 */
 }
 ```
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/flex/12.jpg)
+<img src="/images/img-folder/flex/12.jpg">
+
 如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。
 
 负值对该属性无效。
@@ -168,5 +178,5 @@ align-self
   align-self: auto | flex-start | flex-end | center | baseline | stretch;
 }
 ```
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/flex/13.png)
+<img src="/images/img-folder/flex/13.png">
 该属性可能取6个值，除了auto，其他都与align-items属性完全一致。

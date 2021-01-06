@@ -28,8 +28,8 @@ let vConsole = new VConsole() // 初始化
 </script>
 ```
 
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/vconsole1.png)
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/vconsole.png)
+<img src="/images/img-folder/vconsole1.png">    
+<img src="/images/img-folder/vconsole.png">    
 
 出现上面的就是安装成功了！
 

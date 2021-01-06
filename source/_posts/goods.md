@@ -4,7 +4,7 @@ title: vue 简易加入购物车效果
 date: 2019-12-04 16:18:40
 tags: vue js
 ---
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/goods.gif)   
+<img src="/images/img-folder/goods.gif">
 
 <!-- more -->
 

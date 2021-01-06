@@ -31,7 +31,7 @@ animation-direction	规定是否应该轮流反向播放动画。
 -- alternate	动画应该轮流反向播放。
 ```
 <!-- more -->
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/loading.gif)
+<img src="/images/img-folder/loading.gif">
 
 公用样式：
 ```css

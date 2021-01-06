@@ -9,9 +9,9 @@ date: 2020-07-30 12:01:26
 <!-- more -->
 
 修改前的效果：
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/npm-1.png)
+<img src="/images/img-folder/npm-1.png">
 修改后的效果：
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/npm-2.png)
+<img src="/images/img-folder/npm-2.png">
 
 ### 修改源代码
 #### 1.首先把elementUI的项目从git上克隆下来

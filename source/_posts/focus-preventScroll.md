@@ -5,7 +5,7 @@ date: 2019-09-20 11:01:30
 tags: focus preventScroll 滚动
 ---
 
-<img src="https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/focus.gif" width="400"/>
+<img src="/images/img-folder/focus.gif" width="400"/>
 
 <!-- more -->
 

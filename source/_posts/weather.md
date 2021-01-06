@@ -6,7 +6,7 @@ tags: box-shadow
 ---
 ## 效果如下：
 
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/weather.gif)
+<img src="/images/img-folder/weather.gif">
 
 <!-- more -->
 

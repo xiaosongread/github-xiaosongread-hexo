@@ -6,7 +6,7 @@ tags: css3
 ---
 
 ## 三角形
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/traingle.png)
+<img src="/images/img-folder/traingle.png">
 ```css
 .traingle {
  width: 0;
@@ -18,7 +18,7 @@ tags: css3
 ```
 <!-- more -->
 ## 切角
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/notching.png)
+<img src="/images/img-folder/notching.png">
 ```css
 .notching {
  width: 40px;
@@ -34,7 +34,7 @@ tags: css3
 ```
 
 ## 梯形
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/trapezoid.png)
+<img src="/images/img-folder/trapezoid.png">
 ```css
 .trapezoid{
  position: relative;
@@ -61,7 +61,7 @@ tags: css3
 ```
 
 ## 五边形
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/pentagon-1.png)
+<img src="/images/img-folder/pentagon-1.png">
 ```css
 .pentagon {
  position: relative;
@@ -83,7 +83,8 @@ tags: css3
 ```
 
 ## 六边形
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/pentagon-2.png)
+<img src="/images/img-folder/pentagon-2.png">
+
 ```css
 .pentagon {
  position: relative;
@@ -106,7 +107,8 @@ tags: css3
 ```
 
 ## 八边形
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/octagon.png)
+<img src="/images/img-folder/octagon.png">
+
 ```css
 .octagon {
  position: relative;
@@ -139,7 +141,8 @@ tags: css3
 ## 五角星
 > 这里使用 3 个三角形叠加旋转在一起实现。
 
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/star.png)
+<img src="/images/img-folder/star.png">
+
 ```css
 .star {
  margin: 50px 0;
@@ -173,7 +176,8 @@ tags: css3
 ```
 
 ## 六角星
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/sixstar.png)
+<img src="/images/img-folder/sixstar.png">
+
 ```css
 .sixstar {
  position: relative;
@@ -197,7 +201,8 @@ tags: css3
 ## 八角形
 > 八角星呢？八个角那么多呢。其实使用两个矩形进行旋转拼接就可以了。
 
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/eightstar.png)
+<img src="/images/img-folder/eightstar.png">
+
 ```css
 .eightstar {
  position: relative;
@@ -222,7 +227,7 @@ tags: css3
 ## 十二角形
 > 好。最后多角星再来一个十二级角星。在八角星的基础上，再增加一个矩形，就能得到十二角啦。也就是要过第一个伪元素。
 
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/twelvestar.png)
+<img src="/images/img-folder/twelvestar.png">
 ```css
 .twelvestar {
  position: relative;

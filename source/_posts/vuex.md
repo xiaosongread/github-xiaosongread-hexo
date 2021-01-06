@@ -23,7 +23,7 @@ vuex 文件夹下创建 store.js 文件夹modules
 modules 文件夹下创建app.js user.js
 ```
 目录如下：
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/vuex-1.png)
+<img src="/images/img-folder/vuex-1.png">
 
 安装vuex
 ```
@@ -66,7 +66,8 @@ new Vue({
 ```
 完整APIdemo地址：[GitHub](https://github.com/xiaosongread/vuex)   
 运行效果如下：
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/vuex-2.png)
+
+<img src="/images/img-folder/vuex-2.png">
 
 ***
 **关键代码：**

@@ -11,7 +11,7 @@ date: 2019-10-30 10:04:21
 
 <!-- more -->
 
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/video.png)   
+<img src="/images/img-folder/video.png"> 
 
 ## 播放/暂停   
 api：

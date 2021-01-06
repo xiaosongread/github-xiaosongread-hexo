@@ -4,7 +4,7 @@ categories: gc-end
 date: 2019-08-22 10:20:42
 tags: git
 ---
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/git.jpg)
+<img src="/images/img-folder/git.jpg">
 <!-- more -->
 ## 单独合并某个分支的某个文件
 branch-a分支有个文件的功能要合并到branch-b的上面

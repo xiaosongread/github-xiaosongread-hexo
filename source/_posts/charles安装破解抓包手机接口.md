@@ -9,16 +9,16 @@ https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/r
 <!-- more -->
 ### 破解方法
 打开Charles，help→Registered to，输入账号和key提交破解成功就可以正常使用啦！
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/pj-1.png)
+<img src="/images/img-folder/pj-1.png">
 #### Charles激活码：
 Registered Name: https://zhile.io
 License Key: 48891cf209c6d32bf4
 ### 配置
 #### 电脑配置
 1.打开Charles软件 -> Proxy / Proxy Settings
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/pj-2.jpg)
+<img src="/images/img-folder/pj-2.jpg">
 2.Port填写8888(或者其他你喜欢的端口号)，勾选"Enable transparent HTTP proxying"，OK确定
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/pj-3.jpg)
+<img src="/images/img-folder/pj-3.jpg">
 #### 手机配置
 ##### 手机和电脑连接同一个无线网络（wifi）
 ##### 点击该无线网络 -> 在最底下选择"高级设置" 
@@ -32,8 +32,8 @@ License Key: 48891cf209c6d32bf4
 ### 手机无法安装pem的证书
 https://jingyan.baidu.com/article/2a138328eb6448074b134f7c.html
 #### 第一种方法
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/pj-4.png)
+<img src="/images/img-folder/pj-4.png">
 
 #### 第二种方法（亲测有效）
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/pj-5.png)
+<img src="/images/img-folder/pj-5.png">
 

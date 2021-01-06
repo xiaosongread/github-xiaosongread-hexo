@@ -7,22 +7,27 @@ date: 2020-11-12 16:49:13
 #### 访问MongoDB官方下载地址
 官网地址是：[MongoDB Download Center | MongoDB](https://www.mongodb.com/try/download/community)
 <!-- more -->
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/mongodb/1.png)
+<img src="/images/img-folder/mongodb/1.png">
+
 #### 点击“DOWNLOAD(tgz)”按钮，将解压后的文件放入 /usr/local ，默认情况下在Finder中是看不到 /usr 这个目录的（终端用得溜的请略过），可以打开Finder后按 shift + command +G 输入 /usr/local 后回车便能看到这个隐藏的目录了。
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/mongodb/2.png)
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/mongodb/3.png)
+<img src="/images/img-folder/mongodb/2.png">
+
+<img src="/images/img-folder/mongodb/3.png">
+
 #### 配置环境变量，打开终端，输入“open -e .bash_profile”，在打开的文件中加入
 ```javascript
 export PATH=${PATH}:/usr/local/MongoDB/bin
 ```
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/mongodb/4.png)
+<img src="/images/img-folder/mongodb/4.png">
+
 用Command+S保存配置，关闭上面的.bash_profile编辑窗口，然后在下图中输入"source .bash_profile"使配置生效。输入"mongod -version"，回车后如果看到下面的版本号则说明MongoDB已经成功安装到了Mac上。
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/mongodb/5.png)
+<img src="/images/img-folder/mongodb/5.png">
+
 #### 在根目录下新建 data 文件夹，里面再建一个 db 文件夹，安装MongoDB时并不会自动生成，需要我们手动创建，可以在命令行输入创建，也可以直接在Finder中手动新建
 ```javascript
 sudo mkdir -p /data/db
 ```
-![blockchain](https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/mongodb/6.png)
+<img src="/images/img-folder/mongodb/6.png">
 
 > 命令行不好使 删掉重新手动创建一下，我就是重新删掉手动新建了一下，具体原因不详
 
