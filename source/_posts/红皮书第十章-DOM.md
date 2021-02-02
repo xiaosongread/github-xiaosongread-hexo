@@ -60,7 +60,69 @@ document.anchors(): 包含文档中所有带name属性的a元素。
 document.forms(): 包含文档中所有的form元素。   
 document.images(): 包含文档中所有的image元素。   
 document.links(): 包含文档中所有带href属性的a元素。   
+#### 文档写入
+write(): 在文档中写入内容，接受一个 字符窜 的参数，原样写入
+writeIn(): 在文档中写入内容，接受一个 字符窜 的参数，在字符窜的末尾加上换行符（n/）
+open(): 打开文档
+close(): 关闭文档
+```javascript
+document.write("<script src='a.js'><\/script>")
+```
+### Element类型
++ nodeType的值为1
++ nodeName的值为元素的标签名
++ nodeValue为null
++ parentNode为Document或者是Element
+```javascript
+<div id="id"></div>
+var a = document.getElementById('id')
+console.log(a.tagName) // DIV
+console.log(a.nodeName) // DIV
+console.log(a.nodeType) // 1
+```
+#### 取得特性
+getAttribute()
+setAttribute()
+removeAttribute()
+```javascript
+<div id="id" class="myDive" my_special_attribute="hellow" style="font-weight: bold">aaa</div>
+var a = document.getElementById('id')
+console.log(a.getAttribute('id')) // id
+console.log(a.getAttribute('class')) // myDive
+console.log(a.getAttribute('my_special_attribute')) // hellow
+console.log(a.getAttribute('style')) // font-weight: bold
+console.log(a.style) // 返回的是对象
+console.log(a.style.fontWeight) // bold
+```
+> 属性名不区分大小写，a.getAttribute('id')和a.getAttribute('ID')是同一个意思。onclick和style返回的都是字符窜，
 
-
-
-
+#### 设置属性
+setAttribute(设置的属性名，设置的属性的值),如果有设置的属性名，那就覆盖，否则就是新添加。
+```javascript
+a.setAttribute('id', 'myDiv1')
+a.setAttribute('id', 'myDive1')
+a.setAttribute('myColor', 'red')
+console.log(a.getAttribute('myColor')) // red
+```
+#### 删除属性
+```javascript
+// 删除前
+<div id="id" class="myDive" my_special_attribute="hellow" myColor="red" style="font-weight: bold">aaa</div>
+a.removeAttribute('myColor')
+// 删除后
+console.log(a.getAttribute('myColor')) // red
+<div id="id" class="myDive" my_special_attribute="hellow" style="font-weight: bold">aaa</div>
+```
+#### 创建元素
+使用document.createElement()方法可以创建新元素。这个方法只接受要创建的元素的标签名，不区分大小写。
+```javascript
+var div = document.createElement('div')
+div.id = 'divId'
+div.className = 'divClassName'
+```
+appendChild()
+insertBefore()
+replaceChild()
+```javascript
+document.body.appendChild(div)
+```
