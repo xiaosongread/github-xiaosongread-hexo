@@ -36,7 +36,7 @@ button2.onclick = function () {
 };
 ```
 ## demo
-[猛戳查看](https://www.songyanbin.com/demo/focus.html)
+[猛戳查看](http://www.shuy.cc/demo/focus.html)
 ## 兼容情况
 <img src="https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/icon/chrome.png" width="40" hegiht="40" align=center /> |<img src="https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/icon/firefox.png" width="40" hegiht="40" align=center />|<img src="https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/icon/ie.png" width="40" hegiht="40" align=center />|<img src="https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/icon/edge.png" width="40" hegiht="40" align=center />|<img src="https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/icon/opera.png" width="40" hegiht="40" align=center />|<img src="https://raw.githubusercontent.com/xiaosongread/github-xiaosongread-hexo/master/img-folder/icon/safari.png" width="40" hegiht="40" align=center />
 ---|:--:|:--:|:--:|:--:|:--:

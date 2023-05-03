@@ -154,12 +154,12 @@ function getQueryAttrToString(attr) {
 location.assign('https://www.baidu.com')
 ```
 这样浏览器会打开新的链接，并且在浏览器中生成一条新的浏览器历史记录。location.href和window.location设置为一个url，也会在后台调用此方法的。另外修改url的属性，也可以当前加载的页面
-假设初始的url: 'https://www.songyanbin.com'
+假设初始的url: 'http://www.shuy.cc'
 
 ```javascript
-// 修改后的URL：https://www.songyanbin.com#setion1
+// 修改后的URL：http://www.shuy.cc#setion1
 location.hash = '#setion1'
-// 修改后的URL：https://www.songyanbin.com?title=123
+// 修改后的URL：http://www.shuy.cc?title=123
 location.search = '?title=123'
 // 其余方法如上表的属性集合
 ```
