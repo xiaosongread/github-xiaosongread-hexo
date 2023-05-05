@@ -15,6 +15,7 @@ tags: 支付
 MWEB_URL= https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx20161110163838f231619da20804912345&package=1037687096
 
 访问该链接，出现以下错误：
+
 <img src="/images/img-folder/2021/10.png">
 
 原因：商户侧统一下单传的终端IP(spbill_create_ip)与用户实际调起支付时微信侧检测到的终端IP不一致导致的，
@@ -30,12 +31,14 @@ document.write(returnCitySN["cip"]+','+returnCitySN["cname"]);
 这条语句即可拿到手机端的真实ip,returnCitySN["cip"]将该值作为参数传到后台，作为spbill_create_ip的值调起微信支付接口。
 
 当前调起微信支付的域名和申请H5授权的域名不一致时会出现如下图所示：
+
 <img src="/images/img-folder/2021/11.png">
 
 原因：当前调起微信支付的域名和申请H5授权的域名不一致。
 ### 解决方法：将该项目放到域名服务器上，并使得调起支付的访问链接的域名和H5授权的域名一致！
 1.解决以上两个问题后，不能在浏览其中访问返回的MWEB_URL，而是要通过前端类似于window.location.href=”MWEB_URL”去调用。
 ① 不能直接在手机微信端，必须在手机浏览器上调用。会提示“系统繁忙，请稍后再试”
+
 <img src="/images/img-folder/2021/12.png">
 
 
