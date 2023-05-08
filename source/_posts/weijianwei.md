@@ -1,66 +1,36 @@
 ---
-title: 卫健委项目完结总结test
+title: 卫健委(中国继续医学教育网)项目完结总结
 categories: gc-end
-date: 2022-04-10 13:30:03
-tags: vscode github
+date: 2022-04-21 13:30:03
+tags: vue nuxt scss webpack 
 ---
 
-#### 准备工作：电脑上需安装VSCode，拥有一个github账户。实现同步的功能主要依赖于VSCode插件 "Settings Sync"
-### Setting Sync 可同步包含的所有扩展和完整的用户文件夹
-1) 设置文件
+### 中国继续医学教育网 - 卫健委 - 2022/01 ~ 2022/04/10
 
-2) 快捷键设置文件
+#### 项目介绍
+中国继续医学教育网是国家卫健委健康委能力建设和继续教育中心的线上为各级医院的医师做专业技能课程的培训和线上考级的线上平台。项目主要承载的直播，录播，音频，线上视频购买，线上考试和线上证书的发放。
 
-3) Launch File
+#### 项目架构选择
+项目主要包括3个系统：
+后台管理系统：https://www.ncme.org.cn/admin/#/login?redirect=%2F；
+PC端的线上学习网站：https://www.ncme.org.cn/；
+手机端的H5学习网站：https://www.ncme.org.cn/ncme-h5/；
+后台管理系统采用的是：vue + element + vuex的全家桶的前端架构模式；
+PC端的线上学习网站采用的是：nuxt + element-ui
+手机端的H5学习网站采用的是：nuxt + vant
 
-4) Snippets Folder
+ToB的网站，项目要求首屏渲染速度要快，尤其是SEO的要求比较高，所以选择了服务端渲染，有头部标签管理方便，SEO优化比较好的nuxt，并且项目资金压力不大，服务器方面的费用不用考虑。
+#### 项目的坑
+1.首先管理系统包括用户、属性、课程、项目、运营、财务、消息、权限、统计、学院等十大系统，需求太多，前期给的文档需求不全，导致后期工期不变，需求一直再加，工期没有商量余地，导致时间太紧，bug率太高。
+2.项目的需求文档不全，导致课程、项目系统变成了俄罗斯套娃，代码变得非常的难维护。
+3.nuxt当时没有接触过这个框架，在时间紧的基础上还是不要采取不熟悉框架，不过好赖都过来了。
+4.直播相关的业务采用的第三方的CC，导致调用他们的API各种问题，沟通很麻烦。
 
-5) VSCode 扩展设置
+#### 项目的交付
+国家级别的项目相对来说还是比较好交付的，就是应为功能太多，导致有些问题没有测试到，结果到了线上数据全部上去，访问量达到30W+的时候暴露了一些没测到问题，但是整体还能说得过去。
+#### 项目总结
 
-6) 工作空间
-<!-- more -->
-
-### Setting Sync 快捷键：
-1) 上传： Shift + Alt + U (Sync: Update / Upload Settings)
-
-2) 下载： Shift + Alt + D (Sync: Download  Settings)
-
-如果快捷键有冲突，可Ctrl + K + S快捷键设置配置其它快捷键 或 Ctrl + P / F1 在命令窗口输入 >sync 即会出现相应命令供选择
-<img src="/images/img-folder/2021/3.png">
-
-### Step1. 安装 同步插件"Settings Sync"
-<img src="/images/img-folder/2021/4.png">
-
-### Step2. 进入github -> Settings 在左侧 Developer settings -> Personal access tokens 
-<img src="/images/img-folder/2021/5.png">
-
-### Step3. 点击按钮 Generate new token 新增一个token
-图1：
-<img src="/images/img-folder/2021/6.png">
-图2：
-<img src="/images/img-folder/2021/7.png">
-图3：
-<img src="/images/img-folder/2021/8.png">
-
-```
-记住你自己生成的token值，在VSCode配置上回用得到，最好找个笔记保存下来。
-```
-
-### Step4. 回到VSCode配置将token配置到本地
-(Sync: Update / Uplaod Settings) Shift + Alt + U 在弹窗里输入你的token， 回车后会生成syncSummary.txt文件
-<img src="/images/img-folder/2021/9.png">
-
-syncSummary.txt文件会存储VSCode的设置及所安装的插件列表
-
-有点类似package.json这样形式的文件
-
-可以将自己的token分享到自己的团队里面去，这样团队可以共用一套设置。 
-
-### Step5.设置上同步下载设置
-
-(Sync: Download  Settings) Shift + Alt + D 在弹窗里输入你的gist值，稍后片刻便可同步成功
-
-### Step6. 如果要重置同步设置，变更其它token
-
-Ctrl+P / F1 弹出输入>sync,即可重新配置你的其它token来同步
-
+1、大型项目前期的需求一定要确定好，最起码要确定十有八九。
+2、前期项目的框架要尽量选择自己熟悉的，大项目不适合去选用新的框架。
+3、工期是最重要，那其实就是需求一定要仔细过，做到时间功能的合理安排。
+4、UI层面的适当找比较初级的程序员写好，但前提是一定要有自己的代码书写规范文档。
