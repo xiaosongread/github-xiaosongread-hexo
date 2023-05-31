@@ -990,25 +990,78 @@ mutations: {
 ## 小程序相关
 
 ### 生命周期函数有哪些？小程序的周期函数？
+生命周期函数：
+onLoad
+onUnLoad
+onShow
+onHide
+onReady
+小程序周期函数：
+onLaunch
+onShow
+onError
 
+### 应用与页面生命周期发生顺序
+应用onLaunch -> 应用onShow -> 页面page -> onLoad -> onShow -> onReady
 ### 小程序是如何传值？
+
+```html
+<button bindTap="get" id='123' data-name="按钮名">按钮</button>
+```
+
+```js
+get(e) {
+  let id = e.currentTarget.id
+  let name = e.currentTarget.dataset.name
+}
+```
 
 ### wxss和css的区别
 
++ wxss背景图只能引入外联，不能使用本地图片
++ 小程序使用@important引入外链样式，地址为相对路径
++ 单位为rpx，是响应式像素，可根据屏幕宽度做自适应
+
 ### 小程序是如何传递数据？
 
++ 在app.js中，this.globalData={}中存放数据，在组件.js中，头部引入const app = getApp(),来获取全局变量，直接使用app.globalData.key来获取变量
++ 使用路由，wx.navigation/redircetTo/url+参数等方式，在页面onLoad(e),通过e来获取参数
++ 本地缓存，如storage等存储数据
+
 ### webview的理解
+在小程序中嵌套H5页面，域名必须在白名单里面
+
+### 注意事项
+1.rpx，规定屏幕宽度为750rpx，可适配不同的屏幕宽度
+2.本地资源wxss无法获取，bgimg可使用网络图片，base64,或者使用标签来引入
+3.navigateTo，一个应用同时能发开5个页面或者使用redirct
 
 ### 小程序的双向绑定和vue的有什么区别
-
+小程序必须使用this.setState({key:val})来更新数据，直接赋值不能更新页面变化
 
 ### 下拉刷新的实现方法
+app.json中，将'enablePullDownFresh': true,开启全局下拉刷新，组件.json中，将'enablePullDownFresh': true,开启单页下拉刷新，组件中的onPullDownRefresh写加载的逻辑，wx.stopPullDownRefresh()更新完数据，停止更新。
 
 ### 跳转的方式有哪些
++ wx.navigateTo() 保留当前页，跳转到应用指定页面，不能跳转tabar页面
++ wx.redircetTo() 关闭当前页，跳转到应用指定页面，不能跳转tabar页面
++ wx.switchTo() 跳转到tabbar页面，关闭其他非tabar页面
++ wx.navigateBack() 关闭当前页，返回上一级或多级页面，可通过getCurrentPages()获取当前的页面栈，决定要返回第几层
++ wx.relaunch() 关闭所有页，打开到应用内的某个页面（应用场景：登陆跳转到其他页面）
 
 ### 描述一下小程序的登陆流程
 
+点击登陆按钮 -> 调用微信登陆程序接口wx.login,获取code(有效期5分钟) -> 后台使用code、appid,appSercrent获取openid、session-key,然后生成token返回给前端 -> 前端保存token，便于之后的业务请求
+
 ### wx:if和hidden的区别，如何使用？
 
+wx:if 有更高的切换消耗
+hidden 有更高的初始渲染消耗
+页面数据切换使用hidden,运行条件变化使用wx:if
+
 ### app.json的配置项
+
+pages 存放小程序所有pages的路径
+window 小程序所有页面的顶部、背景颜色，文字tabbar等的设置
+tabBar 设置底部导航，最多5个，最少2个
 
