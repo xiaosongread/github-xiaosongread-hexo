@@ -299,9 +299,38 @@ document.write(str.slice(4,10)); // 从第 5 个字符开始截取到第10个字
 + find() 返回通过测试（函数内判断）的数组的第一个元素的值
 当数组中的元素在测试条件时返回 true 时, find() 返回符合条件的元素，之后的值不会再调用执行函数。
 如果没有符合条件的元素返回 undefined
+
+> array.find(function(currentValue, index, arr),thisValue)
+[参数]
+callback：必须。为数组中每个元素执行的函数，该函数接受三个参数：
+currentValue：必须。数组中正在处理的当前元素。
+index：可选。当前元素的索引值。
+arr：可选。当前元素所在的数组对象。
+thisValue：可选。传递给函数的值一般用 "this" 值。
+如果这个参数为空， "undefined" 会传递给 "this" 值
+
+```js
+let arr1 = [1, 2, 3, 4, 5];
+let num = arr1.find(item => item > 1);
+console.log(num) // 2
+```
 + findIndex() 返回传入一个测试条件（函数）符合条件的数组第一个元素位置。
 当数组中的元素在测试条件时返回 true 时, findIndex() 返回符合条件的元素的索引位置，之后的值不会再调用执行函数。
 如果没有符合条件的元素返回 -1
+
+> array.findIndex(function(currentValue, index, arr), thisValue)
+
+```js
+const arr = [1, 2, 3, 4, 5, 3, 3, 2, 4, 5 ]
+ 
+// 可以这么写
+const index = arr.findIndex(item => {
+    return item > 2
+})
+console.log(index) // 2
+// 也可以这么写
+const index = arr.findIndex(item => item > 2)
+```
 
 <h4>排序</h4>
 + reverse() 将数组元素翻转
@@ -444,9 +473,9 @@ console.log(unique(arr))
 ```
 ### — bind/call/apply的区别？
 
-+ call()的第一个参数为this绑定的对象，后面传入一串参数列表
++ call()的第一个参数为this绑定的对象，后面传入一串字符窜
 当第一个参数为null或者undefined的时候，默认指向window
-+ apply()和call类似，不同在于第二个参数一个数组
++ apply()和call类似，不同在于第二个参数是一个数组
 + bind()和call()类似，不通电在于bind()不会立即执行，而是返回了一个改变this后的函数；不同点二在于当你调用fn1 = fn.bind(newThis,param1)方法后，执行fn2(prama2)时，参数prama2会加到param1后面。
 
 ```js
@@ -504,7 +533,7 @@ function log(){
 }
 ```
 ### 箭头函数和普通函数的区别
-普通函数的this是调用者；箭头函数的this是更具作用域的上下文确定的是，是不可以修改的。
+普通函数的this是调用者；箭头函数的this是根据作用域的上下文确定的是，是不可以修改的。
 + 全局声明的函数，this指向的是window
 + 对象里面的函数，this指向的是当前的对象，但是可以修改
 + 构造函数的this，指向的是new出来的对象
