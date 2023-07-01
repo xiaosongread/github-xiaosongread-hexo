@@ -1,7 +1,7 @@
 ---
 title: 关于我
 categories: my-end
-date: 2023-06-19 13:30:03
+date: 2023-04-01 13:30:03
 tags: 人物
 ---
 
@@ -45,6 +45,10 @@ tags: 人物
     <img src="/images/img-folder/my/dyrs-h5.png" style="height: 100%;margin:0 auto;display:block;position:absolute;top:0;left:0;right:0;bottom:0;">
     <div style="width:100%;line-height:25px;background:rgba(0,0,0,.5);color:#fff;position:absolute;bottom:-25px;left:0;font-size: 14px;text-align:center;">东易日盛mobile官网</div>
   </a>
+  <a href="" style="display:block;width:300px;height:170px;position:relative; margin: 0 30px 50px 0;background:rgba(0,0,0,.5);">
+    <img src="/images/img-folder/2023/n1.png" style="height: 100%;margin:0 auto;display:block;position:absolute;top:0;left:0;right:0;bottom:0;">
+    <div style="width:100%;line-height:25px;background:rgba(0,0,0,.5);color:#fff;position:absolute;bottom:-25px;left:0;font-size: 14px;text-align:center;">博客网站</div>
+  </a>
 </div>
 
 ### 能力
@@ -65,3 +69,4 @@ tags: 人物
 + 邮箱：598349146@qq.com/gu_syb@sina.com
 + 微信号：s20200929
 + 抖音号：ssy_0301
++ github：https://github.com/xiaosongread
