@@ -540,30 +540,55 @@ function log(){
 + 箭头函数的this，是当前声明箭头函数的作用域this指向的是谁，this就是指向谁
 
 ### — typeof 与 instanceof 区别
-typeof 与 instanceof都是用来判断数据类型的方法，区别在于：
+typeof 和 instanceof 都是 JavaScript 中用来检测数据类型的运算符，但它们的作用不同。
+1.typeof 运算符是用来检测一个变量或表达式的数据类型的。它返回一个字符串，表示该值的数据类型。
+
+> 基本数据类型可以用typeof检测出来，但null、数组、对象、函数的实例(new+函数),返回的都是object，无法检测到真实的数据类型，需要使用instanceof
 
 ```js
-let str1 = "宋的博客文章"
-let num1 = 12
-let null1 = null
-let bool1 = true
-let arr1 = [1,2,3]
-let fun1 = function() {
-  return "this my web!"
-}
-console.log(typeof str1) // string
-console.log(typeof arr1) // object
-console.log(typeof fun1) // function
-console.log(typeof arr1) // object
-console.log(str1 instanceof string) // VM469:9 Uncaught ReferenceError: string is not defined
-console.log(fun1 instanceof Object) // true
+console.log(typeof 123);// number
+console.log(typeof 'hello');//输出 string
+console.log(typeof true);//输出 boolean
+console.log(typeof undefined);//输出 undefined
+console.log(typeof function () { });//输出 function
+console.log(typeof null);//输出 object
+console.log(typeof [123]);//输出 object
+console.log(typeof { name: 'tom', age: 18 });//输出 object
+console.log(typeof new Date());//输出 object
+```
+2.instanceof
+instanceof 运算符是用来判断一个对象是否属于某个类（构造函数）的实例。
+instanceof 检查的是对象的原型链上是否有该类实例，只要原型链上有该类实例，就会返回true，否则为false
+
+```js
+var arr = [1, 2, 3];
+arr instanceof Array // 返回 true
+
+var date = new Date();
+date instanceof Date // 返回 true
+
+var reg = /hello/;
+reg instanceof RegExp // 返回 true
+
+class Person { }
+class Dog extends Person { }
+let dog = new Dog()
+console.log(dog instanceof Dog);//输出 true
+console.log(dog instanceof Person);//输出 true
+console.log(dog instanceof Object);//输出 true
+//执行顺序：dog-->Person的实例-->Object实例-->Object原型
+//Object是所有对象的原型，所以任何和对象和Object进行instanceof运算都会返回true
+let b = { name: 'Bob', age: 18 }
+console.log(b instanceof Person);//输出 false
 ```
 
+> 需要注意的是，instanceof 运算符只能用来判断对象是否为该类的实例，不能用来判断基本数据类型的值。而且，如果要判断对象是否为某个类的实例，该类必须是通过构造函数定义的，不能是字面量对象或匿名函数等其他形式。
 
-> typeof会返回一个变量的基本类型，instanceof 返回的是布尔值
-instanceof 可以准确判断引用数据类型，但是不能正确判断原始数据类型
-typeof虽然可以判断原始数据类型（null 除外），但是无法判断引用数据类型（function 除外）
-
+3.typeof与instanceof总结：
+①typeof与instanceof用来判断变量是否为空,或者属于什么数据类型
+②typeof返回的是一个字符串,用来判断是什么数据类型
+③instanceof返回的是一个布尔值,用来判断一个变量是否属于对象上的实例
+④typeof检测的是简单数据类型,instanceof检测的是引用数据类型
 ### — 本地存储
 + cookie
 存储数据大小为4K左右，客户端请求服务器。将cookie返给服务器，以此来判断用户的状态，可以设置过期时间，不可跨域访问
@@ -627,7 +652,46 @@ var jsonObj = $.parseJSON(jsonStr);
 ```
 
 ### — 闭包，使用场景
-闭包就是函数套函数，从而达到内部声明的变量，在外部可以访问到，延长变量的生命周期，让变量始终保持在内存中，但是闭包很容易导致内存泄漏，一般在创建私有变量或者延长变量的生命周期会使用到。
+#### 概念
+闭包是指一个函数中有权访问另一个函数中的变量，本质就是在函数A中返回另一个函数B，这时候B函数可以访问A函数中的变量，这样就形成了一个闭包，A函数中变量不会被销毁，并且这个变量只能通过B函数来访问。
+#### 解决的问题
+能够让函数执行后，其中的变量不会被销毁，同时能够让函数内的局部变量被访问。
+#### 闭包带来的问题和如何规避
+由于垃圾回收机制不能销毁闭包中的局部变量，从而导致内存泄漏，一旦闭包使用的太多，就会导致内存溢出，导致程序不安全和卡顿，所以必须手动设置闭包=null,让垃圾回收机制回收闭包中的变量。
+#### 简单实现一个闭包
+```js
+var getA = function() {
+  var a = 10;
+  return function() {
+    return a
+  }
+}
+var a = getA()
+console.log(a) // 10
+```
+#### 闭包的作用
++ 延长变量的生命周期
++ 创建私有变量
++ 闭包可以在函数外部访问到函数内部作用域的变量
++ 闭包可以让访问变量不会被垃圾机制回收
+
+#### 闭包的应用场景
++ 使用场景一:给对象设置私有变量并且利用特权方法去访问私有属性
+```js
+function Fun(){
+  var name = 'tom';
+  
+  this.getName = function (){
+    return name;
+  }
+}
+
+var fun = new Fun(); 
+console.log(fun.name);//输出undefined,在外部无法直接访问name
+console.log(fun.getName());//可以通过特定方法去访问
+```
+
++ 防抖节流
 
 ### — 什么是防抖和节流？
 + 防抖 n秒后在执行该事件，若在n秒之内被重复触发，则重新计时(单位时间内，频繁触发一个事件，以最后一次触发为准。)
