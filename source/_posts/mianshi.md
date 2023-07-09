@@ -696,23 +696,33 @@ console.log(fun.getName());//可以通过特定方法去访问
 ### — 什么是防抖和节流？
 + 防抖 n秒后在执行该事件，若在n秒之内被重复触发，则重新计时(单位时间内，频繁触发一个事件，以最后一次触发为准。)
 
+> 简单点理解就是：
+防抖是频繁执行某个事件的时候，就等事件停止之后的n秒后再执行相关的操作；
+节流是频繁执行某个事件的时候，规定n秒执行一次回调（执行相关的操作），比如规定了1S执行一次，那就是如果用户某个按钮频繁点击了3S，那就执行相关操作（执行回调方法）3次。
+
+使用场景：
+最典型的防抖函数应用场景就是搜索输入框了，用户输入之后需要自动发送网络请求获取数据，但是普通函数会频繁的触发事件，而用户的输入并没有完成，请求的结果也是无意义的，毫无疑问地给服务器造成了巨大地压力。
+现在需要优化的关键点就是，如何使网络请求触发的不那么频繁，比如在用户输入停下一段时间后，这时，可能代表用户输入已经完毕，在这时才发送请求是最合适的。防抖函数就可以很好的做到这一点。
+防抖函数的功能：如果在某个时间内反复触发的函数，那么它只会执行最后触发的那一次。
+
 ```js
 /**
  * 防抖动
  *
  * @export
- * @param {*} fn 方法
- * @param {*} delay 多少毫秒不调用后执行一次
+ * @param {*} fn 需要防抖执行的函数
+ * @param {*} delay 多少毫秒不调用后执行一次,延迟时间
  * @returns
  */
-export function debounce(fn, delay) {
-  var timeout = null
-  return function() {
-    let that = this
-    let args = arguments
-    clearTimeout(timeout) 
-    timeout = setTimeout(function() {
-      fn.apply(that, args)
+const debounce = (fn, delay = 500) => {
+  // 存储定时器的timerId
+  let timer = null
+  return function(...args) {
+    // 在每一次调用函数时，都清除上一次的定时器
+    if (timer) clearTimeout(timer)
+    // 开启一个定时器
+    timer = setTimeout(() => {
+      fn.apply(this, args)
     }, delay)
   }
 }
@@ -720,28 +730,48 @@ export function debounce(fn, delay) {
 
 + 节流 n秒内只运行一次，若在n秒内重复触发，只有一次生效(单位时间内，频繁触发一个事件，只会触发一次。)
 
+应用场景：假如有一个轮播图，轮播图以固定的频率播放图片，用户可以点击切换上一张或者下一张，如果用户点击过快，轮播图就会一直切换。这时候，应该控制轮播图切换的频率，在用户的持续点击下，只按照固定的频率切换。
+节流函数的功能：连续的触发某个函数，只会以固定的频率去执行
+
 ```js
+/**
+**@param{fn: function} 需要节流的函数
+**@param{interval: number} 函数触发的频率
+*/
+const throttle = (fn, interval) => {
+  // 记录上一次触发函数时的时间，初始值为0
+  let lastTime  = 0
+  return function (...args) {
+    // 获取现在的时间
+    const nowTime = new Date().getTime()
+    // 如果现在的时间减去上次触发的事件大于等于interval，则可以执行函数了
+    if(nowTime - lastTime >= interval){
+      fn.apply(this, args)
+      // 将上次触发函数的时间赋值成当前时间
+      lastTime = nowTimes
+    }
+  }
+}
+// 或者
 /**
  * 节流
  *
  * @export
- * @param {*} func 方法
+ * @param {*} fn 方法
  * @param {*} delay 每隔多少毫秒执行一次
  * @returns
  */
-export function throttle(func, delay) {
-  var timer = null
-  return function() {
-    var that = this
-    var args = arguments
-    if (!timer) {
-      timer = setTimeout(function() {
-        func.apply(that, args)
-        timer = null
-      }, delay)
-    }
-  }
-}
+const throttle = (fn, delay) => {
+  let flag = true;
+  return function () {
+    if (!flag) return;
+    flag = false;
+    fn.apply(this, arguments);
+    setTimeout(() => {
+      flag = true;
+    }, delay);
+  };
+};
 ```
 
 ### — ajax的请求过程
