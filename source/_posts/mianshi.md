@@ -809,7 +809,7 @@ xhr.onreadystatechange = function () {
 
 ### — ajax、axios、jsonp的理解
 1、jsonp是一种可以解决跨域问题的方式，就是通过动态创建script标签用src引入外部文件实现跨域，script加载实际上就是一个get请求，并不能实现post请求。(其他实现跨域的方法有：iframe,window.name,postMessage,CORS...)
-2、ajax是一种技术，ajax技术包含了get和post请求的，但是它仅仅是一种获取数据的技术，不能直接实现跨域，只有后台服务器配置好Access-Control-Allow-Origin，才可以实现请求的跨域。
+2、ajax是一种技术，ajax技术包含了get和post请求的，但是它仅仅是一种获取数据的技术，不能直接实现跨域，只有后台服务器配置好Access-Control-Allow-Origin，才可以实现跨域的请求。
 3、axios是通过promise实现对ajax技术的一种封装，axios是ajax，ajax不止axios。
 
 ### — 什么是事件委托以及优缺点
@@ -862,11 +862,115 @@ JavaScript 常被描述为一种基于原型的语言——每个对象拥有一
 
 ### — 浏览器输入Url之后发生了什么？
 
-浏览器输入URL链接 -> 回车 -> 浏览器查找当前URL是否有本地缓存 -> dns解析URL对应的IP -> 根据IP三次握手TCP -> 发起http请求 -> 服务器处理请求 ->  关闭四次握手 -> 浏览器根据发回的response响应，启用浏览器的渲染引擎和JS引擎，更具HTML/CSS/JS/IMG等等渲染页面。
+浏览器输入URL链接 -> 回车 -> 浏览器查找当前URL是否有本地缓存 -> dns解析URL对应的IP -> 根据IP建立TCP连接(三次握手) -> 发起http请求 -> 服务器处理请求 ->  关闭TCP连接(四次握手) -> 浏览器根据发回的response响应，启用浏览器的渲染引擎和JS引擎，更具HTML/CSS/JS/IMG等等渲染页面。
 
-1.浏览器解析html源码，创建dom树，在dom树中，每个html标签都有一个节点，每个文本都有一个节点，dom数的根节点是html标签
-2.浏览器解析css，计算出最终的样式，对css中非法的代码过滤掉，根据优先级计算最终的渲染树
-3.根据生成的dom树和cssom，调用GPU，合成图层，显示在屏幕上。
+#### 从输入URL到页面加载的主干流程如下：
+
+1、浏览器的地址栏输入URL并按下回车。
+
+2、浏览器查找当前URL的DNS缓存记录。
+
+3、DNS解析URL对应的IP。
+
+4、根据IP建立TCP连接（三次握手）。
+
+5、HTTP发起请求。
+
+6、服务器处理请求，浏览器接收HTTP响应。
+
+7、渲染页面，构建DOM树。
+
+8、关闭TCP连接（四次挥手）。
+
+##### 1.首先在浏览器中输入URL
+
+我们常见的RUL是这样的:
+http://www.baidu.com
+这个域名由三部分组成：协议名、域名、端口号，这里端口是默认所以隐藏。除此之外URL还会包含一些路径、查询和其他片段
+例如：http://www.tuicool.com/search?kw=%E4%。
+我们最常见的的协议是HTTP协议，除此之外还有加密的HTTPS协议、FTP协议、FILe协议等等。URL的中间部分为域名或者是IP，之后就是端口号了。通常端口号不常见是因为大部分的都是使用默认端口，如HTTP默认端口80，HTTPS默认端口443。
+
++ 查找缓存：浏览器先查看浏览器缓存-系统缓存-路由缓存中是否有该地址页面，如果有则显示页面内容。如果没有则进行下一步。
+
++ 浏览器缓存：浏览器会记录DNS一段时间，因此，只是第一个地方解析DNS请求；
+
++ 操作系统缓存:如果在浏览器缓存中不包含这个记录，则会使系统调用操作系统， 获取操作系统的记录(保存最近的DNS查询缓存)；
+
++ 路由器缓存：如果上述两个步骤均不能成功获取DNS记录，继续搜索路由器缓存；
+
++ ISP缓存：若上述均失败，继续向ISP搜索。
+
+##### 2.DNS域名解析
+
+我们知道在地址栏输入的域名并不是最后资源所在的真实位置，域名只是与IP地址的一个映射。网络服务器的IP地址那么多，我们不可能去记一串串的数字，因此域名就产生了，域名解析的过程实际是将域名还原为IP地址的过程。
+
+首先浏览器先检查本地hosts文件是否有这个网址映射关系，如果有就调用这个IP地址映射，完成域名解析。
+
+如果没找到则会查找本地DNS解析器缓存，如果查找到则返回。
+
+如果还是没有找到则会查找本地DNS服务器，如果查找到则返回。
+
+最后迭代查询，按根域服务器 ->顶级域,.cn->第二层域，hb.cn ->子域，www.hb.cn的顺序找到IP地址。
+
+DNS域名解析：浏览器向DNS服务器发起请求，解析该URL中的域名对应的IP地址。DNS服务器是基于UDP的，因此会用到UDP协议。
+##### 3.建立TCP连接： 解析出IP地址后，根据IP地址和默认80端口，和服务器建立TCP连接
+
+发起HTTP请求： 浏览器发起读取文件的HTTP请求，，该请求报文作为TCP三次握手的第三次数据发送给服务器
+
+服务器响应请求并返回结果：服务器对浏览器请求做出响应，并把对应的html文件发送给浏览器
+
+关闭TCP连接 ： 通过四次挥手释放TCP连接
+
+浏览器渲染：客户端（浏览器）解析HTML内容并渲染出来，浏览器接收到数据包后的解析
+
+**构建DOM树：**词法分析然后解析成DOM树（dom tree），是由dom元素及属性节点组成，树的根是document对象
+
+构建CSS规则树：生成CSS规则树（CSS Rule Tree）
+构建render树：Web浏览器将DOM和CSSOM结合，并构建出渲染树（render tree）
+布局（Layout）：计算出每个节点在屏幕中的位置
+绘制（Painting）：即遍历render树，并使用UI后端层绘制每个节点。
+JS引擎解析过程：
+调用JS引擎执行JS代码（JS的解释阶段，预处理阶段，执行阶段生成执行上下文，VO，作用域链、回收机制等等）
+
+创建window对象：window对象也叫全局执行环境，当页面产生时就被创建，所有的全局变量和函数都属于window的属性和方法，而DOM Tree也会映射在window的doucment对象上。当关闭网页或者关闭浏览器时，全局执行环境会被销毁。
+加载文件：完成js引擎分析它的语法与词法是否合法，如果合法进入预编译
+预编译：在预编译的过程中，浏览器会寻找全局变量声明，把它作为window的属性加入到window对象中，并给变量赋值为’undefined’；寻找全局函数声明，把它作为window的方法加入到window对象中，并将函数体赋值给他（匿名函数是不参与预编译的，因为它是变量）。而变量提升作为不合理的地方在ES6中已经解决了，函数提升还存在。
+解释执行：执行到变量就赋值，如果变量没有被定义，也就没有被预编译直接赋值，在ES5非严格模式下这个变量会成为window的一个属性，也就是成为全局变量。string、int这样的值就是直接把值放在变量的存储空间里，object对象就是把指针指向变量的存储空间。函数执行，就将函数的环境推入一个环境的栈中，执行完成后再弹出，控制权交还给之前的环境。JS作用域其实就是这样的执行流机制实现的。
+浏览器重绘与重排的区别？
+重排/回流（Reflow）：当DOM的变化影响了元素的几何信息，浏览器需要重新计算元素的几何属性，将其安放在界面中的正确位置，这个过程叫做重排。表现为重新生成布局，重新排列元素。
+重绘(Repaint): 当一个元素的外观发生改变，但没有改变布局,重新把元素外观绘制出来的过程，叫做重绘。表现为某些元素的外观被改变
+单单改变元素的外观，肯定不会引起网页重新生成布局，但当浏览器完成重排之后，将会重新绘制受到此次重排影响的部分
+重排和重绘代价是高昂的，它们会破坏用户体验，并且让UI展示非常迟缓，而相比之下重排的性能影响更大，在两者无法避免的情况下，一般我们宁可选择代价更小的重绘。
+『重绘』不一定会出现『重排』，『重排』必然会出现『重绘』。
+如何触发重排和重绘？
+任何改变用来构建渲染树的信息都会导致一次重排或重绘：
+
+添加、删除、更新DOM节点
+通过display: none隐藏一个DOM节点-触发重排和重绘
+通过visibility: hidden隐藏一个DOM节点-只触发重绘，因为没有几何变化
+移动或者给页面中的DOM节点添加动画
+添加一个样式表，调整样式属性
+用户行为，例如调整窗口大小，改变字号，或者滚动。
+如何避免重绘或者重排？
+集中改变样式，不要一条一条地修改 DOM 的样式。
+
+不要把 DOM 结点的属性值放在循环里当成循环里的变量。
+
+为动画的 HTML 元件使用 fixed 或 absoult 的 position，那么修改他们的 CSS 是不会 reflow 的。
+
+不使用 table 布局。因为可能很小的一个小改动会造成整个 table 的重新布局。
+
+尽量只修改position：absolute或fixed元素，对其他元素影响不大
+
+动画开始GPU加速，translate使用3D变化
+
+提升为合成层
+
+> 将元素提升为合成层有以下优点：
+合成层的位图，会交由 GPU 合成，比 CPU 处理要快
+当需要 repaint 时，只需要 repaint 本身，不会影响到其他的层
+对于 transform 和 opacity 效果，不会触发 layout 和 paint
+提升合成层的最好方式是使用 CSS 的 will-change 属性：#target {will-change: transform;}
 
 ## vue相关
 
@@ -876,13 +980,53 @@ modal + view + viewModal的缩写，是modal驱动view的渐进式框架，不�
 ### 为什么使用虚拟dom
 + 创建真实DOM的代价高：真实的 DOM 节点 node 实现的属性很多，而 vnode 仅仅实现一些必要的属性，相比起来，创建一个 vnode 的成本比较低。
 + 触发多次浏览器重绘及回流：使用 vnode ，相当于加了一个缓冲，让一次数据变动所带来的所有 node 变化，先在 vnode 中进行修改，然后 diff 之后对所有产生差异的节点集中一次对 DOM tree 进行修改，以减少浏览器的重绘及回流。
+1). 重绘：元素样式的改变（但宽高、大小、位置等不变）
+如：outline、visibility、color、background-color等
+只改变自身样式，不会影响到其他元素
+2). 回流：元素的大小或者位置发生改变（当页面布局和几何信息发生改变的时候），触发了重新布局导致渲染树重新计算布局和渲染
+​ 如添加或删除可见的DOM元素；元素的位置发生变化；元素的尺寸发生变化、内容发生变化（如文本变化或图片被另一个不同尺寸的图片所代替）；页面一开始渲染的时候（无法避免）；
+​因为回流是根据视口大小来计算元素的位置和大小的，所以浏览器窗口尺寸变化也会引起回流
+
+> 注意：回流一定会触发重绘，而重绘不一定会回流
+
 + 虚拟dom由于本质是一个js对象，因此天生具备跨平台的能力，可以实现在不同平台的准确显示。
 + Virtual DOM 在性能上的收益并不是最主要的，更重要的是它使得 Vue 具备了现代框架应有的高级特性。
 
 ### Vue中key是用来做什么的？为什么不推介使用index作为key？
-1、key的作用主要是为了高效的更新虚拟DOM（使用key，它会基于key的变化重新排列元素顺序，并且会移除key不存在的元素）
+> key 是为 Vue 中 vnode 的唯一标记，通过这个 key，我们的 diff 操作可以更准确、更快速
 
-2、当以数组的下标index作为index值时，其中一个元素（如增删改查）发生了变化就有可能导致所有元素的key值发生变化
+为什么会更快速，更准确呢，下面来看vnode中关于节点更新复用的详情情况
+在diff中比较两个节点是否可以复用，主要通过下面sameVnode函数来判断
+
+<img src="/images/img-folder/2023/vnode.png">
+
++ key：列表上每一项设置的key值
++ data：render函数中设置的一些属性
++ sel：标签和id或者class，例如 div#app.item，表示div标签有一个id：app，class：item
+
+#### 当我们没有设置key值的情况
+默认是undefined，undefined===undefined = true
+
+因为是列表，所以标签，class，属性基本上是一样，只是里面内容不一样，通过调用上诉函数，可以判断出：可以复用的dom
+我们来设想一下，如果我们有一个列表，然后我们在列表的头部新增一条数据
+1、首先会比较新增的vnode和老元素第一个元素比较，因为sameVnode返回true，标签可以复用，修改里面的内容
+2、比较第二个元素，是不是sameVnode返回的还是true，标签复用，修改列面的内容，以此类推，是不每一个节点都要替换内容
+3、如果我们列表每一项有一个chekbox元素，勾选的第一项，再插入新元素的时候，是不是你插入的节点被勾选了，这样是不是就不对了，有问题
+4、而且每一个元素都替换，是不是特别慢，并且列表需要全部重新渲染，大大的影响的性能
+
+> 把key值设置成index，有什么问题吧，为什么说最好不要设置成index
+
+1、列表每一项设置了一个index值，从0、1、2、3、4、5
+
+2、当我们在头部插入一个节点，是不是插入的节点就变成0，原来的0、1、2、3、4都加一位，我们来diff比较的时候，是不是每一项又都不一样了，sameVnode返回的都是false，标签不能复用，都要重新创建一个，插入到节点中，这样是不是也全部需要重新渲染，影响性能
+
+#### 如果设置了key，且key值固定的情况
+
+下面我们来把key设置成唯一的值，且是固定的值，当我们在头部插入一个节点，这个节点的key没有一样的，我们就创建一个，插入到头部
+
+后面的节点，是不是sel没有变，标签没有变，key值也没有变，是不是节点全部都可以复用，只是把位置挪动下，实际上就只创建了一个元素，这样就可以大大加快渲染速度
+
+这就是我们所说的diff操作更加准确，更快速的原因
 
 ### v-show和v-if的区别
 v-show原理是修改元素的css属性display:none来决定是显示还是隐藏
@@ -903,14 +1047,110 @@ v-if则是通过操作DOM来进行切换显示
 + beforeDestory 实例销毁之前调用，在这一步，实例仍然完全可用
 + destoryed Vue实例销毁之后调用。调用后，Vue实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁
 
+> 
+> **调用解耦一般在那个生命周期函数中执行？** 
+可以在钩子函数 created、beforeMount、mounted 中进行调用，因为在这三个钩子函数中，data 已经创建，可以将服务端端返回的数据进行赋值。
+但是推荐在 created 钩子函数中调用异步请求，因为在 created 钩子函数中调用异步请求有以下优点：
+<u>1.能更快获取到服务端数据，减少页面loading 时间；</u>
+<u>2.ssr不支持 beforeMount 、mounted 钩子函数，所以放在 created 中有助于一致性；</u>
+
 ### 常用的指令？常用的内置组件有哪些？
 
 常用指令：
-v-html v-text v-modal v-if v-show v-hide v-once v-on v-for
+v-html v-text v-modal v-if v-show v-hide v-once v-on v-for v-slot v-pre
 
 常用内置组件
 transition 动画 
 keepAlive 多个组件动态切换时缓存被移除的组件实例
+
+### computed 和 watch 的区别
+#### computed
+computed有缓存，关联的data里面的数据不变则不会重新计算，遇到双向绑定的属性值即v-model的属性值需要使用 get()和set(),才能监听
+
+```js
+<template>
+    <div>
+        <p>num {{num}}</p>
+        <p>double1 {{double1}}</p>
+        <input v-model="double2"/>
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            num: 20
+        }
+    },
+    computed: {
+        double1() {
+            return this.num * 2
+        },
+        double2: {//双向绑定的值需要使用get()和set()
+            get() {
+                return this.num * 2
+            },
+            set(val) {
+                this.num = val/2
+            }
+        }
+    }
+}
+</script>
+```
+
+> **计算属性的特点**
++ 支持缓存，只有依赖数据发生改变，才会重新进行计算,否则只会执行一次
++ 不支持异步，当 computed 内有异步操作时无效
++ 如果一个属性是由其他属性计算而来的，这个属性依赖其他属性，是一个多对一或者一对一，一般用 computed
++ 如果 computed 属性属性值是函数，那么默认会走 get() ；函数的返回值就是属性的属性值；在 computed 中的，属性都有一个 get() 和一个 set()，当数据变化时，调用 set()。
+
+#### watch
+监听引用类型需要深度监测，而且是拿不到oldVal，值类型不需要深度监听
+其可以监听的数据来源：data，props，computed 内的数据。
+
+```js
+<template>
+    <div>
+        <input v-model="name"/>
+        <input v-model="info.city"/>
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            name: '小宋',
+            info: {
+                city: '北京'
+            }
+        }
+    },
+    watch: {
+        name(oldVal, val) {
+            // eslint-disable-next-line
+            console.log('watch name', oldVal, val) // 值类型，可正常拿到 oldVal 和 val
+        },
+        info: {
+            handler(oldVal, val) {
+                // eslint-disable-next-line
+                console.log('watch info', oldVal, val) // 引用类型，拿不到 oldVal 。因为指针相同，此时已经指向了新的 val
+            },
+            deep: true // 深度监听
+        }
+    }
+}
+</script>
+```
+
+> **监听的特点**
++ 主要用来监听某些特定数据的变化，从而进行某些具体的业务逻辑操作，可以看作是 computed 和 methods 的结合体；
++ 可以监听的数据来源：data，props，computed 内的数据；
++ watch 支持异步；
++ 不支持缓存，监听的数据改变，直接会触发相应的操作；
++ 监听函数有两个参数，第一个参数是最新的值，第二个参数是输入之前的值，顺序一定是新值，旧值。
 
 ### vue自定义指令设置
 
@@ -1114,15 +1354,15 @@ mutations: {
 
 ### 生命周期函数有哪些？小程序的周期函数？
 生命周期函数：
-onLoad
-onUnLoad
-onShow
-onHide
-onReady
+onLoad 监听页面加载，一个页面只调用1次
+onReady 监听页面初次渲染完成，一个页面只调用1次
+onShow 监听页面显示
+onHide 监听页面隐藏
+onUnLoad 监听页面卸载
 小程序周期函数：
-onLaunch
-onShow
-onError
+onLaunch 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）。可以做一些初始化的工作
+onShow 当小程序启动，或从后台进入前台显示，会触发 onShow
+onHide 当小程序从前台进入后台，会触发 onHide
 
 ### 应用与页面生命周期发生顺序
 应用onLaunch -> 应用onShow -> 页面page -> onLoad -> onShow -> onReady
@@ -1148,7 +1388,7 @@ get(e) {
 ### 小程序是如何传递数据？
 
 + 在app.js中，this.globalData={}中存放数据，在组件.js中，头部引入const app = getApp(),来获取全局变量，直接使用app.globalData.key来获取变量
-+ 使用路由，wx.navigation/redircetTo/url+参数等方式，在页面onLoad(e),通过e来获取参数
++ 使用路由，wx.navigation/redircetTo/url+参数等方式，在页面onLoad(e),通过e.key来获取参数
 + 本地缓存，如storage等存储数据
 
 ### webview的理解
@@ -1168,9 +1408,9 @@ app.json中，将'enablePullDownFresh': true,开启全局下拉刷新，组件.j
 ### 跳转的方式有哪些
 + wx.navigateTo() 保留当前页，跳转到应用指定页面，不能跳转tabar页面
 + wx.redircetTo() 关闭当前页，跳转到应用指定页面，不能跳转tabar页面
++ wx.relaunch() 关闭所有页，打开到应用内的某个页面（应用场景：登陆跳转到其他页面）
 + wx.switchTo() 跳转到tabbar页面，关闭其他非tabar页面
 + wx.navigateBack() 关闭当前页，返回上一级或多级页面，可通过getCurrentPages()获取当前的页面栈，决定要返回第几层
-+ wx.relaunch() 关闭所有页，打开到应用内的某个页面（应用场景：登陆跳转到其他页面）
 
 ### 描述一下小程序的登陆流程
 
