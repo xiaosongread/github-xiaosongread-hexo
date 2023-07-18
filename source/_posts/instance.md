@@ -8,9 +8,9 @@ tag: js
 
 <!-- more -->
 
-[红皮书第三章-数据类型]()
-[红皮书第四章-变量、作用域和内存问题]()
-[红皮书第五章-引用类型](http://shuy.cc/2020/08/03/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/)
+[红皮书第三章-数据类型](http://shuy.cc/2020/07/12/typeOf/)
+[红皮书第四章-变量、作用域和内存问题](http://shuy.cc/2020/08/13/instance/)
+[红皮书第五章-引用类型](http://shuy.cc/2020/08/03/object)
 [红皮书第六章-面向对象的设计程序](http://shuy.cc/2020/08/04/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%A8%8B%E5%BA%8F/)
 [红皮书第七章-函数表达式](http://shuy.cc/2020/08/28/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/)
 [红皮书第八章-BOM](http://shuy.cc/2020/09/03/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%85%AB%E7%AB%A0-BOM/)
