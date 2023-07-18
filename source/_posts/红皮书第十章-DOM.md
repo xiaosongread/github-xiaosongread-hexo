@@ -1,15 +1,15 @@
 ---
-title: 红皮书第十章-DOM
+title: 第十章-DOM
 categories: jc-end
 date: 2020-09-09 11:09:56
 ---
-[红皮书第三章-数据类型](http://shuy.cc/2020/07/12/typeOf/)
-[红皮书第四章-变量、作用域和内存问题](http://shuy.cc/2020/08/13/instance/)
-[红皮书第五章-引用类型](http://shuy.cc/2020/08/03/object)
-[红皮书第六章-面向对象的设计程序](http://shuy.cc/2020/08/04/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%A8%8B%E5%BA%8F/)
-[红皮书第七章-函数表达式](http://shuy.cc/2020/08/28/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/)
-[红皮书第八章-BOM](http://shuy.cc/2020/09/03/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%85%AB%E7%AB%A0-BOM/)
-[红皮书第十章-DOM](http://shuy.cc/2020/09/09/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%8D%81%E7%AB%A0-DOM/)
+[第三章-数据类型](http://shuy.cc/2020/07/12/typeOf/)
+[第四章-变量、作用域和内存问题](http://shuy.cc/2020/08/13/instance/)
+[第五章-引用类型](http://shuy.cc/2020/08/03/object)
+[第六章-面向对象的设计程序](http://shuy.cc/2020/08/04/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%A8%8B%E5%BA%8F/)
+[第七章-函数表达式](http://shuy.cc/2020/08/28/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/)
+[第八章-BOM](http://shuy.cc/2020/09/03/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%85%AB%E7%AB%A0-BOM/)
+[第十章-DOM](http://shuy.cc/2020/09/09/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%8D%81%E7%AB%A0-DOM/)
 <!-- more -->
 ### 操作节点
 ##### appendChild(): 用于向childNodes列表末尾插入节点。

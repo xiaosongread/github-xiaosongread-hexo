@@ -1,5 +1,5 @@
 ---
-title: '红皮书第三章-数据类型'
+title: '第三章-数据类型'
 categories: js-end
 date: 2020-07-12 14:50:41
 tag: js

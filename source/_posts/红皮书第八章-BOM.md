@@ -1,5 +1,5 @@
 ---
-title: 红皮书第八章-BOM
+title: 第八章-BOM
 categories: jc-end
 date: 2020-09-03 15:26:41
 ---
@@ -9,13 +9,13 @@ BOM对象的核心是window,它表示浏览器的实例，window是javascript和
 > 有一点值得注意:定义全局变量和在window上面定义变量有一个区别就是，在window上面直接定义变量，可以用delete删除，但是直接定义是不可以删除的用delete
 
 <!-- more -->
-[红皮书第三章-数据类型](http://shuy.cc/2020/07/12/typeOf/)
-[红皮书第四章-变量、作用域和内存问题](http://shuy.cc/2020/08/13/instance/)
-[红皮书第五章-引用类型](http://shuy.cc/2020/08/03/object)
-[红皮书第六章-面向对象的设计程序](http://shuy.cc/2020/08/04/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%A8%8B%E5%BA%8F/)
-[红皮书第七章-函数表达式](http://shuy.cc/2020/08/28/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/)
-[红皮书第八章-BOM](http://shuy.cc/2020/09/03/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%85%AB%E7%AB%A0-BOM/)
-[红皮书第十章-DOM](http://shuy.cc/2020/09/09/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%8D%81%E7%AB%A0-DOM/)
+[第三章-数据类型](http://shuy.cc/2020/07/12/typeOf/)
+[第四章-变量、作用域和内存问题](http://shuy.cc/2020/08/13/instance/)
+[第五章-引用类型](http://shuy.cc/2020/08/03/object)
+[第六章-面向对象的设计程序](http://shuy.cc/2020/08/04/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%A8%8B%E5%BA%8F/)
+[第七章-函数表达式](http://shuy.cc/2020/08/28/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/)
+[第八章-BOM](http://shuy.cc/2020/09/03/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%85%AB%E7%AB%A0-BOM/)
+[第十章-DOM](http://shuy.cc/2020/09/09/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%8D%81%E7%AB%A0-DOM/)
 
 ```javascript
 window.aa = 123
@@ -194,7 +194,7 @@ function hasPlugin(name) {
 }
 console.log(hasPlugin('Flash'))
 ```
-> 以上方法不支持IE浏览器，需要支持的，请看红皮书212页有相关的说明。
+> 以上方法不支持IE浏览器，需要支持的，请看212页有相关的说明。
 
 ### screen对象
 javascript有几个对象相对编程来说意义不大，screen对象就是意义不大的一个，基本上就是用来表示客户端的能力，包括浏览器窗口外部的显示器信息，如像素宽度和高度。
