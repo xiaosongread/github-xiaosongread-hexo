@@ -1,7 +1,15 @@
+<!--
+ * @Author: xiaosongwindow 598349146@qq.com
+ * @Date: 2023-04-25 23:16:16
+ * @LastEditors: xiaosongwindow 598349146@qq.com
+ * @LastEditTime: 2023-07-18 16:44:16
+ * @FilePath: \github-xiaosongread-hexo\source\_posts\修改element源码如何部署代码打包.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 ---
 title: 修改element源码，发布属于自己的element包，实现自定义并修改element源码的bug，来实现线上使用自己的包来打包文件
 categories: gc-end
-date: 2020-07-30 12:01:26
+date: 2020-07-12 12:01:26
 ---
 我们在项目中，在采用element框架的时候，框架本身也是有bug的或者不符合我们产品需求需要我们改动的，但是，如果是本地打包完上传到服务器的话，可以修改本地的element源码，如果是服务器打包的话，那我们就得自己发一个npm的包来进行打包了。
 ### 案例：修改element Cascader 级联选择器，清空数据，下拉框仍然回显最后选择的数据的问题
