@@ -13,8 +13,10 @@ tag: js
 [第五章-引用类型](http://shuy.cc/2020/08/03/object)
 [第六章-面向对象的设计程序](http://shuy.cc/2020/08/13/defineProperty/)
 [第七章-函数表达式](http://shuy.cc/2020/08/28/func)
-[第八章-BOM](http://shuy.cc/2020/09/03/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%85%AB%E7%AB%A0-BOM/)
-[第十章-DOM](http://shuy.cc/2020/09/09/%E7%BA%A2%E7%9A%AE%E4%B9%A6%E7%AC%AC%E5%8D%81%E7%AB%A0-DOM/)
+[第八章-BOM](http://shuy.cc/2020/09/03/bom/)
+[第九章-客户端检测](http://shuy.cc/2020/09/03/navigator/)
+[第十章-DOM](http://shuy.cc/2020/09/09/dom/)
+[第十三章-事件](http://shuy.cc/2020/10/29/click/)
 
 
 ### 基本类型和引用类型的值
