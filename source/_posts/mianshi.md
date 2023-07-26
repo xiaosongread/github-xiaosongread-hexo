@@ -32,16 +32,109 @@ nav 定义导航链接的部分
 
 ### — 居中的方式
 
-1) 父子元素的宽高已知
+<!-- 1) 使用Flexbox布局
+在父级容器中设置 display: flex; 和 justify-content: center; align-items: center;
+这将使子元素水平和垂直居中
+
+2) 使用Grid布局
+在父级容器中设置 display: grid; 和 place-items: center;
+这将使子元素水平和垂直居中
+
+3) 使用绝对定位
++ 在子元素中设置 position: absolute; 和 top: 50%; left: 50%; (transform: translate(-50%, -50%)/margin-top: -50%;margin-left: -50%;);
++ 在子元素中设置 position: absolute; 和 top:0; left: 0; bottom: 0; right: 0;
+这将使子元素相对于父级容器垂直和水平居中 -->
+
++ 使用绝对定位 + transform，给子元素添加如下样式
+这种方式比较常用，***父子元素都不确定宽高***的情况也适用。
+如果 ***子元素的宽高确定***的话，translate中的值也可以设置为子元素宽高的一半，即transform: translate(-100px, -100px); 
+
 ```css
-margin: 父元素的高减去子元素的高/2(垂直居中) auto(水平居中)
+.work{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
 ```
-2) 父子元素的宽高未知
++ 使用绝对定位 + margin，给子元素添加如下样式
+这种方式适合 ***子元素宽高确定***的情况，给margin-top设置百分比的大小将不生效，即margin-top: -50%;不能达到垂直居中的效果
+
+```css
+.work1{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+}
+```
+
++ 使用绝对定位 + margin: auto，给子元素添加如下样式
+***父子元素宽高都未知时也适用***。
+
+```css
+.work2{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin:auto;
+}
+```
+
++ 父元素使用flex布局，并设置相关的属性值为center
+这种方式要求 ***父元素的高度是确定的*** ，百分比形式的高度将不能生效。
+
+```css
+.par-work{
+  height: 100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+```
+
++ 使用table-cell实现
+这种方式需要 ***父元素的宽高都是确定的***，才能保证子元素在父元素中垂直水平都居中。
+
+```css
+.par-work2 {
+  height: 500px;
+  width: 500px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.son-work2 {
+  display: inline-block;
+}
+```
+
++ 使用grid布局
+这种方式适用于 ***父元素高度确定***的情况
+
+```css
+.par-work3 {
+  display: grid;
+  height: 500px;
+}
+.son-work3 {
+  align-self: center; /*设置单元格内容的垂直位置*/
+  justify-self: center; /*设置单元格内容的水平位置*/
+}
+```
 
 ### — rem、em、vh、px各自代表的含义？
 px: 绝对单位，页面按精确像素展示
-em: 相对单位，基准为父节点字体大小，如果滋生定义了font-size按照自身来计算，整个页面内1em不是一个固定值
+
+em: 相对单位，基准为父节点字体大小，如果自身定义了font-size按照自身来计算，整个页面内1em不是一个固定值
+
 rem: 相对单位，可以理解为root em，相对根节点html的字体大小来计算
+默认根元素的 font-size 都是 16px 的。如果想要设置 12px 的字体大小也就 是 12px/16px = 0.75rem
+
 vh/vw: 主要用于页面视口大小布局，在页面布局上更加方便简单
 
 ### — 有哪些方式可以影藏页面元素？区别是什么？
@@ -1393,6 +1486,9 @@ get(e) {
 
 ### webview的理解
 在小程序中嵌套H5页面，域名必须在白名单里面
+
+### 小程序和h5页面的交互
+http://shuy.cc/2020/06/09/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%92%8Ch5%E9%A1%B5%E9%9D%A2%E7%9A%84%E4%BA%A4%E4%BA%92
 
 ### 注意事项
 1.rpx，规定屏幕宽度为750rpx，可适配不同的屏幕宽度
