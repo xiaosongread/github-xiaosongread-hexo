@@ -134,6 +134,44 @@ console.log(people.toString()) // toString1,toString2
 console.log(people.toLocaleString()) // toLocaleString1,toLocaleString2
 ```
 
+##### Array.from()
+Array.from()方法从类似数组或可迭代对象创建一个新的(浅拷贝)的数组实例。
+
+Array.from(arrayLike,mapFn,thisArg)
++ arrayLike：必选，想要转换成数组的伪数组对象或可迭代对象
++ mapFn：可选，如果指定了该参数，新数组中的每个元素会执行该函数
++ thisArg：可选，执行回调函数mapFn时this对象
+可迭代的对象包括ES6新增的数据结构Set和Map
+
+```js
+// 将伪数组转换成数组
+let likeArr  = {
+    0:'react',
+    1:'Vue',
+    2:'angular',
+    3:'Node',
+    'length':4
+}
+let arr = Array.from(likeArr);
+console.log(arr);
+
+// 将页面中的所有 a 链接找出来并且放到一个数组里面
+var aLink = document.getElementsByTagName('a');
+var aArray = [];
+Array.from(aLink).map(function(item,index){
+  aArray.push(aLink);
+})
+console.log(aArray);
+console.log(Array.isArray(aLink), Array.isArray(aArray))
+
+// 使用Array.from实现数组去重
+var arr = [1,1,2,2,4,4,4,5];
+function unique(arr){
+    return Array.from(new Set(arr));
+}
+console.log(unique(arr));
+```
+
 ##### join
 数组转化为字符窜，参数为分隔符号。
 

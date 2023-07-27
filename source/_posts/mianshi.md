@@ -332,6 +332,58 @@ h5:nth-of-type(2n+1) {
 ### — var/let/const 的区别？
 + 变量提升
 var申明存在变量提升，let和const存在变量提升，不声明是不可以使用的，否则会报错
+
+```js
+// 示例1
+var a
+var a // 重复声明会被忽视
+a = 1
+console.log(a) // 1
+a = 2
+console.log(a) // 2
+ 
+// 示例2
+var a 
+a = 1
+console.log(a) // 1
+console.log(a) // 1
+ 
+// 示例3
+var a 
+console.log(a) //undefined
+a = 1
+console.log(a) // 1
+```
+> js中，变量提升指的是变量声明的提升，赋值还是按照代码中的顺序逐行执行。
+
+```js
+// 函数式声明 会变量提升
+fn(10) // 10
+function fn (a) {
+    console.log(a)
+}
+// 表达式声明 不会变量提升
+console.log(test) // undefined
+test(10) // TypeError: test is not a function
+var test = function(a) {
+console.log(a)
+console.log(a) // f a()
+function a(v){return v}
+console.log(a) // f a()
+var a=1
+console.log(a) // 1
+```
+```js
+console.log(a) // ƒ a(v){return v}
+var a=1
+console.log(a) // 1
+function a(v){return v}
+console.log(a) // 1
+```
+> 函数的提升是优先变量的提升的。
+变量提升指的是变量声明的提升，赋值还是按照代码中的顺序逐行执行。
+函数式声明存在变量提升，函数表达式声明不存在变量提升。
+
 + 作用域
 var 没有块级作用域一说，不声明也是可以使用的，let，const有块级作用域一说，只能在申明的花括号里面使用
 + 使用的方法
