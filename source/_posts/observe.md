@@ -13,8 +13,8 @@ date: 2023-07-28 22:45:48
 
 <!-- more -->
 
-<video id="video" controls="" preload="none" poster="封面">
-    <source id="mp4" src="mp4格式视频" type="http://shuy.cc/images/img-folder/2023/vue.mp4">
+<video id="video" controls="controls" preload="load" poster="" width="640">
+  <source id="mp4" src="http://shuy.cc/images/img-folder/2023/vue.mp4" type="video/mp4">
 </videos>
 
 ```html
