@@ -11,8 +11,10 @@ date: 2023-07-28 22:45:48
 2. window 设置一个变量，来记录当有属性改变的时候，将需要调用的函数记录一下
 3. set 中，当数据属性修改的时候，for 循环来调用相关改变页面的的函数
 
+<!-- more -->
+
 <video id="video" controls="" preload="none" poster="封面">
-    <source id="mp4" src="mp4格式视频" type="/images/img-folder/2023/vue.mp4">
+    <source id="mp4" src="mp4格式视频" type="http://shuy.cc/images/img-folder/2023/vue.mp4">
 </videos>
 
 ```html
