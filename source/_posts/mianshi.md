@@ -1005,6 +1005,8 @@ JavaScript 常被描述为一种基于原型的语言——每个对象拥有一
 1、作用域就是变量与函数的可访问范围
 2、一般情况下，变量取值到创建这个变量的函数的作用域中取值。 但是如果在当前作用域中没有查到值，就会向上级作用域去查，直到查到全局作用域，这么一个查找过程形成的链条就叫做作用域链
 
+<!-- ### — 浏览器内核 -->
+
 ### — 浏览器输入Url之后发生了什么？
 
 浏览器输入URL链接 -> 回车 -> 浏览器查找当前URL是否有本地缓存 -> dns解析URL对应的IP -> 根据IP建立TCP连接(三次握手) -> 发起http请求 -> 服务器处理请求 ->  关闭TCP连接(四次握手) -> 浏览器根据发回的response响应，启用浏览器的渲染引擎和JS引擎，更具HTML/CSS/JS/IMG等等渲染页面。
@@ -1117,10 +1119,41 @@ JS引擎解析过程：
 对于 transform 和 opacity 效果，不会触发 layout 和 paint
 提升合成层的最好方式是使用 CSS 的 will-change 属性：#target {will-change: transform;}
 
+### 事件循环
 ## vue相关
 
 ### 什么是mvvm?
 modal + view + viewModal的缩写，是modal驱动view的渐进式框架，不需要直接操作dom来实现页面的改变。
+
+### 生命周期函数有哪些
+
++ beforeCreate 实例刚在内存中被创建出来，此时dom data methods 都是取不到的
++ created 实例已经在内存中创建出来，此时dom 是取不到的 data methods可以取到
++ beforeMount 此时已经完成了模板的编译，但是还没有挂载到页面上，此时dom 是取不到的 data methods可以取到
++ mounted 已经将编译好的模板，挂载到了页面指定的容器中显示,dom data methods都可以取到
++ beforeUpdate 状态更新之前执行此函数，此时data中的状态值是最新的，但是界面上显示的数据还是旧的，因为此时还没有开始重新渲染DOM节点
++ updated 实例更新完毕之后调用此函数，此时data中的状态值和界面上显示的数据，都已经完成了更新，界面已经被重新渲染好了
++ beforeDestory 实例销毁之前调用，在这一步，实例仍然完全可用
++ destoryed Vue实例销毁之后调用。调用后，Vue实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁
+
+> 
+> **调用解耦一般在那个生命周期函数中执行？** 
+可以在钩子函数 created、beforeMount、mounted 中进行调用，因为在这三个钩子函数中，data 已经创建，可以将服务端端返回的数据进行赋值。
+但是推荐在 created 钩子函数中调用异步请求，因为在 created 钩子函数中调用异步请求有以下优点：
+<u>1.能更快获取到服务端数据，减少页面loading 时间；</u>
+<u>2.ssr不支持 beforeMount 、mounted 钩子函数，所以放在 created 中有助于一致性；</u>
+
+但是 ***具体的需求*** 需要具体的分析：
+
+比如：如果一个页面里面用到了三个子组件，
+页面初始化进来的生命周期执行的顺序是：
+父 beforeCreate -> created -> beforeMount
+子1 beforeCreate -> created -> beforeMount -> mounted
+子2 beforeCreate -> created -> beforeMount -> mounted
+子3 beforeCreate -> created -> beforeMount -> mounted
+父 mounted
+
+> 那么就应该父组件的调用接口逻辑放到 mounted ,子组件的调用接口放到 created , 这样就避免了父组件里面接口调用阻塞子组件的接口返回，使得子组件的数据先显示到页面中去。
 
 ### 为什么使用虚拟dom
 + 创建真实DOM的代价高：真实的 DOM 节点 node 实现的属性很多，而 vnode 仅仅实现一些必要的属性，相比起来，创建一个 vnode 的成本比较低。
@@ -1181,23 +1214,6 @@ v-if则是通过操作DOM来进行切换显示
 ### 双向数据绑定
 实现mvvm的双向绑定，是采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。
 
-### 生命周期函数有哪些
-
-+ beforeCreate 实例刚在内存中被创建出来，此时还没有初始化好data和methods属性
-+ created 实例已经在内存中创建出来，此时的data和methods以及创建完成，但是还没有开始编译模板
-+ beforeMount 此时已经完成了模板的编译，但是还没有挂载到页面上
-+ mounted 已经将编译好的模板，挂载到了页面指定的容器中显示
-+ beforeUpdate 状态更新之前执行此函数，此时data中的状态值是最新的，但是界面上显示的数据还是旧的，因为此时还没有开始重新渲染DOM节点
-+ updated 实例更新完毕之后调用此函数，此时data中的状态值和界面上显示的数据，都已经完成了更新，界面已经被重新渲染好了
-+ beforeDestory 实例销毁之前调用，在这一步，实例仍然完全可用
-+ destoryed Vue实例销毁之后调用。调用后，Vue实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁
-
-> 
-> **调用解耦一般在那个生命周期函数中执行？** 
-可以在钩子函数 created、beforeMount、mounted 中进行调用，因为在这三个钩子函数中，data 已经创建，可以将服务端端返回的数据进行赋值。
-但是推荐在 created 钩子函数中调用异步请求，因为在 created 钩子函数中调用异步请求有以下优点：
-<u>1.能更快获取到服务端数据，减少页面loading 时间；</u>
-<u>2.ssr不支持 beforeMount 、mounted 钩子函数，所以放在 created 中有助于一致性；</u>
 
 ### 常用的指令？常用的内置组件有哪些？
 
