@@ -16,6 +16,16 @@ IE盒子模型：宽高包括content + padding + bording; box-sizing: border-box
 标准盒模型：宽高就是元素的实际宽高 content; box-sizing: content-box
 <!-- more -->
 
+### 什么是BFC？
+bfc 就是 Block formatting contexts，***块级格式化上下文***
+一个独立的渲染区域，有这自己的渲染规则，其内部元素不会和外部元素相互影响。
+常见触发 **BFC** 方式：
+1. 元素设置了 float 属性（float 不为 none）;
+2. 元素设置了 position 属性为 absolute 或 fixed;
+3. 元素设置了 display 属性为 inline-block;
+4. 元素 overflow 属性值除了 visible 外。
+
+
 ### — HTML5新增元素
 ```text
 canvas/audio/video
@@ -1120,6 +1130,19 @@ JS引擎解析过程：
 提升合成层的最好方式是使用 CSS 的 will-change 属性：#target {will-change: transform;}
 
 ### 事件循环
+
+### 谈谈你对promise、axios的理解
+***promise*** 是 js 用来处理所有异步操作的
+传统的方式处理异步操作，就是 ajax 嵌套 ajax,就是常说的回调地狱，是非常难维护，而 promise 有 resolive 和 reject 这两个方法，将成功和失败返回的数据，传递给使用者，promise 开始的状态是 pending ，当成功或者失败的时候，状态会切换到 fulfilled(成功)或者rejected（失败）状态，把结果通过then()或者catch()交出去。
+promise 不仅仅一次处理一个异步请求，它还有两个方法，all() 和 race() ,all() 只有在里面所有的异步操作都成功才算是成功，race() 只有在一个异步请求成功就会往后面继续执行代码。
+
+### webpack 构建优化怎么搞？
+webpack构建的时候，需要找出所有模块文件进行编译处理，那么我们可以在以下几个点上做优化处理：
+1. 缩小文件的搜索范围，用alias extensions等配置缩小范围
+2. 减少需要解析的文件，使用 noParse配置告诉webpack 排除指定的文件，不对它们进行解析
+3. 避免重复编译第三方库，可以吧第三方文件库单独打包到一个文件夹中，他不会跟着业务代码一起重新打包
+
+构建的时候，如果对多个js文件需要被压缩，他会一个一个的进行压缩，可以使用 parallelUglifyPlugin插件来开启多个子进程，采用并行方式对多个js文件进行压缩
 ## vue相关
 
 ### 什么是mvvm?
@@ -1511,6 +1534,16 @@ mutations: {
 
 快速掌握vuex常用的所有api用法: http://shuy.cc/2019/07/24/vuex/
 
+### 登陆权限的实现
+#### 登陆
+在登陆页面，前端需要进行表单校验，通过前端校验，过滤拦截一些不符合规则的参数请求，然后调用后端的提供登陆接口，将符合规则的参数传递给后端，后端接受到请求后，会获取这个请求携带的参数，这些参数通常会有用户名、密码一级验证码、然后来验证这些参数，如果验证不通过，前端将后端提供的错误提示提示给用户即可，如果验证通过，那么就会生成一个token，并且返回给前端，前端接受到这个token之后，需要将这个token保存在本地，在我们下次去调用需要携带token的接口时，通常会将这个token塞入到请求头中，一并发送给后端，那么将token 添加到请求头中，我们通常会去封装一个请求方法，在这个请求方法中完成给请求头添加token的操作，我们在本地保存token，是因为有的页面是需要登录才可以进入的，那么我们就可以通过路由守卫来判断当前本地有没有token，如果没有token就跳转到登录页面，如果你的项目做了token过期之后会自动刷新这个token，然后继续完成请求这么一个功能，那么就更好了，
+#### 权限
+路由控制的核心包含用户、角色、菜单，用户和角色具备某种关联关系，而角色和菜单具备某种关联关系，所以用户和菜单会通过角色产生关联关系，那对应到后台页面上，首先我们会创建好菜单，然后在创建角色，在创建角色的时候，可以给角色分配菜单，最好当创建用户账号时，就可以给这个用户分配角色，那么当登陆该账号的时候，前端会请求一次后端提供的返回了用户所具备菜单列表的数据接口，然后在前端代码定义路由时，我们会维护两份路由，一份是静态路由，他是所有用户都可以访问的路由，直接挂载在路由实例上即可，还有一份是动态路由，这份路由会根据当前用户所具备的菜单进行筛选asyncRoutes.forEach((item)=>{
+	If(menus.find(menu))
+})
+最后筛选出的路由，通过addRoute这个方法，动态添加上去，这一步通常会在路由守卫中完成（router.beforeEach）,遍历这份动态路由（asyncRoutes.forEach），判断当前遍历项是否存在于后端返回的菜单列表中，那返回一个筛选完成的路由数组，最后我们就可以用这份路由数组去渲染菜单栏了。
+
+
 ## 小程序相关
 
 ### 生命周期函数有哪些？小程序的周期函数？
@@ -1592,3 +1625,198 @@ pages 存放小程序所有pages的路径
 window 小程序所有页面的顶部、背景颜色，文字tabbar等的设置
 tabBar 设置底部导航，最多5个，最少2个
 
+## 算法题
+### 去重
+```js
+var arr = [11, 11, 22, 22,4, 444,444]
+// 循环 + includes
+function equal (arr) {
+  let newArr = [arr[0]];
+  for (let i = 1; i < arr.length; i++) {
+    if (!newArr.includes(arr[i])) {
+      newArr.push(arr[i])
+    }
+  }
+  return newArr;
+}
+console.log(equal(arr));
+// 双循环 判断是否相等
+function equal (arr) {
+  let newArr = [arr[0]];
+  for (let i = 1; i < arr.length; i++) {
+    let flag = true;
+    for (let j = 0; j < newArr.length; j++) {
+      if (newArr[j] === arr[i]){
+        flag = false;
+      }
+    }
+    if (flag) {
+      newArr.push(arr[i]);
+    }
+  }
+  return newArr;
+}
+console.log(equal(arr));
+// filter 过滤判断下标是否相等
+function equal (arr) {
+  let result = arr.filter((item, index, self) => {
+    return self.indexOf(item) === index;
+  })
+  return result;
+}
+console.log(equal(arr));
+// es6的 set + from 转化类数组
+function equal (arr) {
+  let setArr = new Set(arr);
+  let result = Array.from(setArr);
+  return result;
+}
+console.log(equal(arr));
+```
+### 排序
+```js
+var arr = [5, 2, 4, 8, 1, 3, 10];
+// sort 排序
+let result = arr.sort((a, b) => a - b);
+console.log(result);
+// for 循环
+function sort (arr) {
+  for(var j=0;j<=arr.length-1;j++){
+    for(var i=0;i<=arr.length-1;i++){
+        if(arr[i]>arr[i+1]){ 
+            var tmp = arr[i];
+            arr[i] = arr[i+1]
+            arr[i+1] = tmp
+        }
+    }
+  }
+  return arr
+}
+```
+### 防抖、节流
+```js
+/**
+ * 防抖动
+ *
+ * @export
+ * @param {*} fn 需要防抖执行的函数
+ * @param {*} delay 多少毫秒不调用后执行一次,延迟时间
+ * @returns
+ */
+const debounce = (fn, delay = 500) => {
+  // 存储定时器的timerId
+  let timer = null
+  return function(...args) {
+    // 在每一次调用函数时，都清除上一次的定时器
+    if (timer) clearTimeout(timer)
+    // 开启一个定时器
+    timer = setTimeout(() => {
+      fn.apply(this, args)
+    }, delay)
+  }
+}
+```
+```js
+/**
+**@param{fn: function} 需要节流的函数
+**@param{interval: number} 函数触发的频率
+*/
+const throttle = (fn, interval) => {
+  // 记录上一次触发函数时的时间，初始值为0
+  let lastTime  = 0
+  return function (...args) {
+    // 获取现在的时间
+    const nowTime = new Date().getTime()
+    // 如果现在的时间减去上次触发的事件大于等于interval，则可以执行函数了
+    if(nowTime - lastTime >= interval){
+      fn.apply(this, args)
+      // 将上次触发函数的时间赋值成当前时间
+      lastTime = nowTimes
+    }
+  }
+}
+// 或者
+/**
+ * 节流
+ *
+ * @export
+ * @param {*} fn 方法
+ * @param {*} delay 每隔多少毫秒执行一次
+ * @returns
+ */
+const throttle = (fn, delay) => {
+  let flag = true;
+  return function () {
+    if (!flag) return;
+    flag = false;
+    fn.apply(this, arguments);
+    setTimeout(() => {
+      flag = true;
+    }, delay);
+  };
+};
+```
+### 求和
+```js
+// 求数组的和
+var arr = [1, 2, 3, 4]
+// for 循环
+function add (array) {
+  let result = 0;
+  for (let index = 0; index < array.length; index++) {
+    result += array[index]
+  }
+  return result
+}
+console.log(add(arr));
+// reduce 方法
+function add (arr) {
+  let result = arr.reduce((prev, cur, index, array) => {
+    console.log(prev, cur, array);
+    return prev + cur;
+  })
+  return result;
+}
+console.log(add(arr));
+```
+### 数组转对象
+```js
+/**
+let data = [{
+  key: 'name',
+  value : 'xiaosong'
+}, {
+  key: 'age',
+  value : 12
+}]
+
+转||化
+
+let obj = {
+  name: 'xiaosong',
+  age: 12
+}
+*/
+// let data = [{
+//   key: 'name',
+//   value : 'xiaosong'
+// }, {
+//   key: 'age',
+//   value : 12
+// }]
+// function setArr (data) {
+//   let obj = {};
+//   // 写法1：
+//   for (let index = 0; index < data.length; index++) {
+//     obj[data[index].key] = data[index].value;
+//   }
+//   // 写法2：
+//   data.map((item, index) => {
+//     const {key, value} = item;
+//     obj[key] = value;
+//   })
+//   return obj;
+// }
+// console.log(setArr())
+
+// ```
