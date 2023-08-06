@@ -1797,26 +1797,26 @@ let obj = {
   age: 12
 }
 */
-// let data = [{
-//   key: 'name',
-//   value : 'xiaosong'
-// }, {
-//   key: 'age',
-//   value : 12
-// }]
-// function setArr (data) {
-//   let obj = {};
-//   // 写法1：
-//   for (let index = 0; index < data.length; index++) {
-//     obj[data[index].key] = data[index].value;
-//   }
-//   // 写法2：
-//   data.map((item, index) => {
-//     const {key, value} = item;
-//     obj[key] = value;
-//   })
-//   return obj;
-// }
-// console.log(setArr())
+let data = [{
+  key: 'name',
+  value : 'xiaosong'
+}, {
+  key: 'age',
+  value : 12
+}]
+function setArr (data) {
+  let obj = {};
+  // 写法1：
+  for (let index = 0; index < data.length; index++) {
+    obj[data[index].key] = data[index].value;
+  }
+  // 写法2：
+  data.map((item, index) => {
+    const {key, value} = item;
+    obj[key] = value;
+  })
+  return obj;
+}
+console.log(setArr())
 
-// ```
+```
