@@ -29,23 +29,23 @@ tags: node mongodb
 <!-- more -->
 ### 功能页面
 <div style="display: flex;flex-wrap: wrap;justify-content:flex-start;">
-  <a href="https://www.wm-motor.com/" style="display:block;width:450px;height:257px;position:relative; margin: 0 30px 50px 0;background:rgba(0,0,0,.5);">
+  <a href="" style="display:block;width:450px;height:257px;position:relative; margin: 0 30px 50px 0;background:rgba(0,0,0,.5);">
     <img src="/images/img-folder/2023/n1.png" style="height: 100%;position:absolute;top:0;left:0;right:0;bottom:0;">
     <div style="width:100%;line-height:25px;background:rgba(0,0,0,.5);color:#fff;position:absolute;bottom:-25px;left:0;font-size: 14px;text-align:center;">博客列表</div>
   </a>
-  <a href="https://www.wm-imotor.com/" style="display:block;width:450px;height:257px;position:relative; margin: 0 30px 50px 0;background:rgba(0,0,0,.5);">
+  <a href="" style="display:block;width:450px;height:257px;position:relative; margin: 0 30px 50px 0;background:rgba(0,0,0,.5);">
     <img src="/images/img-folder/2023/n2.png" style="height: 100%;margin:0 auto;display:block;position:absolute;top:0;left:0;right:0;bottom:0;">
     <div style="width:100%;line-height:25px;background:rgba(0,0,0,.5);color:#fff;position:absolute;bottom:-25px;left:0;font-size: 14px;text-align:center;">博客详情</div>
   </a>
-  <a href="https://www.wm-motor.com/" style="display:block;width:450px;height:257px;position:relative; margin: 0 30px 50px 0;background:rgba(0,0,0,.5);">
+  <a href="" style="display:block;width:450px;height:257px;position:relative; margin: 0 30px 50px 0;background:rgba(0,0,0,.5);">
     <img src="/images/img-folder/2023/n3.png" style="height: 100%;position:absolute;top:0;left:0;right:0;bottom:0;">
     <div style="width:100%;line-height:25px;background:rgba(0,0,0,.5);color:#fff;position:absolute;bottom:-25px;left:0;font-size: 14px;text-align:center;">插件库列表</div>
   </a>
-  <a href="https://www.wm-imotor.com/" style="display:block;width:450px;height:257px;position:relative; margin: 0 30px 50px 0;background:rgba(0,0,0,.5);">
+  <a href="" style="display:block;width:450px;height:257px;position:relative; margin: 0 30px 50px 0;background:rgba(0,0,0,.5);">
     <img src="/images/img-folder/2023/n4.png" style="height: 100%;margin:0 auto;display:block;position:absolute;top:0;left:0;right:0;bottom:0;">
     <div style="width:100%;line-height:25px;background:rgba(0,0,0,.5);color:#fff;position:absolute;bottom:-25px;left:0;font-size: 14px;text-align:center;">插件详情页</div>
   </a>
-  <a href="https://www.wm-imotor.com/" style="display:block;width:450px;height:257px;position:relative; margin: 0 30px 50px 0;background:rgba(0,0,0,.5);">
+  <a href="" style="display:block;width:450px;height:257px;position:relative; margin: 0 30px 50px 0;background:rgba(0,0,0,.5);">
     <img src="/images/img-folder/2023/n5.png" style="height: 100%;margin:0 auto;display:block;position:absolute;top:0;left:0;right:0;bottom:0;">
     <div style="width:100%;line-height:25px;background:rgba(0,0,0,.5);color:#fff;position:absolute;bottom:-25px;left:0;font-size: 14px;text-align:center;">管理系统-内容编辑</div>
   </a>
