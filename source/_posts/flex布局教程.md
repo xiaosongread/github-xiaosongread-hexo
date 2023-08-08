@@ -56,6 +56,7 @@ row-reverse：主轴为水平方向，起点在右端。
 column：主轴为垂直方向，起点在上沿。
 column-reverse：主轴为垂直方向，起点在下沿。
 ```
+
 #### flex-wrap: 属性定义，如果一条轴线排不下，如何换行。
 <img src="/images/img-folder/flex/3.png">
 
@@ -68,7 +69,7 @@ column-reverse：主轴为垂直方向，起点在下沿。
 ##### nowrap（默认）：不换行。
 <img src="/images/img-folder/flex/4.png">
 
-##### wrap：不换行。
+##### wrap：换行。
 <img src="/images/img-folder/flex/5.jpg">
 
 ##### wrap-reverse：换行，第一行在下方。
