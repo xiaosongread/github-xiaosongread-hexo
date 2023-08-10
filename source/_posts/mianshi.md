@@ -344,7 +344,7 @@ h5:nth-of-type(2n+1) {
 
 ### — var/let/const 的区别？
 + 变量提升
-var申明存在变量提升，let和const存在变量提升，不声明是不可以使用的，否则会报错
+var声明存在变量提升，let和const不存在变量提升，不声明是不可以使用的，否则会报错
 
 ```js
 // 示例1
@@ -379,7 +379,8 @@ function fn (a) {
 console.log(test) // undefined
 test(10) // TypeError: test is not a function
 var test = function(a) {
-console.log(a)
+  console.log(a)
+}
 console.log(a) // f a()
 function a(v){return v}
 console.log(a) // f a()
@@ -398,7 +399,7 @@ console.log(a) // 1
 函数式声明存在变量提升，函数表达式声明不存在变量提升。
 
 + 作用域
-var 没有块级作用域一说，不声明也是可以使用的，let，const有块级作用域一说，只能在申明的花括号里面使用
+var 没有块级作用域一说，不声明也是可以使用的，let，const有块级作用域一说，只能在声明的花括号里面使用
 + 使用的方法
 const声明一个只读的变量，一旦声明，不可以修改，其余使用let，避免使用var，因为有不可控性，代码复杂的时候，不容易查找问题。
 
@@ -694,11 +695,67 @@ function log(){
 }
 ```
 ### 箭头函数和普通函数的区别
-普通函数的this是调用者；箭头函数的this是根据作用域的上下文确定的是，是不可以修改的。
+普通函数的this是调用者；箭头函数的this是根据作用域的上下文确定的，是不可以修改的。
 + 全局声明的函数，this指向的是window
 + 对象里面的函数，this指向的是当前的对象，但是可以修改
 + 构造函数的this，指向的是new出来的对象
 + 箭头函数的this，是当前声明箭头函数的作用域this指向的是谁，this就是指向谁
+
+#### 普通函数
+一句话：谁调用就指向谁。
+```js
+var person={
+   age:20,
+   getAge(){
+       var age = 30;
+       return this.age;
+    },
+};
+person.getAge(); // 20
+```
+
+> 这个的 getAge 方法是 person 调用的，所以 this 指向 person，person.age 输出为 20；
+
+#### 箭头函数
+一句话：调用者指向谁，则指向谁。
+```js
+var age = 10;
+var person={
+   age:20,
+   getAge:()=>{
+       var age = 30;
+       return this.age;
+    },
+};
+person.getAge(); // 10
+```
+
+> 这个的 getAge 方法是 person 调用的，则 getAge 和 person 的指向一致，person 是 window 调用的（参照上述普通函数），所以 person 指向 window，因此 getAge 也指向 window，输出 10。
+
+#### 强制改变 this 指向
+一句话：你说指向谁就指向谁。
+改变 this 指向，有 call，apply，bind 这几种方法。
+
+```js
+var age = 10;
+var person={
+   age:20,
+   getAge:function(){
+       var age = 30;
+       return this.age;
+    },
+};
+person.getAge.call(person);
+```
+
+> 这里 call 方法将 person 作为 this 指向，所以输出 20。
+这里在执行 getAge 方法的时候，传入了 person，那么 getAge 的 this 指向 person，所以输出 20。
+
+#### 总结
+1. 箭头函数没有 this，箭头函数的 this 指向的是外层第一个普通函数的 this，如果外层没有普通函数，则指向 window。
+2. 普通函数的 this 指向调用者，如果调用者是 window，则指向 window。
+3. 箭头函数的 this 指向是固定的，不会指向调用者，而是指向外层第一个普通函数的 this。
+
 
 ### — typeof 与 instanceof 区别
 typeof 和 instanceof 都是 JavaScript 中用来检测数据类型的运算符，但它们的作用不同。
@@ -780,6 +837,21 @@ console.log(b instanceof Person);//输出 false
 + JSON.stringify()
 + 循环递归
 
+```js
+const deepClone = obj => {
+  if (typeof obj !== 'object' || obj === null) {
+    return obj;
+  }
+  let result = Array.isArray(obj) ? [] : {};
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      result[key] = deepClone(obj[key]);
+    }
+  }
+  return result;
+}
+```
+
 ### — JSON是什么？
 JSON是轻量级的文本数据格式，是一门独立的语言，是用js语法描述的数据对象，但独立于任何的语言，编程语言都支持JSON，具有自我描述性，更容易理解。
 + json对象转化为json字符窜
@@ -828,7 +900,7 @@ var getA = function() {
   }
 }
 var a = getA()
-console.log(a) // 10
+console.log(a()) // 10
 ```
 #### 闭包的作用
 + 延长变量的生命周期
@@ -895,6 +967,19 @@ const debounce = (fn, delay = 500) => {
 节流函数的功能：连续的触发某个函数，只会以固定的频率去执行
 
 ```js
+function throttle(fn, delay = 2000) {
+  let timer = null;
+  return function () {
+    if (timer) {
+      return;
+    }
+    timer = setTimeout(() => {
+      fn.apply(this, arguments);
+      timer = null;
+    }, delay);
+  }
+}
+// 或者
 /**
 **@param{fn: function} 需要节流的函数
 **@param{interval: number} 函数触发的频率
@@ -1134,8 +1219,6 @@ JS引擎解析过程：
 当需要 repaint 时，只需要 repaint 本身，不会影响到其他的层
 对于 transform 和 opacity 效果，不会触发 layout 和 paint
 提升合成层的最好方式是使用 CSS 的 will-change 属性：#target {will-change: transform;}
-
-### 事件循环
 
 ### 谈谈你对promise、axios的理解
 ***promise*** 是 js 用来处理所有异步操作的
