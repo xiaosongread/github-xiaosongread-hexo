@@ -1,4 +1,8 @@
 博客地址：http://www.shuy.cc/
+
+hexo g
+hexo d
+hexo s
 ## 2020
 [slice-splice-用法区别](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/slice-splice-用法区别.md)  ( 6/24 )   
 [vue-router-打开新页面](https://github.com/xiaosongread/github-xiaosongread-hexo/blob/master/source/_posts/vue-router-打开新页面.md)  ( 6/23 )   
