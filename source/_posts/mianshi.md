@@ -943,21 +943,18 @@ console.log(fun.getName());//可以通过特定方法去访问
  * 防抖动
  *
  * @export
- * @param {*} fn 需要防抖执行的函数
+ * @param {*} func 需要防抖执行的函数
  * @param {*} delay 多少毫秒不调用后执行一次,延迟时间
  * @returns
  */
-const debounce = (fn, delay = 500) => {
-  // 存储定时器的timerId
-  let timer = null
+function debounce(func, delay) {
+  let timer = null;
   return function(...args) {
-    // 在每一次调用函数时，都清除上一次的定时器
-    if (timer) clearTimeout(timer)
-    // 开启一个定时器
+    clearTimeout(timer);
     timer = setTimeout(() => {
-      fn.apply(this, args)
-    }, delay)
-  }
+      func.apply(this, args);
+    }, delay);
+  };
 }
 ```
 
@@ -967,18 +964,18 @@ const debounce = (fn, delay = 500) => {
 节流函数的功能：连续的触发某个函数，只会以固定的频率去执行
 
 ```js
-function throttle(fn, delay = 2000) {
+function throttle(func, delay = 500) {
   let timer = null;
-  return function () {
-    if (timer) {
-      return;
+  return function(...args) {
+    if (!timer) {
+      timer = setTimeout(() => {
+        func.apply(this, args);
+        timer = null;
+      }, delay);
     }
-    timer = setTimeout(() => {
-      fn.apply(this, arguments);
-      timer = null;
-    }, delay);
-  }
+  };
 }
+
 // 或者
 /**
 **@param{fn: function} 需要节流的函数
@@ -1797,7 +1794,7 @@ const debounce = (fn, delay = 500) => {
   let timer = null
   return function(...args) {
     // 在每一次调用函数时，都清除上一次的定时器
-    if (timer) clearTimeout(timer)
+    clearTimeout(timer)
     // 开启一个定时器
     timer = setTimeout(() => {
       fn.apply(this, args)
