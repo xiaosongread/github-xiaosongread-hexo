@@ -314,7 +314,8 @@ while(i < count) {
 > 使用while循环做不到的，for循环也做不到
 
 #### for-in语句
-是一种精确迭代语句，可以用来枚举对象的属性。
+可以用来枚举对象的属性。
+也可用来遍历数组，遍历出的是数组的下标。
 ```js
 for(var propName in window) {
   document.write(propName + '</br>')
@@ -329,6 +330,22 @@ for(var attr in obj){
   console.log(attr) // name age sex look
 }
 ```
+
+#### for-of语句
+可以用来枚举数组。
+```js
+var arr = [{
+  name: '小宋',
+  age: 23
+}, {
+  name: '李四',
+  age: 30
+}]
+for(const value in arr){
+  console.log(var) // {name: '小宋', age: 23} {name: '李四', age: 30}
+}
+```
+
 #### label语句
 使用label语句可以在代码中添加标签，以便将来使用。
 label: statement
