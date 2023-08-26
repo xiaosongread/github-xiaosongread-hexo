@@ -1759,6 +1759,68 @@ function equal (arr) {
 }
 console.log(equal(arr));
 ```
+
+### 快排算法
+**快速排序**（Quick Sort）是一种常用的排序算法，其基本思想是分治法。它的主要步骤是:
+
++ 选择一个基准元素，将数组分为两个子数组，左边的元素都小于基准元素，右边的元素都大于基准元素。
++ 然后对这两个子数组递归地应用快速排序。
+
+```js
+function quickSort(arr, left = 0, right = arr.length - 1) {
+    if (left < right) {
+        let pivotIndex = partition(arr, left, right);
+        quickSort(arr, left, pivotIndex - 1);
+        quickSort(arr, pivotIndex + 1, right);
+    }
+    return arr;
+}
+
+function partition(arr, left, right) {
+    let pivot = arr[right];
+    let i = left;
+    for (let j = left; j < right; j++) {
+        if (arr[j] < pivot) {
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+            i++;
+        }
+    }
+    [arr[i], arr[right]] = [arr[right], arr[i]];
+    return i;
+}
+
+// 测试代码
+let arr = [5, 9, 1, 2, 0, 6, 3];
+console.log(quickSort(arr));  // 输出：[0, 1, 2, 3, 5, 6, 9]
+```
+```js
+function quickSort(arr) {
+  if (arr.length <= 1) {
+    return arr; // 如果数组长度为1或者空数组，则直接返回
+  }
+  
+  let pivotIndex = Math.floor(arr.length / 2); // 选择基准数的索引
+  let pivot = arr.splice(pivotIndex, 1)[0]; // 取出基准数
+  let left = [];
+  let right = [];
+  
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] < pivot) {
+      left.push(arr[i]); // 小于基准数的放在左边数组
+    } else {
+      right.push(arr[i]); // 大于等于基准数的放在右边数组
+    }
+  }
+  
+  // 递归地对左右子数组进行排序，并将结果合并
+  return quickSort(left).concat([pivot], quickSort(right));
+}
+ 
+// 测试代码
+let arr = [3, 1, 5, 2, 4];
+let sortedArr = quickSort(arr);
+console.log(sortedArr); // 输出 [1, 2, 3, 4, 5]
+```
 ### 排序
 ```js
 var arr = [5, 2, 4, 8, 1, 3, 10];
