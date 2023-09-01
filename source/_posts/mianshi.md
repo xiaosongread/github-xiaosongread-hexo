@@ -2133,3 +2133,89 @@ function setArr (data) {
 console.log(setArr())
 
 ```
+### 时间相关
+
+***写一个类似于抢购的倒计时***
+
+```js
+// 父组件
+<div>
+  开抢时间：{{ date }}
+  <Time1 :date="date" />
+</div>
+
+data() {
+  return {
+    date: '2023/8/29 23:56:00'
+  }
+}
+```
+```js
+// 子组件
+<div>
+  {{ str }}
+</div>
+
+created() {
+  // 将传入的时间字符串转化为时间戳
+  this.format(this.date)
+},
+methods: {
+  format(date) {
+    const that = this
+    setInterval(() => {
+      // 根据时间戳获取时分秒
+      const endTime = new Date(date).getTime()
+      const newTime = new Date().getTime()
+      const diffTime = (endTime - newTime) / 1000
+      var day = parseInt(diffTime / 60 / 60 / 24)
+      var honur = parseInt((diffTime / 60 / 60) % 24)
+      var min = parseInt((diffTime / 60) % 60)
+      var sen = parseInt(diffTime % 60)
+
+      if (diffTime <= 0) {
+        that.str = '开抢了！'
+        clearInterval(that.timer)
+      } else {
+        that.str = day + '天 ' + honur + '小时 ' + min + '分 ' + sen + '秒'
+      }
+    }, 1000)
+  }
+}
+```
+
+***写一个显示当前时间的方法***
+
+```js
+<div>{{ time }}</div>
+
+setInterval(() => {
+  this.timeFn()
+}, 1000)
+
+timeFn() {
+  let timeStr = new Date()
+  let year = timeStr.getFullYear()
+  let mounth = timeStr.getMonth() + 1
+  let day = timeStr.getDate()
+  let hour = timeStr.getHours()
+  let minu = timeStr.getMinutes()
+  let secon = timeStr.getSeconds()
+  if (mounth < 10) {
+    mounth = '0' + mounth
+  }
+  if (day < 10) {
+    day = '0' + day
+  }
+  if (hour < 10) {
+    hour = '0' + hour
+  }
+  if (minu < 10) {
+    minu = '0' + minu
+  }
+  if (secon < 10) {
+    secon = '0' + secon
+  }
+  this.time = `${year}/${mounth}/${day} ${hour}:${minu}:${secon}`
+}
+```
