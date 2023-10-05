@@ -17,6 +17,8 @@ TypeScript 是一种由微软开发的自由和开源的编程语言。它是 Ja
 + TypeScript 还具有 ECMAScript 6（ES6）的所有功能，如类，模块，迭代器和生成器。
 + TypeScript 还具有 JavaScript 中没有的许多功能，如接口，类型断言，类型保护，类型别名，命名空间和模块重定向。
 
+### 文档链接
+https://www.tslang.cn/docs/handbook/basic-types.html
 ### TypeScript 安装
 TypeScript 安装非常简单。
 
