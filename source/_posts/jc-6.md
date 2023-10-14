@@ -163,12 +163,21 @@ export default {
 }
 
 ```
+#### 父组件访问子组件的数据和方法
+通过 `$refs` 访问子组件的属性
+
+```js
+<cpn ref="twoChildrenRef"></cpn>
+
+// this.$refs.twoChildrenRef.子组件数据
+// this.$refs.twoChildrenRef.子组件方法
+```
 
 ### 子传父
 
 子组件点击事件$emit触发父组件的事件，父组件事件中接受传递过来的数据
 
-#### 子组件
++ 子组件
 
 ```html
 <li v-for="historyItem in history" @click="getData(historyItem)">{{historyItem}}</li>
@@ -180,7 +189,7 @@ methods: {
 }
 ```
 
-#### 父组件
++ 父组件
 
 ```html
 <list v-if="showList" @getValue="getValueData"></list>
@@ -234,6 +243,15 @@ getValueData(msg,msg1){
         }
     });
 </script>
+```
+
+#### 子组件访问父组件的数据和方法
+
+在子组件直接使用 `this.$parent`
+
+```js
+this.$parent.name; 
+this.$parent.方法名(); 
 ```
 
 ---

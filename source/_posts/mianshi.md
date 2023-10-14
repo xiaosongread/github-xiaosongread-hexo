@@ -1692,7 +1692,11 @@ keepAlive 多个组件动态切换时缓存被移除的组件实例
 
 #### computed
 
-computed 有缓存，关联的 data 里面的数据不变则不会重新计算，遇到双向绑定的属性值即 v-model 的属性值需要使用 get()和 set(),才能监听
+computed 有缓存，关联的 data 里面的响应式数据不变则不会重新计算，遇到双向绑定的属性值即 v-model 的属性值需要使用 get()和 set(),才能监听
+
++ 计算属性是基于它们的响应式依赖进行缓存的，只在相关响应式依赖发生改变时它们才会重新求值，也就是说只要 message 值不变，多次访问计算属性会立即返回之前的计算结果，而不必再次执行函数
+
++ 如果 message 值改变了，不依赖 message 的值，计算属性不会重新计算
 
 ```js
 <template>
@@ -1828,11 +1832,32 @@ directives: {
 
 ### 父子组件之间的通信
 
-父传子：通过 props 来传递
+**父传子**：通过 props 来传递
 父组件(:变量名) -> 子组件([props])来接收
-子传父：$emit/$on
+
++ 父组件访问子组件的数据和方法：
+通过 `$refs` 访问子组件的属性
+
+```js
+<cpn ref="twoChildrenRef"></cpn>
+
+// this.$refs.twoChildrenRef.子组件数据
+// this.$refs.twoChildrenRef.子组件方法
+```
+
+**子传父**：$emit/$on
 子组件($emit('事件名'，值)) -> 父组件(@事件名='aa',aa(传递的值))来接收
-兄弟组件：创建一个事件中心
+
++ 子组件访问父组件的数据和方法:
+
+在子组件直接使用 `this.$parent`
+
+```js
+this.$parent.name; 
+this.$parent.方法名(); 
+```
+
+**兄弟组件**：创建一个事件中心
 
 ```js
 let Hub = new Vue()
@@ -1937,13 +1962,28 @@ const asyncRoutes = [
 
 ### 编程式导航的使用方法
 
-1.路由的跳转
+1.**路由的跳转**
 this.$router.push()
-2.路由替换
-this.$router.replace() 3.后退
++ path 跳转方式，只可以用query传参
+```js
+this.$router.push( {path:'login', query: { userName: '01testuser2'}})
+```
++ name 跳转方式，可以用query和params传参
+```js
+this.$router.push( {name:'login', query: { userName: '01testuser2'}})
+
+this.$router.push( {name:'login', params: { userName: '01testuser2'}})
+```
+> query传参与params传参区别：query传参相当于get请求，在浏览器的url地址中会显示参数；params相当于post请求，在浏览器的地址栏中不显示。
+
+2.**路由替换**
+this.$router.replace() 
+***使用方法和 `this.$router.push()` 一样***
+3.**后退**
 this$router.back()
-4.前进
-this.$router.forward() 5.前进后退
+4.**前进**
+this.$router.forward() 
+5.**前进后退**
 this.$router.go() -1 为后退 6.配置路由常用参数
 
 - path 路径
@@ -1967,9 +2007,9 @@ this.$router.go() -1 为后退 6.配置路由常用参数
 
 vuex 是专门为 vue 开发的一款状态管理库，主要采用集中管理应用所有的组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
 
-- state 保存应用的全部状态的对象 this.$store.state(key)
-- Getter 其实就是 state 通过计算属性，衍变出的新的状态 this.$store.getters(key)
-- Mutation 包含一个字符窜名称和回调函数，必须是同步函数
+- state 保存应用的**全部状态**的对象 this.$store.state(key)
+- Getter 其实就是 state 通过**计算属性**，衍变出的新的状态 this.$store.getters(key)
+- Mutation 包含一个字符窜名称和回调函数，必须是 ***同步函数***
 
 ```js
 mutations: {
@@ -1979,18 +2019,24 @@ mutations: {
 }
 ```
 
-> 它其实就是操作 state 的，它不能直接调用，这更像是一个事件注册，需要 store.commit('name')来调用对应的 mutation
+> 它其实就是操作 `state` 的，它不能直接调用，这更像是一个事件注册，需要 `store.commit('name')`来调用对应的 `mutation`
 
-- action 类似于 mutation,但是 action 提交的数 mutation，并且是异步的，使用 commit('mutation 名')来调用，action 使用 dispatch 来调用
+- action 类似于 `mutation`,但是 `action` 提交的是 `mutation`，并且是 ***异步*** 的，使用 `commit('mutation 名')`来调用，action 使用 `dispatch` 来调用
 
-> 在 main.js 引入 store，注入。新建了一个 store 目录，然后….. export 。 场景：单页应用中，组件之间的共享状态和方法 state Vuex 使用单一状态树,即每个应用将仅仅包含一个 store 实例，但单一状态树和模块化并不冲突。存放的数据状态，不可以直接修改里面的数据。 mutations mutations 定义的方法动态修改 Vuex 的 store 中的状态或数据。 getters 类似 vue 的计算属性，主要用来过滤一些数据。 action actions 可以理解为通过将 mutations 里面处里数据的方法变成可异步的处理数据的方法，简单的说就是异步操作数据。view 层通过 store.dispath 来分发 action。 modules 项目特别复杂的时候，可以让每一个模块拥有自己的 state、mutation、action、getters,使得结构非常清晰，方便管理。
+> 在 main.js 引入 store，注入。新建了一个 store 目录，然后….. export 。 
+场景：单页应用中，组件之间的共享状态和方法 state Vuex 使用单一状态树,即每个应用将仅仅包含一个 store 实例，但单一状态树和模块化并不冲突。存放的数据状态，不可以直接修改里面的数据。 
++ **mutations** 定义的方法动态修改 Vuex 的 store 中的状态或数据。 
++ **getters** 类似 vue 的计算属性，主要用来过滤一些数据。 
++ **action** 可以理解为通过将 mutations 里面处里数据的方法变成可异步的处理数据的方法，简单的说就是异步操作数据。
+view 层通过 store.dispath 来分发 action。 
++ **modules** 项目特别复杂的时候，可以让每一个模块拥有自己的 state、mutation、action、getters,使得结构非常清晰，方便管理。
 
 快速掌握 vuex 常用的所有 api 用法: http://shuy.cc/2019/07/24/vuex/
 
 ### 你有对 Vue 项目进行哪些优化？
 
-如果没有对 Vue 项目没有进行过优化总结的同学，可以参考本文作者的另一篇文章《 Vue 项目性能优化 — 实践指南 》，文章主要介绍从 3 个大方面，22 个小方面详细讲解如何进行 Vue 项目的优化。
-（1）代码层面的优化
+从 **`3个大方面`**，**`22个小方面`**详细讲解如何进行 Vue 项目的优化。
+**（1）代码层面的优化**
 
 - v-if 和 v-show 区分使用场景
 - computed 和 watch 区分使用场景
@@ -2003,7 +2049,7 @@ mutations: {
 - 优化无限列表性能
 - 服务端渲染 SSR or 预渲染
 
-（2）Webpack 层面的优化
+**（2）Webpack 层面的优化**
 
 - Webpack 对图片进行压缩
 - 减少 ES6 转为 ES5 的冗余代码
@@ -2014,7 +2060,7 @@ mutations: {
 - 构建结果输出分析
 - Vue 项目的编译优化
 
-（3）基础的 Web 技术的优化
+**（3）基础的 Web 技术的优化**
 
 - 开启 gzip 压缩
 - 浏览器缓存

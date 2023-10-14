@@ -3,6 +3,7 @@ title: 关于我
 categories: my-end
 date: 2023-04-01 13:30:03
 tags: 人物
+hide: true
 ---
 
 ## -- 1991年出生，2013.08在北京从事前端至今。
