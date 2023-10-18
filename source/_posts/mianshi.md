@@ -1499,6 +1499,16 @@ var app = new Vue({
     }
 }
 ```
+### 为什么 Vue 里面的是 data 是函数？
+Vue实例中的 data 是通过一个函数的返回值来返回的，这样创建每一个实例的时候，就会返回一个新的对象，相当于给每一个实例的 data 属性对象创建了一个新的内存空间，相当于每次调用组件的时候，都生成了一个意思对象属性，这样就不会造成数据污染，避免发生一个组件里面修改了里面的对象，调用这个组件的所有数据都发生变化。
+
+### 怎样理解 Vue 的单向数据流？
+所有的 prop 都使得其父子 prop 之间形成了一个**单向下行绑定**：父级 prop 的更新会向下流动到子组件中
+但是反过来则不行。这样会防止从子组件意外改变父级组件的状态，从而导致你的应用的数据流向难以理解。
+额外的，每次父级组件发生更新时，子组件中所有的 prop 都将会刷新为最新的值。
+
+> 子组件修改父组件的props值，只能事件通知父组件来修改，而不能直接去修改父组件的值。
+
 
 ### Vue 是如何实现数据双向绑定的？
 
@@ -1616,7 +1626,7 @@ export function set(target: Array<any> | Object, key: any, val: any): any {
 
 - beforeCreate 实例刚在内存中被创建出来，此时 dom data methods 都是取不到的
 - created 实例已经在内存中创建出来，此时 dom 是取不到的 data methods 可以取到
-- beforeMount 此时已经完成了模板的编译，但是还没有挂载到页面上，此时 dom 是取不到的 data methods 可以取到
+- beforeMount 此时已经完成了模板的编译，但是还没有挂载到页面上，相关的 render 函数首次被调用，此时 dom 是取不到的 data methods 可以取到
 - mounted 已经将编译好的模板，挂载到了页面指定的容器中显示,dom data methods 都可以取到
 - beforeUpdate 状态更新之前执行此函数，此时 data 中的状态值是最新的，但是界面上显示的数据还是旧的，因为此时还没有开始重新渲染 DOM 节点
 - updated 实例更新完毕之后调用此函数，此时 data 中的状态值和界面上显示的数据，都已经完成了更新，界面已经被重新渲染好了
@@ -1672,7 +1682,7 @@ export function set(target: Array<any> | Object, key: any, val: any): any {
 
 #### 当我们没有设置 key 值的情况
 
-默认是 undefined，undefined===undefined = true
+默认是 `undefined，undefined===undefined = true`
 
 因为是列表，所以标签，class，属性基本上是一样，只是里面内容不一样，通过调用上诉函数，可以判断出：可以复用的 dom
 我们来设想一下，如果我们有一个列表，然后我们在列表的头部新增一条数据
@@ -1701,10 +1711,6 @@ v-show 原理是修改元素的 css 属性 display:none 来决定是显示还是
 
 v-if 则是通过操作 DOM 来进行切换显示
 
-### 双向数据绑定
-
-实现 mvvm 的双向绑定，是采用数据劫持结合发布者-订阅者模式的方式，通过 Object.defineProperty()来劫持各个属性的 setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。
-
 ### 常用的指令？常用的内置组件有哪些？
 
 常用指令：
@@ -1713,6 +1719,43 @@ v-html v-text v-modal v-if v-show v-hide v-once v-on v-for v-slot v-pre
 常用内置组件
 transition 动画
 keepAlive 多个组件动态切换时缓存被移除的组件实例
+
+### Vue 修饰符有哪些
+**事件修饰符**
+
+.stop 阻止事件继续传播
+.prevent 阻止标签默认行为
+.capture 使用事件捕获模式, 即元素自身触发的事件先在此处处理，然后才交由内部元素进行处理
+.self 只当在 event.target 是当前元素自身时触发处理函数
+.once 事件将只会触发一次
+.passive 告诉浏览器你不想阻止事件的默认行为
+**v-model 的修饰符**
+
+.lazy 通过这个修饰符，转变为在 change 事件再同步
+.number 自动将用户的输入值转化为数值类型
+.trim 自动过滤用户输入的首尾空格
+**键盘事件的修饰符**
+
+.enter
+.tab
+.delete (捕获 “删除” 和“退格”键)
+.esc
+.space
+.up
+.down
+.left
+.right
+**系统修饰键**
+
+.ctrl
+.alt
+.shift
+.meta
+**鼠标按钮修饰符**
+
+.left
+.right
+.middle
 
 ### computed 和 watch 的区别
 
@@ -1812,6 +1855,20 @@ export default {
 - 不支持缓存，监听的数据改变，直接会触发相应的操作；
 - 监听函数有两个参数，第一个参数是最新的值，第二个参数是输入之前的值，顺序一定是新值，旧值。
 
+> 计算属性一般用在模板渲染中，某个值是依赖了其它的响应式对象甚至是计算属性计算而来；而侦听属性适用于观测某个值的变化去完成一段复杂的业务逻辑。
+
+### v-if 与 v-for 为什么不建议一起使用
+
+### v-model 原理
+v-model 只是语法糖而已
+
+v-model 在内部为不同的输入元素使用不同的 property 并抛出不同的事件：
+
+text 和 textarea 元素使用 value property 和 input 事件；
+checkbox 和 radio 使用 checked property 和 change 事件；
+select 字段将 value 作为 prop 并将 change 作为事件。
+注意: 对于需要使用输入法（如中文、日文、韩文等）的语言，你会发现 v-model 不会在输入法组合文字过程中得到更新。
+
 ### vue 自定义指令设置
 
 - 全局: Vue.directive('指令名称，不需要写 v-开头',对象或函数)
@@ -1856,13 +1913,30 @@ directives: {
 }
 ```
 
+### Vue.mixin 的使用场景和原理
+在日常的开发中，我们经常会遇到在不同的组件中经常会需要用到一些相同或者相似的代码，这些代码的功能相对独立，可以通过 Vue 的 mixin 功能抽离公共的业务逻辑，原理类似 “对象的继承”，当组件初始化时会调用 mergeOptions 方法进行合并，采用策略模式针对不同的属性进行合并。当组件和混入对象含有同名选项时，这些选项将以恰当的方式进行 “合并”。
+
+### nextTick 使用场景和原理
+nextTick 中的回调是在下次 DOM 更新循环结束之后执行的延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。主要思路就是采用微任务优先的方式调用异步方法去执行 nextTick 包装的方法
+
+### Vue.set 方法原理
+了解 Vue 响应式原理的同学都知道在两种情况下修改数据 Vue 是不会触发视图更新的
+
+1. 在实例创建之后添加新的属性到实例上（给响应式对象新增属性）
+
+2. 直接更改数组下标来修改数组的值
+
+Vue.set 或者说是 $set 原理如下
+
+因为响应式数据 我们给对象和数组本身都增加了__ob__属性，代表的是 Observer 实例。当给对象新增不存在的属性 首先会把新的属性进行响应式跟踪 然后会触发对象__ob__的 dep 收集到的 watcher 去更新，当修改数组索引时我们调用数组本身的 splice 方法去更新数组
+
 ### 父子组件之间的通信
 
 **父传子**：通过 props 来传递
 父组件(:变量名) -> 子组件([props])来接收
 
 + 父组件访问子组件的数据和方法：
-通过 `$refs` 访问子组件的属性
+通过 `$refs` 或者 `$children` 访问子组件的属性
 
 ```js
 <cpn ref="twoChildrenRef"></cpn>
@@ -1896,6 +1970,8 @@ Hub.$on('change', ()=>{
 ```
 
 详细介绍：http://shuy.cc/2019/04/27/jc-6/
+
+**Vuex**：专门为Vue开发的用于管理应用状态的库，使Vue的状态能按照可预期的方式来进行管理。
 
 ### 路由跳转的方式，传参方式有哪些？
 
@@ -2029,6 +2105,43 @@ this.$router.go() -1 为后退 6.配置路由常用参数
 - beforeRouterLeave 当路由离开的时候（当用户没有支付离开的时候、当用户填写完用户信息没有保存的时候）
 - beforeEach 全局守卫，验证用户是否登录
 
+### vue-router 路由钩子函数是什么 执行顺序是什么
+路由钩子的执行流程, 钩子函数种类有: 全局守卫、路由守卫、组件守卫
+
+完整的导航解析流程:
+
+导航被触发。
+在失活的组件里调用 beforeRouteLeave 守卫。
+调用全局的 beforeEach 守卫。
+在重用的组件里调用 beforeRouteUpdate 守卫 (2.2+)。
+在路由配置里调用 beforeEnter。
+解析异步路由组件。
+在被激活的组件里调用 beforeRouteEnter。
+调用全局的 beforeResolve 守卫 (2.5+)。
+导航被确认。
+调用全局的 afterEach 钩子。
+触发 DOM 更新。
+调用 beforeRouteEnter 守卫中传给 next 的回调函数，创建好的组件实例会作为回调函数的参数传入。
+
+
+### 能说下 vue-router 中常用的路由模式实现原理吗?
+**hash 模式**
+
+location.hash 的值实际就是 URL 中 #后面的东西 它的特点在于：hash 虽然出现 URL 中，但不会被包含在 HTTP 请求中，对后端完全没有影响，因此改变 hash 不会重新加载页面。
+可以为 hash 的改变添加监听事件
+window.addEventListener("hashchange", funcRef, false);
+每一次改变 hash（window.location.hash），都会在浏览器的访问历史中增加一个记录利用 hash 的以上特点，就可以来实现前端路由 “更新视图但不重新请求页面” 的功能了
+
+> 特点：兼容性好但是不美观
+
+**history 模式**
+
+利用了 HTML5 History Interface 中新增的 pushState() 和 replaceState() 方法。
+
+这两个方法应用于浏览器的历史记录站，在当前已有的 back、forward、go 的基础之上，它们提供了对历史记录进行修改的功能。这两个方法有个共同的特点：当调用他们修改浏览器历史记录栈后，虽然当前 URL 改变了，但浏览器不会刷新页面，这就为单页应用前端路由 “更新视图但不重新请求页面” 提供了基础。
+
+> 特点：虽然美观，但是刷新会出现 404 需要后端进行配置
+
 ### vuex 的理解
 
 vuex 是专门为 vue 开发的一款状态管理库，主要采用集中管理应用所有的组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
@@ -2059,11 +2172,23 @@ view 层通过 store.dispath 来分发 action。
 
 快速掌握 vuex 常用的所有 api 用法: http://shuy.cc/2019/07/24/vuex/
 
+### Vuex 页面刷新数据丢失怎么解决
+需要做 vuex 数据持久化 一般使用本地存储的方案来保存数据 可以自己设计存储方案 也可以使用第三方插件
+
+推荐使用 vuex-persist 插件，它就是为 Vuex 持久化存储而生的一个插件。不需要你手动存取 storage ，而是直接将状态保存至 cookie 或者 localStorage 中
+
+### Vuex 为什么要分模块并且加命名空间
+模块: 由于使用单一状态树，应用的所有状态会集中到一个比较大的对象。当应用变得非常复杂时，store 对象就有可能变得相当臃肿。为了解决以上问题，Vuex 允许我们将 store 分割成模块（module）。每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块。
+
+命名空间：默认情况下，模块内部的 action、mutation 和 getter 是注册在全局命名空间的——这样使得多个模块能够对同一 mutation 或 action 作出响应。如果希望你的模块具有更高的封装度和复用性，你可以通过添加 namespaced: true 的方式使其成为带命名空间的模块。当模块被注册后，它的所有 getter、action 及 mutation 都会自动根据模块注册的路径调整命名
+
 ### 你有对 Vue 项目进行哪些优化？
 
 从 **`3个大方面`**，**`22个小方面`**详细讲解如何进行 Vue 项目的优化。
 **（1）代码层面的优化**
 
+- 对象层级不要过深，否则性能就会差
+- 不需要响应式的数据不要放到 data 中（可以用 Object.freeze() 冻结数据）
 - v-if 和 v-show 区分使用场景
 - computed 和 watch 区分使用场景
 - v-for 遍历必须为 item 添加 key，且避免同时使用 v-if
@@ -2074,6 +2199,8 @@ view 层通过 store.dispath 来分发 action。
 - 第三方插件的按需引入
 - 优化无限列表性能
 - 服务端渲染 SSR or 预渲染
+- 防止内部泄漏，组件销毁后把全局变量和事件销毁
+- 防抖、节流运用
 
 **（2）Webpack 层面的优化**
 
@@ -2093,6 +2220,17 @@ view 层通过 store.dispath 来分发 action。
 - CDN 的使用
 - 使用 Chrome Performance 查找性能瓶颈
 
+### 使用过 Vue SSR 吗？说说 SSR
+SSR 也就是服务端渲染，也就是将 Vue 在客户端把标签渲染成 HTML 的工作放在服务端完成，然后再把 html 直接返回给客户端。
+
+优点：
+
+SSR 有着更好的 SEO、并且首屏加载速度更快
+
+缺点： 开发条件会受到限制，服务器端渲染只支持 beforeCreate 和 created 两个钩子，当我们需要一些外部扩展库时需要特殊处理，服务端渲染应用程序也需要处于 Node.js 的运行环境。
+
+服务器会有更大的负载需求
+
 ### 登陆权限的实现
 
 #### 登陆
@@ -2106,7 +2244,58 @@ If(menus.find(menu))
 })
 最后筛选出的路由，通过 addRoute 这个方法，动态添加上去，这一步通常会在路由守卫中完成（router.beforeEach）,遍历这份动态路由（asyncRoutes.forEach），判断当前遍历项是否存在于后端返回的菜单列表中，那返回一个筛选完成的路由数组，最后我们就可以用这份路由数组去渲染菜单栏了。
 
+### vue2.0 和 vue3.0 的区别
++ 响应式原理
++ 模板编译
++ 生命周期
++ 组件
++ 性能优化
+
+
 ## 小程序相关
+### 微信的小程序的主要文件
++ WXML——模板文件
++ JSON——配置/设置文件，如标题,tabbar,页面注册
++ WXSS——样式文件，样式可直接用import导入
++ JS——脚本逻辑文件，逻辑处理，网络请求
++ app.json——配置文件入口，整个小程序的全局配置，网络超时时间、底部tab、页面路径，window字段是小程序所有页面的顶部背景颜色、文字颜色
++ app.js——可以没有内容，可以在里边监听生命周期函数、声明全局变量
++ app.wxss——全局配置样式文件
+
+### 小程序中如何进行接口请求？会不会跨域，为什么
+微信小程序有自带的api接口，wx.request();
+不会跨域，因为微信小程序不是浏览器，没有同源策略的约束；
+
+```js
+wx.request({
+  url: 'https://xxxxxxx.com/api',
+  method: "POST",
+  data: {
+    pageNum: 1,
+    pageSize: 10
+  },
+  header: {
+    "content-type": "application/x-www-form-urlencoded"
+  },
+  success: res => {
+    console.log(res)
+  }
+})
+```
+
+### 小程序的常用命令有哪些
+```js
+引用数据 `{{}}`
+逻辑渲染 `wx:if wx:elif wx:else hidden`
+列表渲染 `wx:for wx:for-item wx:for-index wx:key`，使用 `wx:for-item` 指定数组当前元素的变量名，使用 `wx:for-index` 指定数组当前下标的变量名。
+```
+```html
+<view wx:for="{{array}}" wx:for-index="idx" wx:for-item="itemName"></view>
+```
+```js
+驱动视图 `this.setData({})`
+事件绑定 `bind`
+```
 
 ### 生命周期函数有哪些？小程序的周期函数？
 
@@ -2122,8 +2311,35 @@ onShow 当小程序启动，或从后台进入前台显示，会触发 onShow
 onHide 当小程序从前台进入后台，会触发 onHide
 
 ### 应用与页面生命周期发生顺序
+小程序中的生命周期函数，分为 应用生命周期函数 和 页面生命周期函数 ；
 
-应用 onLaunch -> 应用 onShow -> 页面 page -> onLoad -> onShow -> onReady
+应用 onLaunch -> 应用 onShow -> 页面 page -> onLoad -> onShow -> onReady -> onUnload
+
+App.js是小程序入口文件，所以在App.js中调用**应用生命周期函数**：
+```js
+App({
+    // 小程序初始化完成时，执行此函数，可以做一些初始化的工作
+    onLaunch: function( options ){}
+    // 小程序显示到屏幕上的时候，执行此函数
+    onShow: function( options ){}
+    // 小程序被最小化的时候，执行此函数
+    onHide: function(){}
+})
+```
+**页面生命周期函数**
+- onLoad: 监听页面加载
+- onShow: 监听页面显示
+- onReady: 监听页面初次渲染完成
+- onHide: 监听页面影藏
+- onUnload: 监听页面卸载
+
+### 小程序和Vue写法的区别
+- 数据绑定：小程序是wx:bind，vue是v-bind
+- 事件绑定：小程序是bind，vue是@
+- 样式绑定：小程序是wx:class，vue是:class
+- 循环遍历：小程序是wx:for，vue是v-for
+- 调用data模型：小程序是this.data.unifo，vue是this.unifo
+- 给模型赋值：小程序是this.setData({unifo:1}
 
 ### 小程序是如何传值？
 
@@ -2138,8 +2354,44 @@ get(e) {
 }
 ```
 
-### wxss 和 css 的区别
+### 小程序如何进行页面的跳转传参以及接收数据
+最常用的两个页面的跳转和传参方式：
+①wx.navigateTo 
+②navigator标签
 
+```js
+wx.navigateTo({
+     url: `/pages/details?id=${xxx}`
+});
+
+<navigator url="/page/navigate/navigate?title=navigate" hover-class="navigator-hover">跳转到新页面</navigator>
+```
+跳转页接收参数：
+```js
+onLoad (options) {
+    console.log(options)
+    this.setData({
+      goodsId:options.id,
+      goodsName:options.name
+  })
+}
+```
+其他方式：
++ wx.switchTab() 用来 跳转至tabBar页面，并关闭其他所有非 tabBar 页面
+
++ wx.redirectTo() 和 wx.navigateTo() 一样，都 跳转至非tabBar页面，但会关闭当前页面
+
++ wx.reLaunch() 也是 跳转至非tabBar页面，并且会关闭其他所有页面
+
++ wx.navigateBack() 用来返回上一页面或多级页面，并关闭当前页面。
+```js
+wx.navigateBack({
+  delta: 2 //返回的页面数，1为返回上一页，如果delta大于现有页面数，则返回到首页。
+})
+```
+
+### wxss 和 css 的区别
+1px = 2rpx
 - wxss 背景图只能引入外联，不能使用本地图片
 - 小程序使用@important 引入外链样式，地址为相对路径
 - 单位为 rpx，是响应式像素，可根据屏幕宽度做自适应
@@ -2149,6 +2401,93 @@ get(e) {
 - 在 app.js 中，this.globalData={}中存放数据，在组件.js 中，头部引入 const app = getApp(),来获取全局变量，直接使用 app.globalData.key 来获取变量
 - 使用路由，wx.navigation/redircetTo/url+参数等方式，在页面 onLoad(e),通过 e.key 来获取参数
 - 本地缓存，如 storage 等存储数据
+
+### 小程序如何进行本地存储？
+小程序提供了读写本地数据缓存的接口，通过 wx.getStorage/wx.getStorageSync读取本地缓存，通过 wx.setStorage/wx.setStorageSync写数据到缓存，其中带Sync后缀的接口表示是同步接口
+```js
+// 同步存储
+wx.setStorageSync('key', 'value')
+// 异步存储，并且开启加密存储
+wx.setStorage({
+  key: "key",
+  data: "value",
+  encrypt: true, // 若开启加密存储，setStorage 和 getStorage 需要同时声明 encrypt 的值为 true
+  success() {
+    wx.getStorage({
+      key: "key",
+      encrypt: true, // 若开启加密存储，setStorage 和 getStorage 需要同时声明 encrypt 的值为 true
+      success(res) {
+        console.log(res.data)
+      }
+    })
+  }
+})
+// 同步读取缓存
+var value = wx.getStorageSync('key')
+// 异步读取缓存
+wx.getStorage({
+  key: 'key',
+  success (res) {
+    console.log(res.data)
+  }
+})
+```
+
+### 谈谈你对微信小程序请求封装的理解
+在小程序开发过程中,我们可能会进行许多的网络请求,如果每次请求都去写一遍 `request` 代码：
+
+```js
+wx.request({
+  url: 'xxx',
+  data: {
+    a: '',
+    b: ''
+  },
+  header: {
+    'content-type': 'application/json' // 默认值
+  },
+  success(res) {
+    console.log(res.data)
+  },
+  fail(err){
+    console.log(err)  
+  }
+})
+```
+
+效率低下且不便于维护，所以封装一下 wx.request 接口还是有必要的。
+
+通常以返回 promise 对象的形式进行请求的封装：
+
+```js
+const baseUrl = "123456.com"
+function request(method, url, dataObj) {
+    return new Promise(function(resolve, reject) {
+        let header = {
+            'content-type': 'application/json',
+        };
+        wx.request({
+            url: baseURL + url,
+            method: method,
+            data: dataObj.data,
+            header: dataObj.header||header,
+            success(res) {
+                //请求成功
+                if (res.code == 0) {
+                    resolve(res);
+                } else {
+                    //其他异常
+                    reject('运行时错误,请稍后再试');
+                }
+            },
+            fail(err) {
+                //请求失败
+                reject(err)
+            }
+        })
+    })
+}
+```
 
 ### webview 的理解
 
@@ -2194,6 +2533,46 @@ hidden 有更高的初始渲染消耗
 pages 存放小程序所有 pages 的路径
 window 小程序所有页面的顶部、背景颜色，文字 tabbar 等的设置
 tabBar 设置底部导航，最多 5 个，最少 2 个
+
+### 微信小程序中的数据渲染与浏览器中有什么不同
+浏览器中渲染是单线程的;
+
+而在小程序中的运行环境分成渲染层和逻辑层， WXML 模板和 WXSS 样式工作在渲染层，JS 脚本工作在逻辑层。
+
+### 你认为微信小程序的优点是什么，缺点是什么
+优点：
+①容易推广。在微信中，小程序拥有众多入口，且微信用户基数大，这些都有助于推广小程序；
+②使用便捷。微信下拉即可打开小程序列表，点击即可使用小程序，不需要额外的安装操作等；
+③体验良好。小程序不会像H5页面一样经常出现卡顿、延时、加载慢、权限不足等问题；④成本更低，从开发成本到运营推广成本，小程序的花费仅为APP的十分之一。
+
+缺点：
+①单个包大小限制为2M，这导致无法开发大型的应用，采用分包最大是20M；
+②需要像app一样审核上架，这点相对于H5的发布要麻烦一些；
+③处处受微信限制。例如不能直接分享到朋友圈，涉及到积分，或者虚拟交易的时候，小程序也是不允许的。
+
+### 如何优化首次加载小程序的速度
+
+**包体积优化**
+
+- 分包加载（优先采用，大幅降低主包体积）。
+
+- 图片优化（1.使用tinypng压缩图片素材； 2.服务器端支持，可采用webp格式）。
+
+- 组件化开发（易维护）。
+
+- 减少文件个数及冗余数据。
+
+**请求优化**
+
+- 关键数据尽早请求(onLoad()阶段请求,次要数据可以通过事件触发再请求)；整合请求数据，降低请求次数。
+- 采用cdn缓存静态的接口数据（如判断用户登录状态，未登录则请求缓存接口数据），cdn稳定且就近访问速度快（针对加载总时长波动大）。
+- 缓存请求的接口数据。
+
+**首次渲染优化**
+
+- 图片懒加载（节省带宽）。
+- setData优化（不要一次性设置过多的数据等）。
+- DOM渲染优化（减少DOM节点）
 
 ## 算法题
 
