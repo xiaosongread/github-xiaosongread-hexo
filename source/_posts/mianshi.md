@@ -1553,6 +1553,8 @@ HTTP状态码的英文为HTTP Status Code。
 + 504 Gateway Time-out 充当网关或代理的服务器，未及时从远端服务器获取请求
 + 505 HTTP Version not supported 服务器不支持请求的HTTP协议的版本，无法完成处理
 
+### git 常用的命令行
+
 ## vue 相关
 
 ### 什么是 mvvm?
@@ -1956,6 +1958,8 @@ export default {
                 // eslint-disable-next-line
                 console.log('watch info', oldVal, val) // 引用类型，拿不到 oldVal 。因为指针相同，此时已经指向了新的 val
             },
+            // 强制立即执行回调
+            immediate: true,
             deep: true // 深度监听
         }
     }
