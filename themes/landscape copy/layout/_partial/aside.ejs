@@ -1,0 +1,44 @@
+
+<aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+
+        <% var t = null %>
+        <% if( is_post() ) { %>
+        <% t = toc(page.content) %>
+        <% } %>
+
+        <% if( t ) { %>
+        <%- t %>
+        <% } else { %>
+        <div class="author-meta">
+           
+            <div class="author-name"><%= theme.author.name %></div>
+            <div class="author-work"><%- theme.author.work %></div>
+            <div class="author-location">
+                <i class="icon-location vm"></i>
+                <span class="vm"><%= theme.author.location %></span>
+            </div>
+            <% if( theme.links ) { %>
+            <div class="author-thread-wrap">
+                <div class="author-threads clearfix">
+                    <% theme.links.forEach(function(link, index) { %>
+                        <a class="thread-item" href="<%= link.url %>" target="_blank" rel="noopener">
+                            <%- include({path: link.svg}) %>
+                        </a>
+                    <% }) %>
+                </div>
+            </div>
+            <% } %>
+        </div>
+        <div style="position: absolute;bottom: 30px;left: 30px;font-size: 14px;color: #999;">
+            <div style="font-size: 18px;color: #000;">栈内热点</div>
+            <a href="/2023/07/01/nodeBk/"><div style="color: #999;" class="ahover">· 项目-博客-插件库（jq22）</div></a>
+            <a href="/2020/08/03/object/"><div style="color: #999;" class="ahover">· 第五章-引用类型</div></a>
+            <a href="/2019/02/21/jc-2/"><div style="color: #999;" class="ahover">· 微信小程序实现签名并保存图片</div></a>
+            <a href="/2019/04/27/jc-6/"><div style="color: #999;" class="ahover">· vue 组件之间通信</div></a>
+            <a href="/2019/05/31/jc-1/"><div style="color: #999;" class="ahover">· hexo/github 搭建github博客教程</div></a>
+        </div>
+        <% } %>
+    </div>
+</aside>
