@@ -1,5 +1,5 @@
 ---
-title: mathtype
+title: kiny-mathtype-katex渲染
 categories: js-end
 date: 2024-02-19 14:49:15
 ---
