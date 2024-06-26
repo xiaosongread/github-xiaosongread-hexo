@@ -16,6 +16,8 @@ uni-app 在发布到H5时支持所有vue的语法；发布到App和小程序时�
 + 非H5端不支持 Vue.config.keyCodes
 + 非H5端不支持 Vue.config.performance
 
+<!-- more -->
+
 #### 全局API
 + 非H5端不支持 Vue.nextTick
 + 小程序不支持 Vue.directive
