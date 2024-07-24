@@ -11,6 +11,7 @@ date: 2024-07-23 11:32:04
 ```bash
 npm i svg-captcha
 ```
+<!-- more -->
 
 #### 2. 后端接口
 
@@ -60,7 +61,7 @@ const { account, password, captcha } = req.body
 ```html
 <template>
   <div>
-   <img :src="captchaUrl" alt="" />
+   < img :src="captchaUrl" alt="" />
   </div>
 </template>
 <script>
