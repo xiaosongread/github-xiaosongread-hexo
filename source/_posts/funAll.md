@@ -12,6 +12,8 @@ white-space: nowrap;
 overflow: hidden;
 ```
 
+<!-- more -->
+
 #### 多行显示省略号
 ```css
 display: -webkit-box;
