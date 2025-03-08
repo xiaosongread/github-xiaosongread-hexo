@@ -15,6 +15,8 @@ volta 和 nvm 都是跨平台支持的，这里我介绍下 volta 在 mac 和 wi
 curl https://get.volta.sh | bash
 ```
 
+<!-- more -->
+
 使用以上命令就可以安装好 volta 了，使用命令验证 volta 安装是否成功。
 
 ```
