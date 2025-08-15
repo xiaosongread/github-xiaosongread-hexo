@@ -11,8 +11,7 @@ tags: css js vue
 
 1.table 布局
 2.flex 布局
-3.float 布局 
-4.响应式布局
+3.float 布局 4.响应式布局
 
 ### — 盒子模型
 
@@ -347,55 +346,65 @@ span/img/a/strong/input
 参考文档：[flex 布局教程](/2020/11/05/flex布局教程/)
 
 ### — rem、em、vh、px 各自代表的含义？
+
 > CSS 中的尺寸单位都是 相对长度单位，只是相对的目标不同。
 
-+ px: 绝对单位，页面按精确像素展示
-px 全称为 pixel（像素），它是相对于 **屏幕显示器分辨率**（桌面设定的分辨率，不是显示器的物理分辨率） 而言的，在 相同/不同 的设备上 1px 表示多个 设备像素。
-当 **一个像素点越大** 时, 呈现的图像就会 越模糊；当**一个像素点越小**时, 像素点就会 越密集, 呈现的图像就会 越清晰。
-+ em: 相对单位，基准为父节点字体大小，如果自身定义了 font-size 按照自身来计算，整个页面内 1em 不是一个固定值
-> 若 当前元素/父元素 的 font-size 未设置，由于 font-size 属性值可被继承的原因，可逐级向上查找，最终找不到则相对于浏览器默认字体大小，即 font-size = 16px。
+- px: 绝对单位，页面按精确像素展示
+  px 全称为 pixel（像素），它是相对于 **屏幕显示器分辨率**（桌面设定的分辨率，不是显示器的物理分辨率） 而言的，在 相同/不同 的设备上 1px 表示多个 设备像素。
+  当 **一个像素点越大** 时, 呈现的图像就会 越模糊；当**一个像素点越小**时, 像素点就会 越密集, 呈现的图像就会 越清晰。
+- em: 相对单位，基准为父节点字体大小，如果自身定义了 font-size 按照自身来计算，整个页面内 1em 不是一个固定值
 
-+ rem: 相对单位，可以理解为 root em，相对根节点 html 的字体大小来计算
-默认根元素的 font-size 都是 16px 的。如果想要设置 12px 的字体大小也就 是 12px/16px = 0.75rem
-+ vh/vw: 主要用于页面视口大小布局，在页面布局上更加方便简单
-vw 和 vh 是将 视口 宽/高 都分成 100 份，因此 `100vw = 视口宽`、`100vh = 视口高`
-与之相关的还有 vmin 和 vmax 两个单位。
+  > 若 当前元素/父元素 的 font-size 未设置，由于 font-size 属性值可被继承的原因，可逐级向上查找，最终找不到则相对于浏览器默认字体大小，即 font-size = 16px。
 
-+ vmin 和 vmax 代表的是 `视口宽度` 和 `视口高度` 中的 `最小值` 和 `最大值`
-+ `vmin = 视口高度 vh 和 宽度 vw 间的最小值`
-+ `vmax = 视口高度 vh 和 宽度 vw 间的最大值`
+- rem: 相对单位，可以理解为 root em，相对根节点 html 的字体大小来计算
+  默认根元素的 font-size 都是 16px 的。如果想要设置 12px 的字体大小也就 是 12px/16px = 0.75rem
+- vh/vw: 主要用于页面视口大小布局，在页面布局上更加方便简单
+  vw 和 vh 是将 视口 宽/高 都分成 100 份，因此 `100vw = 视口宽`、`100vh = 视口高`
+  与之相关的还有 vmin 和 vmax 两个单位。
+
+- vmin 和 vmax 代表的是 `视口宽度` 和 `视口高度` 中的 `最小值` 和 `最大值`
+- `vmin = 视口高度 vh 和 宽度 vw 间的最小值`
+- `vmax = 视口高度 vh 和 宽度 vw 间的最大值`
 
 ### - H5 移动端适配原理
-**rem适配原理**
 
-+ 将设备分成 n 等分，n 可以是任意正确的值（比如 `flexible.js` 中的 n = 10 ）。
-+ + 设置 `html` 元素的 `font-size` 为 `设备宽度 / 10`，即得到 设备视口 1 rem 到底表示 多少设备视口 px。
-+ 将设计稿也分成 n 等分，此时设计稿中的某个元素a 的 px 对应 设备中这个元素的 rem 的计算方式为
-+ + ?rem = 设计稿 a px / (`设计稿的宽度 / n`(表示1rem为多少px像素))
+**rem 适配原理**
+
+- 将设备分成 n 等分，n 可以是任意正确的值（比如 `flexible.js` 中的 n = 10 ）。
+- - 设置 `html` 元素的 `font-size` 为 `设备宽度 / 10`，即得到 设备视口 1 rem 到底表示 多少设备视口 px。
+- 将设计稿也分成 n 等分，此时设计稿中的某个元素 a 的 px 对应 设备中这个元素的 rem 的计算方式为
+- - ?rem = 设计稿 a px / (`设计稿的宽度 / n`(表示 1rem 为多少 px 像素))
 
 举个例子：
-比如你的设计稿是 750px，然后你分成了10，那么 1rem = 75px，此时设计稿中某个元素的大小为 30px，
+比如你的设计稿是 750px，然后你分成了 10，那么 1rem = 75px，此时设计稿中某个元素的大小为 30px，
 那么在设备中这个元素的大小就是 30/75 = 0.4rem。
 
 常用插件：
 `lib-flexible` 和 `postcss-px2rem-exclude`
 
-使用postcss-px2rem-exclude可以将项目中的px自动转换成rem
-amfe-flexible则可以根据不同型号的手机，进行相应的HTML根节点(font-szie)的初始化。
+使用 postcss-px2rem-exclude 可以将项目中的 px 自动转换成 rem
+amfe-flexible 则可以根据不同型号的手机，进行相应的 HTML 根节点(font-szie)的初始化。
 
 1. 安装 postcss-px2rem-exclude
+
 ```js
 npm install postcss-px2rem-exclude --save
 ```
+
 2. 安装 amfe-flexible
+
 ```js
 npm install amfe-flexible --save
 ```
-3. 在vue项目中的main.js导入amfe-flexible
+
+3. 在 vue 项目中的 main.js 导入 amfe-flexible
+
 ```js
 import ‘amfe-flexible’; / /引入amfe-flexible做rem适配
 ```
-4. 在vue项目中的vue.config.js中配置postcss-px2rem-exclude
+
+4. 在 vue 项目中的 vue.config.js 中配置 postcss-px2rem-exclude
+
 ```js
 module.exports = {
   css: {
@@ -403,33 +412,41 @@ module.exports = {
       postcss: {
         plugins: [
           require("postcss-px2rem-exclude")({
-          	// 在这里，由于我的设计稿尺寸的屏幕分辨率是1920，具体原因如下：
+            // 在这里，由于我的设计稿尺寸的屏幕分辨率是1920，具体原因如下：
             remUnit: 192, // 设计稿尺寸/10
           }),
         ],
- },}},}
+      },
+    },
+  },
+};
 ```
-5. 有个问题：如何配置remUnit的数值：
 
-> 通常我们是根据设计图来定这个值, 原因很简单，便于开发。假如设计图给的宽度是1920，我们通常就会把remUnit设置为192（设计图宽度的十分之一），这样我们写样式时，可以直接按照设计图标注的宽高来1:1还原开发。
+5. 有个问题：如何配置 remUnit 的数值：
 
-行内样式不能转化rem的问题？
-我们可以写一个px2rem方法，放在全局，在src/main.js里写如下代码：
+> 通常我们是根据设计图来定这个值, 原因很简单，便于开发。假如设计图给的宽度是 1920，我们通常就会把 remUnit 设置为 192（设计图宽度的十分之一），这样我们写样式时，可以直接按照设计图标注的宽高来 1:1 还原开发。
+
+行内样式不能转化 rem 的问题？
+我们可以写一个 px2rem 方法，放在全局，在 src/main.js 里写如下代码：
+
 ```js
-function px2rem(px){
-  if(/%/ig.test(px)){ // 有百分号%，特殊处理，表述pc是一个有百分号的数，比如：90%
-    return px
-  }else{
-    return (parseFloat(px) / 192) + 'rem'
+function px2rem(px) {
+  if (/%/gi.test(px)) {
+    // 有百分号%，特殊处理，表述pc是一个有百分号的数，比如：90%
+    return px;
+  } else {
+    return parseFloat(px) / 192 + "rem";
   }
 }
-Vue.prototype.$px2rem = px2rem // 放到全局
+Vue.prototype.$px2rem = px2rem; // 放到全局
 ```
+
 对应的页面的使用方式：
+
 ```html
- <div class="left">今天是2022年9月16日，天气晴</div>
- <div class="center" :style="{fontSize:$px2rem('30px')}">距离国庆还有14天</div>
- <div class="right">哈哈哈哈哈</div>
+<div class="left">今天是2022年9月16日，天气晴</div>
+<div class="center" :style="{fontSize:$px2rem('30px')}">距离国庆还有14天</div>
+<div class="right">哈哈哈哈哈</div>
 ```
 
 ## javascript
@@ -1493,17 +1510,20 @@ webpack 构建的时候，需要找出所有模块文件进行编译处理，那
 构建的时候，如果对多个 js 文件需要被压缩，他会一个一个的进行压缩，可以使用 parallelUglifyPlugin 插件来开启多个子进程，采用并行方式对多个 js 文件进行压缩
 
 ### http 状态码
-当浏览者访问一个网页时，浏览者的浏览器会向网页所在服务器发出请求。当浏览器接收并显示网页前，此网页所在的服务器会返回一个包含HTTP状态码的信息头（server header）用以响应浏览器的请求。
 
-HTTP状态码的英文为HTTP Status Code。
+当浏览者访问一个网页时，浏览者的浏览器会向网页所在服务器发出请求。当浏览器接收并显示网页前，此网页所在的服务器会返回一个包含 HTTP 状态码的信息头（server header）用以响应浏览器的请求。
 
-下面是常见的HTTP状态码：
-+ 200 - 请求成功
-+ 301 - 资源（网页等）被永久转移到其它URL
-+ 404 - 请求的资源（网页等）不存在
-+ 500 - 内部服务器错误
+HTTP 状态码的英文为 HTTP Status Code。
+
+下面是常见的 HTTP 状态码：
+
+- 200 - 请求成功
+- 301 - 资源（网页等）被永久转移到其它 URL
+- 404 - 请求的资源（网页等）不存在
+- 500 - 内部服务器错误
 
 #### 状态码分类
+
 1×× 信息，服务器收到消息，需求请求者继续执行操作
 2×× 成功，操作被成功接收并处理
 3×× 重定向，需要进一步的操作以完成请求
@@ -1511,47 +1531,48 @@ HTTP状态码的英文为HTTP Status Code。
 5×× 服务器错误，服务器在处理请求的过程中发生了错误
 
 #### 完整状态码
-+ 100 Continue 继续。客户端应继续其请求
-+ 101 Switching Protocols 切换协议。服务器根据客户端的请求切换协议。只能切换到更高级的协议，例如，切换到HTTP的新版本协议
-+ 200 OK 请求成功。一般用于GET与POST请求
-+ 201 Created 已创建。成功请求并创建了新的资源
-+ 202 Accepted 已接受。已经接受请求，但未处理完成
-+ 203 Non-Authoritative Information 非授权信息。请求成功。但返回的meta信息不在原始的服务器，而是一个副本
-+ 204 No Content 无内容。服务器成功处理，但未返回内容。在未更新网页的情况下，可确保浏览器继续显示当前文档
-+ 205 Reset Content 重置内容。服务器处理成功，用户终端（例如：浏览器）应重置文档视图。可通过此返回码清除浏览器的表单域
-+ 206 Partial Content 部分内容。服务器成功处理了部分GET请求
-+ 300 Multiple Choices 多种选择。请求的资源可包括多个位置，相应可返回一个资源特征与地址的列表用于用户终端（例如：浏览器）选择
-+ 301 Moved Permanently 永久移动。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替
-+ 302 Found 临时移动。与301类似。但资源只是临时被移动。客户端应继续使用原有URI
-+ 303 See Other 查看其它地址。与301类似。使用GET和POST请求查看
-+ 304 Not Modified 未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源
-+ 305 Use Proxy 使用代理。所请求的资源必须通过代理访问
-+ 306 Unused 已经被废弃的HTTP状态码
-+ 307 Temporary Redirect 临时重定向。与302类似。使用GET请求重定向
-+ 400 Bad Request 客户端请求的语法错误，服务器无法理解
-+ 401 Unauthorized 请求要求用户的身份认证
-+ 402 Payment Required 保留，将来使用
-+ 403 Forbidden 服务器理解请求客户端的请求，但是拒绝执行此请求
-+ 404 Not Found 服务器无法根据客户端的请求找到资源（网页）。通常可以自定义404错误页面。
-+ 405 Method Not Allowed 客户端请求中的方法被禁止
-+ 406 Not Acceptable 服务器无法根据客户端请求的内容特性完成请求
-+ 407 Proxy Authentication Required 请求要求代理的身份认证，与401类似，但请求者应当使用代理进行授权
-+ 408 Request Time-out 服务器等待客户端发送的请求时间过长，超时
-+ 409 Conflict 服务器完成客户端的PUT请求是可能返回此代码，服务器处理请求时发生了冲突
-+ 410 Gone客户端请求的资源已经不存在。410不同于404，如果资源以前有现在被永久删除了可使用410代码，网站设计人员可通过301代码指定资源的新位置
-+ 411 Length Required 服务器无法处理客户端发送的不带Content-Length的请求信息
-+ 412 Precondition Failed 客户端请求信息的先决条件错误
-+ 413 Request Entity Too Large 由于请求的实体过大，服务器无法处理，因此拒绝请求。为防止客户端的连续请求，服务器可能会关闭连接。如果只是服务器暂时无法处理，则会包含一个Retry-After的响应信息
-+ 414 Request-URI Too Large 请求的URI过长（URI通常为网址），服务器无法处理
-+ 415 Unsupported Media Type 服务器无法处理请求附带的媒体格式
-+ 416 Requested range not satisfiable 客户端请求的范围无效
-+ 417 Expectation Failed 服务器无法满足Expect的请求头信息
-+ 500 Internal Server Error 服务器内部错误，无法完成请求
-+ 501 Not Implemented 服务器不支持请求的功能，无法完成请求
-+ 502 Bad Gateway 充当网关或代理的服务器，从远端服务器接收到了一个无效的请求
-+ 503 Service Unavailable 由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中
-+ 504 Gateway Time-out 充当网关或代理的服务器，未及时从远端服务器获取请求
-+ 505 HTTP Version not supported 服务器不支持请求的HTTP协议的版本，无法完成处理
+
+- 100 Continue 继续。客户端应继续其请求
+- 101 Switching Protocols 切换协议。服务器根据客户端的请求切换协议。只能切换到更高级的协议，例如，切换到 HTTP 的新版本协议
+- 200 OK 请求成功。一般用于 GET 与 POST 请求
+- 201 Created 已创建。成功请求并创建了新的资源
+- 202 Accepted 已接受。已经接受请求，但未处理完成
+- 203 Non-Authoritative Information 非授权信息。请求成功。但返回的 meta 信息不在原始的服务器，而是一个副本
+- 204 No Content 无内容。服务器成功处理，但未返回内容。在未更新网页的情况下，可确保浏览器继续显示当前文档
+- 205 Reset Content 重置内容。服务器处理成功，用户终端（例如：浏览器）应重置文档视图。可通过此返回码清除浏览器的表单域
+- 206 Partial Content 部分内容。服务器成功处理了部分 GET 请求
+- 300 Multiple Choices 多种选择。请求的资源可包括多个位置，相应可返回一个资源特征与地址的列表用于用户终端（例如：浏览器）选择
+- 301 Moved Permanently 永久移动。请求的资源已被永久的移动到新 URI，返回信息会包括新的 URI，浏览器会自动定向到新 URI。今后任何新的请求都应使用新的 URI 代替
+- 302 Found 临时移动。与 301 类似。但资源只是临时被移动。客户端应继续使用原有 URI
+- 303 See Other 查看其它地址。与 301 类似。使用 GET 和 POST 请求查看
+- 304 Not Modified 未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源
+- 305 Use Proxy 使用代理。所请求的资源必须通过代理访问
+- 306 Unused 已经被废弃的 HTTP 状态码
+- 307 Temporary Redirect 临时重定向。与 302 类似。使用 GET 请求重定向
+- 400 Bad Request 客户端请求的语法错误，服务器无法理解
+- 401 Unauthorized 请求要求用户的身份认证
+- 402 Payment Required 保留，将来使用
+- 403 Forbidden 服务器理解请求客户端的请求，但是拒绝执行此请求
+- 404 Not Found 服务器无法根据客户端的请求找到资源（网页）。通常可以自定义 404 错误页面。
+- 405 Method Not Allowed 客户端请求中的方法被禁止
+- 406 Not Acceptable 服务器无法根据客户端请求的内容特性完成请求
+- 407 Proxy Authentication Required 请求要求代理的身份认证，与 401 类似，但请求者应当使用代理进行授权
+- 408 Request Time-out 服务器等待客户端发送的请求时间过长，超时
+- 409 Conflict 服务器完成客户端的 PUT 请求是可能返回此代码，服务器处理请求时发生了冲突
+- 410 Gone 客户端请求的资源已经不存在。410 不同于 404，如果资源以前有现在被永久删除了可使用 410 代码，网站设计人员可通过 301 代码指定资源的新位置
+- 411 Length Required 服务器无法处理客户端发送的不带 Content-Length 的请求信息
+- 412 Precondition Failed 客户端请求信息的先决条件错误
+- 413 Request Entity Too Large 由于请求的实体过大，服务器无法处理，因此拒绝请求。为防止客户端的连续请求，服务器可能会关闭连接。如果只是服务器暂时无法处理，则会包含一个 Retry-After 的响应信息
+- 414 Request-URI Too Large 请求的 URI 过长（URI 通常为网址），服务器无法处理
+- 415 Unsupported Media Type 服务器无法处理请求附带的媒体格式
+- 416 Requested range not satisfiable 客户端请求的范围无效
+- 417 Expectation Failed 服务器无法满足 Expect 的请求头信息
+- 500 Internal Server Error 服务器内部错误，无法完成请求
+- 501 Not Implemented 服务器不支持请求的功能，无法完成请求
+- 502 Bad Gateway 充当网关或代理的服务器，从远端服务器接收到了一个无效的请求
+- 503 Service Unavailable 由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的 Retry-After 头信息中
+- 504 Gateway Time-out 充当网关或代理的服务器，未及时从远端服务器获取请求
+- 505 HTTP Version not supported 服务器不支持请求的 HTTP 协议的版本，无法完成处理
 
 ### git 常用的命令行
 
@@ -1617,16 +1638,18 @@ var app = new Vue({
     }
 }
 ```
+
 ### 为什么 Vue 里面的是 data 是函数？
-Vue实例中的 data 是通过一个函数的返回值来返回的，这样创建每一个实例的时候，就会返回一个新的对象，相当于给每一个实例的 data 属性对象创建了一个新的内存空间，相当于每次调用组件的时候，都生成了一个意思对象属性，这样就不会造成数据污染，避免发生一个组件里面修改了里面的对象，调用这个组件的所有数据都发生变化。
+
+Vue 实例中的 data 是通过一个函数的返回值来返回的，这样创建每一个实例的时候，就会返回一个新的对象，相当于给每一个实例的 data 属性对象创建了一个新的内存空间，相当于每次调用组件的时候，都生成了一个意思对象属性，这样就不会造成数据污染，避免发生一个组件里面修改了里面的对象，调用这个组件的所有数据都发生变化。
 
 ### 怎样理解 Vue 的单向数据流？
+
 所有的 prop 都使得其父子 prop 之间形成了一个**单向下行绑定**：父级 prop 的更新会向下流动到子组件中
 但是反过来则不行。这样会防止从子组件意外改变父级组件的状态，从而导致你的应用的数据流向难以理解。
 额外的，每次父级组件发生更新时，子组件中所有的 prop 都将会刷新为最新的值。
 
-> 子组件修改父组件的props值，只能事件通知父组件来修改，而不能直接去修改父组件的值。
-
+> 子组件修改父组件的 props 值，只能事件通知父组件来修改，而不能直接去修改父组件的值。
 
 ### Vue 是如何实现数据双向绑定的？
 
@@ -1638,16 +1661,16 @@ Vue 数据双向绑定主要是指：数据变化更新视图，视图变化更�
 - Data 中的数据变化时，文本节点的内容同步变化。即 Data => View 的变化。
 
 其中，View 变化更新 Data ，可以通过事件监听的方式来实现，所以 Vue 的数据双向绑定的工作主要是如何根据 Data 变化更新 View。
-回答1：
-通过数据劫持和订阅者、发布者模式来实现，同时使用Object.defineProperty()方法来给劫持的属性添加getter和setter，当数据改变时，setter触发，setter中发布消息，订阅者收到消息后进行更新,也就是说数据发生变化视图更新，视图改变，数据也改变。
-第一步：需要observe的数据对象进行递归遍历，包括子属性对象的属性，都加上setter和getter属性。
-第二步：compile解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图。
-第三步：Watcher订阅者是Observer和Compile之间通信的桥梁，主要做的事情是:
+回答 1：
+通过数据劫持和订阅者、发布者模式来实现，同时使用 Object.defineProperty()方法来给劫持的属性添加 getter 和 setter，当数据改变时，setter 触发，setter 中发布消息，订阅者收到消息后进行更新,也就是说数据发生变化视图更新，视图改变，数据也改变。
+第一步：需要 observe 的数据对象进行递归遍历，包括子属性对象的属性，都加上 setter 和 getter 属性。
+第二步：compile 解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图。
+第三步：Watcher 订阅者是 Observer 和 Compile 之间通信的桥梁，主要做的事情是:
 1、在自身实例化时往属性订阅器(dep)里面添加自己
-2、自身必须有一个update()方法
-3、待属性变动dep.notice()通知时，能调用自身的update()方法，并触发Compile中绑定的回调，则更新视图。
-第四步：MVVM作为数据绑定的入口，整合Observer、Compile和Watcher三者，通过Observer来监听自己的model数据变化，通过Compile来解析编译模板指令，最终利用Watcher搭起Observer和Compile之间的通信桥梁，达到数据变化 ->视图更新；视图交互变化(input) -> 数据model变更的双向绑定效果。
-回答2：
+2、自身必须有一个 update()方法
+3、待属性变动 dep.notice()通知时，能调用自身的 update()方法，并触发 Compile 中绑定的回调，则更新视图。
+第四步：MVVM 作为数据绑定的入口，整合 Observer、Compile 和 Watcher 三者，通过 Observer 来监听自己的 model 数据变化，通过 Compile 来解析编译模板指令，最终利用 Watcher 搭起 Observer 和 Compile 之间的通信桥梁，达到数据变化 ->视图更新；视图交互变化(input) -> 数据 model 变更的双向绑定效果。
+回答 2：
 **Vue 的双向数据绑定实现原理主要基于以下几个核心概念：**
 
 1. **数据劫持**：Vue 使用 Object.defineProperty 方法来劫持数据的 setter 和 getter，以此实现数据与视图的双向绑定。当数据对象被修改时，视图也会随之更新。
@@ -1661,7 +1684,7 @@ Vue 数据双向绑定主要是指：数据变化更新视图，视图变化更�
 2. 当组件中通过 v-model 指令或其他方式对 data 中的属性进行修改时，getter 和 setter 会拦截这些操作，并更新 Vue 实例中的数据状态。
 3. 当 Vue 实例中的数据状态发生变化时，会触发依赖追踪对象的更新操作，将相关的视图加入到更新队列中。
 4. 在浏览器 repaint 阶段，Vue 会统一执行更新队列中的更新操作，将数据状态与视图状态同步。
-总的来说，Vue 的双向数据绑定机制通过数据劫持、依赖追踪和异步更新等技术实现了高效的数据与视图之间的同步，为开发者提供了简洁易用的开发体验。
+   总的来说，Vue 的双向数据绑定机制通过数据劫持、依赖追踪和异步更新等技术实现了高效的数据与视图之间的同步，为开发者提供了简洁易用的开发体验。
 
 ### Vue 框架怎么实现对象和数组的监听？
 
@@ -1754,8 +1777,7 @@ export function set(target: Array<any> | Object, key: any, val: any): any {
 > **调用解耦一般在那个生命周期函数中执行？**
 > 可以在钩子函数 created、beforeMount、mounted 中进行调用，因为在这三个钩子函数中，data 已经创建，可以将服务端端返回的数据进行赋值。
 > 但是推荐在 created 钩子函数中调用异步请求，因为在 created 钩子函数中调用异步请求有以下优点：
-> <u>1.能更快获取到服务端数据，减少页面 loading 时间；</u>
-> <u>2.ssr 不支持 beforeMount 、mounted 钩子函数，所以放在 created 中有助于一致性；</u>
+> <u>1.能更快获取到服务端数据，减少页面 loading 时间；</u> > <u>2.ssr 不支持 beforeMount 、mounted 钩子函数，所以放在 created 中有助于一致性；</u>
 
 但是 **_具体的需求_** 需要具体的分析：
 
@@ -1839,6 +1861,7 @@ transition 动画
 keepAlive 多个组件动态切换时缓存被移除的组件实例
 
 ### Vue 修饰符有哪些
+
 **事件修饰符**
 
 .stop 阻止事件继续传播
@@ -1881,9 +1904,9 @@ keepAlive 多个组件动态切换时缓存被移除的组件实例
 
 computed 有缓存，关联的 data 里面的响应式数据不变则不会重新计算，遇到双向绑定的属性值即 v-model 的属性值需要使用 get()和 set(),才能监听
 
-+ 计算属性是基于它们的响应式依赖进行缓存的，只在相关响应式依赖发生改变时它们才会重新求值，也就是说只要 message 值不变，多次访问计算属性会立即返回之前的计算结果，而不必再次执行函数
+- 计算属性是基于它们的响应式依赖进行缓存的，只在相关响应式依赖发生改变时它们才会重新求值，也就是说只要 message 值不变，多次访问计算属性会立即返回之前的计算结果，而不必再次执行函数
 
-+ 如果 message 值改变了，不依赖 message 的值，计算属性不会重新计算
+- 如果 message 值改变了，不依赖 message 的值，计算属性不会重新计算
 
 ```js
 <template>
@@ -1978,10 +2001,12 @@ export default {
 > 计算属性一般用在模板渲染中，某个值是依赖了其它的响应式对象甚至是计算属性计算而来；而侦听属性适用于观测某个值的变化去完成一段复杂的业务逻辑。
 
 ### v-if 与 v-for 为什么不建议一起使用
+
 当 `v-if` 与 `v-for` 一起使用时，`v-for` 具有比 `v-if` 更高的优先级。这意味着 `v-if` 将分别重复运行于 每个 `v-for` 循环中，即先运行 `v-for` 的循环，然后在每一个 `v-for` 的循环中，再进行 `v-if` 的条件对比，会造成性能问题，影响速度。
 
 解决这个问题的方法是:
-+ 可以使用`计算属性`将数据提前过滤
+
+- 可以使用`计算属性`将数据提前过滤
 
 ```js
 computed: {
@@ -1991,9 +2016,10 @@ computed: {
 }
 ```
 
-+ 也可以使用 `<template>` 元素，在 `<template>` 元素上使用 `v-if`，然后将 `v-for` 放在 `<template>` 元素上
+- 也可以使用 `<template>` 元素，在 `<template>` 元素上使用 `v-if`，然后将 `v-for` 放在 `<template>` 元素上
 
 ### v-model 原理
+
 v-model 只是语法糖而已
 
 v-model 在内部为不同的输入元素使用不同的 property 并抛出不同的事件：
@@ -2048,15 +2074,15 @@ directives: {
 ```
 
 ### Vue.mixin 的使用场景和原理
+
 在日常的开发中，我们经常会遇到在不同的组件中经常会需要用到一些相同或者相似的代码，这些代码的功能相对独立，可以通过 Vue 的 mixin 功能抽离公共的业务逻辑，原理类似 “对象的继承”，当组件初始化时会调用 mergeOptions 方法进行合并，采用策略模式针对不同的属性进行合并。当组件和混入对象含有同名选项时，这些选项将以恰当的方式进行 “合并”。
 
 ### nextTick 使用场景和原理
+
 nextTick 中的回调是在下次 DOM 更新循环结束之后执行的延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。主要思路就是采用微任务优先的方式调用异步方法去执行 nextTick 包装的方法。
 
-**nexttick使用场景**
-1.获取数据更新之后的DOM
-2.created()中进行DOM操作
-3.获取元素宽度
+**nexttick 使用场景** 1.获取数据更新之后的 DOM
+2.created()中进行 DOM 操作 3.获取元素宽度
 
 看例子，比如当 `DOM` 内容改变后，我们需要获取最新的高度
 
@@ -2084,6 +2110,7 @@ export default {
 ```
 
 ### Vue.set 方法原理
+
 了解 Vue 响应式原理的同学都知道在两种情况下修改数据 Vue 是不会触发视图更新的
 
 1. 在实例创建之后添加新的属性到实例上（给响应式对象新增属性）
@@ -2092,15 +2119,15 @@ export default {
 
 Vue.set 或者说是 $set 原理如下
 
-因为响应式数据 我们给对象和数组本身都增加了__ob__属性，代表的是 Observer 实例。当给对象新增不存在的属性 首先会把新的属性进行响应式跟踪 然后会触发对象__ob__的 dep 收集到的 watcher 去更新，当修改数组索引时我们调用数组本身的 splice 方法去更新数组
+因为响应式数据 我们给对象和数组本身都增加了**ob**属性，代表的是 Observer 实例。当给对象新增不存在的属性 首先会把新的属性进行响应式跟踪 然后会触发对象**ob**的 dep 收集到的 watcher 去更新，当修改数组索引时我们调用数组本身的 splice 方法去更新数组
 
 ### 父子组件之间的通信
 
 **父传子**：通过 props 来传递
 父组件(:变量名) -> 子组件([props])来接收
 
-+ 父组件访问子组件的数据和方法：
-通过 `$refs` 或者 `$children` 访问子组件的属性
+- 父组件访问子组件的数据和方法：
+  通过 `$refs` 或者 `$children` 访问子组件的属性
 
 ```js
 <cpn ref="twoChildrenRef"></cpn>
@@ -2112,13 +2139,13 @@ Vue.set 或者说是 $set 原理如下
 **子传父**：$emit/$on
 子组件($emit('事件名'，值)) -> 父组件(@事件名='aa',aa(传递的值))来接收
 
-+ 子组件访问父组件的数据和方法:
+- 子组件访问父组件的数据和方法:
 
 在子组件直接使用 `this.$parent`
 
 ```js
-this.$parent.name; 
-this.$parent.方法名(); 
+this.$parent.name;
+this.$parent.方法名();
 ```
 
 **兄弟组件**：创建一个事件中心
@@ -2135,7 +2162,7 @@ Hub.$on('change', ()=>{
 
 详细介绍：http://shuy.cc/2019/04/27/jc-6/
 
-**Vuex**：专门为Vue开发的用于管理应用状态的库，使Vue的状态能按照可预期的方式来进行管理。
+**Vuex**：专门为 Vue 开发的用于管理应用状态的库，使 Vue 的状态能按照可预期的方式来进行管理。
 
 ### 路由跳转的方式，传参方式有哪些？
 
@@ -2230,28 +2257,29 @@ const asyncRoutes = [
 
 1.**路由的跳转**
 this.$router.push()
-+ path 跳转方式，只可以用query传参
-```js
-this.$router.push( {path:'login', query: { userName: '01testuser2'}})
-```
-+ name 跳转方式，可以用query和params传参
-```js
-this.$router.push( {name:'login', query: { userName: '01testuser2'}})
 
-this.$router.push( {name:'login', params: { userName: '01testuser2'}})
+- path 跳转方式，只可以用 query 传参
+
+```js
+this.$router.push({ path: "login", query: { userName: "01testuser2" } });
 ```
-> query传参与params传参区别：query传参相当于get请求，在浏览器的url地址中会显示参数；params相当于post请求，在浏览器的地址栏中不显示。
+
+- name 跳转方式，可以用 query 和 params 传参
+
+```js
+this.$router.push({ name: "login", query: { userName: "01testuser2" } });
+
+this.$router.push({ name: "login", params: { userName: "01testuser2" } });
+```
+
+> query 传参与 params 传参区别：query 传参相当于 get 请求，在浏览器的 url 地址中会显示参数；params 相当于 post 请求，在浏览器的地址栏中不显示。
 
 2.**路由替换**
 this.$router.replace() 
-***使用方法和 `this.$router.push()` 一样***
-3.**后退**
-this$router.back()
-4.**前进**
-this.$router.forward() 
-5.**前进后退**
-this.$router.go() -1 为后退 
-6.**配置路由常用参数**
+***使用方法和 `this.$router.push()` 一样**\* 3.**后退**
+this$router.back() 4.**前进**
+this.$router.forward() 5.**前进后退**
+this.$router.go() -1 为后退 6.**配置路由常用参数\*\*
 
 - path 路径
 - component 路由相对于组件的路径
@@ -2263,17 +2291,77 @@ this.$router.go() -1 为后退
 ### 什么是路由守卫？路由的钩子函数有哪些？
 
 路由守卫：路由跳转前后的一些验证
-路由钩子函数：
+
+#### 全局前置守卫(router.beforeEach((to, from, next) => { // ... }))
+
+你可以使用 router.beforeEach 注册一个全局前置守卫：
+
+```
+router.beforeEach((to, from, next) => { // ... })
+```
+
+#### 全局解析守卫(router.beforeResolve((to, from, next) => { // ... }))
+
+在 2.5.0+ 你可以用 router.beforeResolve 注册一个全局守卫。这和 router.beforeEach 类似，区别是在导航被确认之前，同时在所有组件内守卫和异步路由组件被解析之后，解析守卫就被调用
+
+#### 全局后置钩子(router.afterEach((to, from) => { // ... }))
+
+你也可以注册全局后置钩子，然而和守卫不同的是，这些钩子不会接受 next 函数也不会改变导航本身：
+
+```
+router.afterEach((to, from) => {
+  // ...
+})
+```
+
+#### 路由独享的守卫(beforeEnter: (to, from, next) => { // ... }))
+
+你可以在路由配置上直接定义 beforeEnter 守卫：
+
+```
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/foo',
+      component: Foo,
+      beforeEnter: (to, from, next) => {
+        // ...
+      }
+    }
+  ]
+})
+```
+
+#### 组件内的守卫(beforeRouteEnter, beforeRouteUpdate, beforeRouteLeave)
+
+最后，你可以在路由组件内直接定义以下路由导航守卫：
 
 - beforeRouterEnter 当路由跳转之前（登录之前）
 - beforeRouterUpdate 当路由进行更新的时候，如果当前路由发生了变化，但是不需要组件进行销毁
 - beforeRouterLeave 当路由离开的时候（当用户没有支付离开的时候、当用户填写完用户信息没有保存的时候）
-- beforeEach 全局守卫，验证用户是否登录
 
-### vue-router 路由钩子函数是什么 执行顺序是什么
-路由钩子的执行流程, 钩子函数种类有: 全局守卫、路由守卫、组件守卫
+```
+const Foo = {
+  template: `...`,
+  beforeRouteEnter(to, from, next) {
+    // 在渲染该组件的对应路由被 confirm 前调用
+    // 不！能！获取组件实例 `this`
+    // 因为当守卫执行前，组件实例还没被创建
+  },
+  beforeRouteUpdate(to, from, next) {
+    // 在当前路由改变，但是该组件被复用时调用
+    // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+    // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+    // 可以访问组件实例 `this`
+  },
+  beforeRouteLeave(to, from, next) {
+    // 导航离开该组件的对应路由时调用
+    // 可以访问组件实例 `this`
+  }
+}
+```
 
-完整的导航解析流程:
+#### 完整的导航解析流程:
 
 导航被触发。
 在失活的组件里调用 beforeRouteLeave 守卫。
@@ -2288,8 +2376,8 @@ this.$router.go() -1 为后退
 触发 DOM 更新。
 调用 beforeRouteEnter 守卫中传给 next 的回调函数，创建好的组件实例会作为回调函数的参数传入。
 
-
 ### 能说下 vue-router 中常用的路由模式实现原理吗?
+
 **hash 模式**
 
 location.hash 的值实际就是 URL 中 #后面的东西 它的特点在于：hash 虽然出现 URL 中，但不会被包含在 HTTP 请求中，对后端完全没有影响，因此改变 hash 不会重新加载页面。
@@ -2313,7 +2401,7 @@ vuex 是专门为 vue 开发的一款状态管理库，主要采用集中管理�
 
 - state 保存应用的**全部状态**的对象 this.$store.state(key)
 - Getter 其实就是 state 通过**计算属性**，衍变出的新的状态 this.$store.getters(key)
-- Mutation 包含一个字符窜名称和回调函数，必须是 ***同步函数***
+- Mutation 包含一个字符窜名称和回调函数，必须是 **_同步函数_**
 
 ```js
 mutations: {
@@ -2325,24 +2413,27 @@ mutations: {
 
 > 它其实就是操作 `state` 的，它不能直接调用，这更像是一个事件注册，需要 `store.commit('name')`来调用对应的 `mutation`
 
-- action 类似于 `mutation`,但是 `action` 提交的是 `mutation`，并且是 ***异步*** 的，使用 `commit('mutation 名')`来调用，action 使用 `dispatch` 来调用
+- action 类似于 `mutation`,但是 `action` 提交的是 `mutation`，并且是 **_异步_** 的，使用 `commit('mutation 名')`来调用，action 使用 `dispatch` 来调用
 
-> 在 main.js 引入 store，注入。新建了一个 store 目录，然后….. export 。 
-场景：单页应用中，组件之间的共享状态和方法 state Vuex 使用单一状态树,即每个应用将仅仅包含一个 store 实例，但单一状态树和模块化并不冲突。存放的数据状态，不可以直接修改里面的数据。 
-+ **mutations** 定义的方法动态修改 Vuex 的 store 中的状态或数据。 
-+ **getters** 类似 vue 的计算属性，主要用来过滤一些数据。 
-+ **action** 可以理解为通过将 mutations 里面处里数据的方法变成可异步的处理数据的方法，简单的说就是异步操作数据。
-view 层通过 store.dispath 来分发 action。 
-+ **modules** 项目特别复杂的时候，可以让每一个模块拥有自己的 state、mutation、action、getters,使得结构非常清晰，方便管理。
+> 在 main.js 引入 store，注入。新建了一个 store 目录，然后….. export 。
+> 场景：单页应用中，组件之间的共享状态和方法 state Vuex 使用单一状态树,即每个应用将仅仅包含一个 store 实例，但单一状态树和模块化并不冲突。存放的数据状态，不可以直接修改里面的数据。
+
+- **mutations** 定义的方法动态修改 Vuex 的 store 中的状态或数据。
+- **getters** 类似 vue 的计算属性，主要用来过滤一些数据。
+- **action** 可以理解为通过将 mutations 里面处里数据的方法变成可异步的处理数据的方法，简单的说就是异步操作数据。
+  view 层通过 store.dispath 来分发 action。
+- **modules** 项目特别复杂的时候，可以让每一个模块拥有自己的 state、mutation、action、getters,使得结构非常清晰，方便管理。
 
 快速掌握 vuex 常用的所有 api 用法: http://shuy.cc/2019/07/24/vuex/
 
 ### Vuex 页面刷新数据丢失怎么解决
+
 需要做 vuex 数据持久化 一般使用本地存储的方案来保存数据 可以自己设计存储方案 也可以使用第三方插件
 
 推荐使用 vuex-persist 插件，它就是为 Vuex 持久化存储而生的一个插件。不需要你手动存取 storage ，而是直接将状态保存至 cookie 或者 localStorage 中
 
 ### Vuex 为什么要分模块并且加命名空间
+
 模块: 由于使用单一状态树，应用的所有状态会集中到一个比较大的对象。当应用变得非常复杂时，store 对象就有可能变得相当臃肿。为了解决以上问题，Vuex 允许我们将 store 分割成模块（module）。每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块。
 
 命名空间：默认情况下，模块内部的 action、mutation 和 getter 是注册在全局命名空间的——这样使得多个模块能够对同一 mutation 或 action 作出响应。如果希望你的模块具有更高的封装度和复用性，你可以通过添加 namespaced: true 的方式使其成为带命名空间的模块。当模块被注册后，它的所有 getter、action 及 mutation 都会自动根据模块注册的路径调整命名
@@ -2386,6 +2477,7 @@ view 层通过 store.dispath 来分发 action。
 - 使用 Chrome Performance 查找性能瓶颈
 
 ### 使用过 Vue SSR 吗？说说 SSR
+
 SSR 也就是服务端渲染，也就是将 Vue 在客户端把标签渲染成 HTML 的工作放在服务端完成，然后再把 html 直接返回给客户端。
 
 优点：
@@ -2410,55 +2502,57 @@ If(menus.find(menu))
 最后筛选出的路由，通过 addRoute 这个方法，动态添加上去，这一步通常会在路由守卫中完成（router.beforeEach）,遍历这份动态路由（asyncRoutes.forEach），判断当前遍历项是否存在于后端返回的菜单列表中，那返回一个筛选完成的路由数组，最后我们就可以用这份路由数组去渲染菜单栏了。
 
 ### vue2.0 和 vue3.0 的区别
-+ 响应式原理
-+ 模板编译
-+ 生命周期
-+ 组件
-+ 性能优化
 
+https://blog.csdn.net/weixin_56370772/article/details/142301562
 
 ## 小程序相关
+
 ### 微信的小程序的主要文件
-+ WXML——模板文件
-+ WXSS——样式文件，样式可直接用import导入
-+ JS——脚本逻辑文件，逻辑处理，网络请求
-+ app.json——配置文件入口，整个小程序的全局配置，网络超时时间、底部tab、页面路径，window字段是小程序所有页面的顶部背景颜色、文字颜色
-+ app.js——可以没有内容，可以在里边监听生命周期函数、声明全局变量
-+ app.wxss——全局配置样式文件
+
+- WXML——模板文件
+- WXSS——样式文件，样式可直接用 import 导入
+- JS——脚本逻辑文件，逻辑处理，网络请求
+- app.json——配置文件入口，整个小程序的全局配置，网络超时时间、底部 tab、页面路径，window 字段是小程序所有页面的顶部背景颜色、文字颜色
+- app.js——可以没有内容，可以在里边监听生命周期函数、声明全局变量
+- app.wxss——全局配置样式文件
 
 ### 小程序中如何进行接口请求？会不会跨域，为什么
-微信小程序有自带的api接口，wx.request();
+
+微信小程序有自带的 api 接口，wx.request();
 不会跨域，因为微信小程序不是浏览器，没有同源策略的约束；
 
 ```js
 wx.request({
-  url: 'https://xxxxxxx.com/api',
+  url: "https://xxxxxxx.com/api",
   method: "POST",
   data: {
     pageNum: 1,
-    pageSize: 10
+    pageSize: 10,
   },
   header: {
-    "content-type": "application/x-www-form-urlencoded"
+    "content-type": "application/x-www-form-urlencoded",
   },
-  success: res => {
-    console.log(res)
-  }
-})
+  success: (res) => {
+    console.log(res);
+  },
+});
 ```
 
 ### 小程序的常用命令有哪些
+
 ```js
 引用数据 `{{}}`
 逻辑渲染 `wx:if wx:elif wx:else hidden`
 列表渲染 `wx:for wx:for-item wx:for-index wx:key`，使用 `wx:for-item` 指定数组当前元素的变量名，使用 `wx:for-index` 指定数组当前下标的变量名。
 ```
+
 ```html
 <view wx:for="{{array}}" wx:for-index="idx" wx:for-item="itemName"></view>
 ```
+
 ```js
-驱动视图 `this.setData({})`
-事件绑定 `bind`
+驱动视图`this.setData({})`;
+事件绑定`bind`;
 ```
 
 ### 生命周期函数有哪些？小程序的周期函数？
@@ -2475,11 +2569,13 @@ onShow 当小程序启动，或从后台进入前台显示，会触发 onShow
 onHide 当小程序从前台进入后台，会触发 onHide
 
 ### 应用与页面生命周期发生顺序
+
 小程序中的生命周期函数，分为 应用生命周期函数 和 页面生命周期函数 ；
 
 应用 onLaunch -> 应用 onShow -> 页面 page -> onLoad -> onShow -> onReady -> onUnload
 
-App.js是小程序入口文件，所以在App.js中调用**应用生命周期函数**：
+App.js 是小程序入口文件，所以在 App.js 中调用**应用生命周期函数**：
+
 ```js
 App({
     // 小程序初始化完成时，执行此函数，可以做一些初始化的工作
@@ -2490,20 +2586,23 @@ App({
     onHide: function(){}
 })
 ```
+
 **页面生命周期函数**
+
 - onLoad: 监听页面加载
 - onShow: 监听页面显示
 - onReady: 监听页面初次渲染完成
 - onHide: 监听页面影藏
 - onUnload: 监听页面卸载
 
-### 小程序和Vue写法的区别
-- 数据绑定：小程序是wx:bind，vue是v-bind
-- 事件绑定：小程序是bind，vue是@
-- 样式绑定：小程序是wx:class，vue是:class
-- 循环遍历：小程序是wx:for，vue是v-for
-- 调用data模型：小程序是this.data.unifo，vue是this.unifo
-- 给模型赋值：小程序是this.setData({unifo:1}
+### 小程序和 Vue 写法的区别
+
+- 数据绑定：小程序是 wx:bind，vue 是 v-bind
+- 事件绑定：小程序是 bind，vue 是@
+- 样式绑定：小程序是 wx:class，vue 是:class
+- 循环遍历：小程序是 wx:for，vue 是 v-for
+- 调用 data 模型：小程序是 this.data.unifo，vue 是 this.unifo
+- 给模型赋值：小程序是 this.setData({unifo:1}
 
 ### 小程序是如何传值？
 
@@ -2519,18 +2618,26 @@ get(e) {
 ```
 
 ### 小程序如何进行页面的跳转传参以及接收数据
+
 最常用的两个页面的跳转和传参方式：
-①wx.navigateTo 
-②navigator标签
+①wx.navigateTo
+②navigator 标签
 
 ```js
 wx.navigateTo({
-     url: `/pages/details?id=${xxx}`
+  url: `/pages/details?id=${xxx}`,
 });
 
-<navigator url="/page/navigate/navigate?title=navigate" hover-class="navigator-hover">跳转到新页面</navigator>
+<navigator
+  url="/page/navigate/navigate?title=navigate"
+  hover-class="navigator-hover"
+>
+  跳转到新页面
+</navigator>;
 ```
+
 跳转页接收参数：
+
 ```js
 onLoad (options) {
     console.log(options)
@@ -2540,22 +2647,27 @@ onLoad (options) {
   })
 }
 ```
+
 其他方式：
-+ wx.switchTab() 用来 跳转至tabBar页面，并关闭其他所有非 tabBar 页面
 
-+ wx.redirectTo() 和 wx.navigateTo() 一样，都 跳转至非tabBar页面，但会关闭当前页面
+- wx.switchTab() 用来 跳转至 tabBar 页面，并关闭其他所有非 tabBar 页面
 
-+ wx.reLaunch() 也是 跳转至非tabBar页面，并且会关闭其他所有页面
+- wx.redirectTo() 和 wx.navigateTo() 一样，都 跳转至非 tabBar 页面，但会关闭当前页面
 
-+ wx.navigateBack() 用来返回上一页面或多级页面，并关闭当前页面。
+- wx.reLaunch() 也是 跳转至非 tabBar 页面，并且会关闭其他所有页面
+
+- wx.navigateBack() 用来返回上一页面或多级页面，并关闭当前页面。
+
 ```js
 wx.navigateBack({
-  delta: 2 //返回的页面数，1为返回上一页，如果delta大于现有页面数，则返回到首页。
-})
+  delta: 2, //返回的页面数，1为返回上一页，如果delta大于现有页面数，则返回到首页。
+});
 ```
 
 ### wxss 和 css 的区别
+
 1px = 2rpx
+
 - wxss 背景图只能引入外联，不能使用本地图片
 - 小程序使用@important 引入外链样式，地址为相对路径
 - 单位为 rpx，是响应式像素，可根据屏幕宽度做自适应
@@ -2567,10 +2679,12 @@ wx.navigateBack({
 - 本地缓存，如 storage 等存储数据
 
 ### 小程序如何进行本地存储？
-小程序提供了读写本地数据缓存的接口，通过 wx.getStorage/wx.getStorageSync读取本地缓存，通过 wx.setStorage/wx.setStorageSync写数据到缓存，其中带Sync后缀的接口表示是同步接口
+
+小程序提供了读写本地数据缓存的接口，通过 wx.getStorage/wx.getStorageSync 读取本地缓存，通过 wx.setStorage/wx.setStorageSync 写数据到缓存，其中带 Sync 后缀的接口表示是同步接口
+
 ```js
 // 同步存储
-wx.setStorageSync('key', 'value')
+wx.setStorageSync("key", "value");
 // 异步存储，并且开启加密存储
 wx.setStorage({
   key: "key",
@@ -2581,42 +2695,43 @@ wx.setStorage({
       key: "key",
       encrypt: true, // 若开启加密存储，setStorage 和 getStorage 需要同时声明 encrypt 的值为 true
       success(res) {
-        console.log(res.data)
-      }
-    })
-  }
-})
+        console.log(res.data);
+      },
+    });
+  },
+});
 // 同步读取缓存
-var value = wx.getStorageSync('key')
+var value = wx.getStorageSync("key");
 // 异步读取缓存
 wx.getStorage({
-  key: 'key',
-  success (res) {
-    console.log(res.data)
-  }
-})
+  key: "key",
+  success(res) {
+    console.log(res.data);
+  },
+});
 ```
 
 ### 谈谈你对微信小程序请求封装的理解
+
 在小程序开发过程中,我们可能会进行许多的网络请求,如果每次请求都去写一遍 `request` 代码：
 
 ```js
 wx.request({
-  url: 'xxx',
+  url: "xxx",
   data: {
-    a: '',
-    b: ''
+    a: "",
+    b: "",
   },
   header: {
-    'content-type': 'application/json' // 默认值
+    "content-type": "application/json", // 默认值
   },
   success(res) {
-    console.log(res.data)
+    console.log(res.data);
   },
-  fail(err){
-    console.log(err)  
-  }
-})
+  fail(err) {
+    console.log(err);
+  },
+});
 ```
 
 效率低下且不便于维护，所以封装一下 wx.request 接口还是有必要的。
@@ -2624,32 +2739,32 @@ wx.request({
 通常以返回 promise 对象的形式进行请求的封装：
 
 ```js
-const baseUrl = "123456.com"
+const baseUrl = "123456.com";
 function request(method, url, dataObj) {
-    return new Promise(function(resolve, reject) {
-        let header = {
-            'content-type': 'application/json',
-        };
-        wx.request({
-            url: baseURL + url,
-            method: method,
-            data: dataObj.data,
-            header: dataObj.header||header,
-            success(res) {
-                //请求成功
-                if (res.code == 0) {
-                    resolve(res);
-                } else {
-                    //其他异常
-                    reject('运行时错误,请稍后再试');
-                }
-            },
-            fail(err) {
-                //请求失败
-                reject(err)
-            }
-        })
-    })
+  return new Promise(function (resolve, reject) {
+    let header = {
+      "content-type": "application/json",
+    };
+    wx.request({
+      url: baseURL + url,
+      method: method,
+      data: dataObj.data,
+      header: dataObj.header || header,
+      success(res) {
+        //请求成功
+        if (res.code == 0) {
+          resolve(res);
+        } else {
+          //其他异常
+          reject("运行时错误,请稍后再试");
+        }
+      },
+      fail(err) {
+        //请求失败
+        reject(err);
+      },
+    });
+  });
 }
 ```
 
@@ -2663,8 +2778,7 @@ http://shuy.cc/2020/06/09/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95
 
 ### 注意事项
 
-1.rpx，规定屏幕宽度为 750rpx，可适配不同的屏幕宽度 
-2.本地资源 wxss 无法获取，bgimg 可使用网络图片，base64,或者使用标签来引入
+1.rpx，规定屏幕宽度为 750rpx，可适配不同的屏幕宽度 2.本地资源 wxss 无法获取，bgimg 可使用网络图片，base64,或者使用标签来引入
 3.navigateTo，一个应用同时能发开 5 个页面或者使用 redirct
 
 ### 小程序的双向绑定和 vue 的有什么区别
@@ -2700,21 +2814,23 @@ window 小程序所有页面的顶部、背景颜色，文字 tabbar 等的设�
 tabBar 设置底部导航，最多 5 个，最少 2 个
 
 ### 微信小程序中的数据渲染与浏览器中有什么不同
+
 浏览器中渲染是单线程的;
 
 而在小程序中的运行环境分成渲染层和逻辑层， WXML 模板和 WXSS 样式工作在渲染层，JS 脚本工作在逻辑层。
 
 ### 你认为微信小程序的优点是什么，缺点是什么
+
 优点：
-①容易推广。在微信中，小程序拥有众多入口，且微信用户基数大，这些都有助于推广小程序；
-②使用便捷。微信下拉即可打开小程序列表，点击即可使用小程序，不需要额外的安装操作等；
-③体验良好。小程序不会像H5页面一样经常出现卡顿、延时、加载慢、权限不足等问题；
-④成本更低，从开发成本到运营推广成本，小程序的花费仅为APP的十分之一。
+① 容易推广。在微信中，小程序拥有众多入口，且微信用户基数大，这些都有助于推广小程序；
+② 使用便捷。微信下拉即可打开小程序列表，点击即可使用小程序，不需要额外的安装操作等；
+③ 体验良好。小程序不会像 H5 页面一样经常出现卡顿、延时、加载慢、权限不足等问题；
+④ 成本更低，从开发成本到运营推广成本，小程序的花费仅为 APP 的十分之一。
 
 缺点：
-①单个包大小限制为2M，这导致无法开发大型的应用，采用分包最大是20M；
-②需要像app一样审核上架，这点相对于H5的发布要麻烦一些；
-③处处受微信限制。例如不能直接分享到朋友圈，涉及到积分，或者虚拟交易的时候，小程序也是不允许的。
+① 单个包大小限制为 2M，这导致无法开发大型的应用，采用分包最大是 20M；
+② 需要像 app 一样审核上架，这点相对于 H5 的发布要麻烦一些；
+③ 处处受微信限制。例如不能直接分享到朋友圈，涉及到积分，或者虚拟交易的时候，小程序也是不允许的。
 
 ### 如何优化首次加载小程序的速度
 
@@ -2722,7 +2838,7 @@ tabBar 设置底部导航，最多 5 个，最少 2 个
 
 - 分包加载（优先采用，大幅降低主包体积）。
 
-- 图片优化（1.使用tinypng压缩图片素材； 2.服务器端支持，可采用webp格式）。
+- 图片优化（1.使用 tinypng 压缩图片素材； 2.服务器端支持，可采用 webp 格式）。
 
 - 组件化开发（易维护）。
 
@@ -2731,14 +2847,14 @@ tabBar 设置底部导航，最多 5 个，最少 2 个
 **请求优化**
 
 - 关键数据尽早请求(onLoad()阶段请求,次要数据可以通过事件触发再请求)；整合请求数据，降低请求次数。
-- 采用cdn缓存静态的接口数据（如判断用户登录状态，未登录则请求缓存接口数据），cdn稳定且就近访问速度快（针对加载总时长波动大）。
+- 采用 cdn 缓存静态的接口数据（如判断用户登录状态，未登录则请求缓存接口数据），cdn 稳定且就近访问速度快（针对加载总时长波动大）。
 - 缓存请求的接口数据。
 
 **首次渲染优化**
 
 - 图片懒加载（节省带宽）。
-- setData优化（不要一次性设置过多的数据等）。
-- DOM渲染优化（减少DOM节点）
+- setData 优化（不要一次性设置过多的数据等）。
+- DOM 渲染优化（减少 DOM 节点）
 
 ## 算法题
 
@@ -3666,6 +3782,7 @@ module.exports = {
 
 **webpack-dev-server**
 webpack-dev-server 是 webpack 官方推出的一款开发工具，将自动编译和自动刷新浏览器等一系列对开发友好的功能全部集成在了一起。同时，为了提高开发者日常的开发效率，只适用在开发阶段。在 webpack 配置对象属性中配置代理的代码如下：
+
 ```js
 // ./webpack.config.js
 const path = require('path')
@@ -3683,6 +3800,7 @@ module.exports = {
   }
 }
 ```
+
 其中，devServetr 里面 proxy 则是关于代理的配置，该属性为对象的形式，对象中每一个属性就是一个代理的规则匹配。
 
 属性的名称是需要被代理的请求路径前缀，一般为了辨别都会设置前缀为 /api，值为对应的代理匹配规则，对应如下：

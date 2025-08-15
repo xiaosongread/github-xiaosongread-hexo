@@ -9,7 +9,7 @@ hide: true
 ## -- 1991 年出生，2013.08 在北京从事前端至今。
 
 电子简历：
-[点击查看电子简历 (PDF)](https://huajianguo.oss-cn-beijing.aliyuncs.com/website/images/syb.pdf){:target="\_blank"}
+[点击查看电子简历 (PDF)](https://huajianguo.oss-cn-beijing.aliyuncs.com/website/images/syb.pdf)
 
 ### 工作历程
 
