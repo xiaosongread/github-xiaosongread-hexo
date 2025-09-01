@@ -19,8 +19,5 @@
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.3.3",
     "nvm": "0.0.4"
-  },
-  "volta": {
-    "node": "7.0.0"
   }
 }
