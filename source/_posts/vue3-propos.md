@@ -1,9 +1,11 @@
 ---
 layout: vue3
-title: vue3 通信方式
+title: vue3
 date: 2023-08-15 22:00:01
 tags:
 ---
+
+## vue3 通信方式
 本文会涉及的知识点：
 
 * [Props](#Props)
@@ -559,7 +561,8 @@ function handleClick() {
 > provide 可以配合 readonly 一起使用。
 provide 和 inject 其实主要是用在深层关系中传值
 
-### 总线 bus
+### 总线bus
+
 在 Vue2 有总线传值的方法，我们在 Vue3 中也可以自己模拟。
 这个方式其实有点像 Vuex 或者 Pinia 那样，弄一个独立的工具出来专门控制数据。
 但和 Vuex 或 Pinia 相比，我们自己写的这个方法并没有很好的数据跟踪之类的特性。
