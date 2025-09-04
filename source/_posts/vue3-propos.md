@@ -1,6 +1,6 @@
 ---
 layout: vue3
-title: vue3
+title: vue3 通信方式
 date: 2023-08-15 22:00:01
 tags:
 ---
