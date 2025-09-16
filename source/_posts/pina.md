@@ -16,6 +16,8 @@ npm install pinia
 
 ### **创建一个 pinia 实例**
 
+<!-- more -->
+
 创建一个 pinia 实例 (根 store) 并将其传递给应用：
 
 ```js
@@ -31,8 +33,6 @@ app.mount('#app')
 ```
 
 如果你使用的是 `Vue 2`，你还需要安装一个插件，并在应用的根部注入创建的 `pinia`：
-
-<!-- more -->
 
 ```js
 import { createPinia, PiniaVuePlugin } from 'pinia'
@@ -504,3 +504,389 @@ const store = useCounterStore()
 ```
 
 ### 访问其他 getter
+
+与计算属性一样，你也可以组合多个 getter。通过 `this`，你可以访问到其他任何 getter。在这种情况下，你需要为这个 getter 指定一个返回值的类型。
+
+```ts
+// counterStore.ts
+export const useCounterStore = defineStore('counter', {
+  state: () => ({
+    count: 0,
+  }),
+  getters: {
+    doubleCount(state) {
+      return state.count * 2
+    },
+    doubleCountPlusOne(): number {
+      return this.doubleCount + 1
+    },
+  },
+})
+```
+```ts
+// counterStore.js
+// 你可以在 JavaScript 中使用 JSDoc (https://jsdoc.app/tags-returns.html)
+export const useCounterStore = defineStore('counter', {
+  state: () => ({
+    count: 0,
+  }),
+  getters: {
+    // 类型是自动推断出来的，因为我们没有使用 `this`
+    doubleCount: (state) => state.count * 2,
+    // 这里我们需要自己添加类型(在 JS 中使用 JSDoc)
+    // 可以用 this 来引用 getter
+    /**
+     * 返回 count 的值乘以 2 加 1
+     *
+     * @returns {number}
+     */
+    doubleCountPlusOne() {
+      // 自动补全 ✨
+      return this.doubleCount + 1
+    },
+  },
+})
+```
+
+### 向 getter 传递参数
+
+***Getter*** 只是幕后的计算属性，所以不可以向它们传递任何参数。不过，你可以从 ***getter*** 返回一个函数，该函数可以接受任意参数：
+
+```js
+export const useUserListStore = defineStore('userList', {
+  getters: {
+    getUserById: (state) => {
+      return (userId) => state.users.find((user) => user.id === userId)
+    },
+  },
+})
+```
+并在组件中使用：
+
+```js
+import { useUserListStore } from './store'
+const userList = useUserListStore()
+const { getUserById } = storeToRefs(userList)
+// 请注意，你需要使用 `getUserById.value` 来访问
+// <script setup> 中的函数
+
+<template>
+  <p>User 2: {{ getUserById(2) }}</p>
+</template>
+```
+
+请注意，当你这样做时，**getter 将不再被缓存**。它们只是一个被你调用的函数。不过，你可以在 getter 本身中缓存一些结果，虽然这种做法并不常见，但有证明表明它的性能会更好：
+
+```js
+export const useUserListStore = defineStore('userList', {
+  getters: {
+    getActiveUserById(state) {
+      const activeUsers = state.users.filter((user) => user.active)
+      return (userId) => activeUsers.find((user) => user.id === userId)
+    },
+  },
+})
+```
+
+### 访问其他 store 的 getter
+想要使用另一个 store 的 getter 的话，那就直接在 getter 内使用就好：
+
+```js
+import { useOtherStore } from './other-store'
+
+export const useStore = defineStore('main', {
+  state: () => ({
+    // ...
+  }),
+  getters: {
+    otherGetter(state) {
+      const otherStore = useOtherStore()
+      return state.localData + otherStore.data
+    },
+  },
+})
+```
+
+### 使用 setup() 时的用法
+
+```js
+<script setup>
+const store = useCounterStore()
+store.count = 3
+store.doubleCount // 6
+</script>
+```
+
+---
+
+### 使用选项式 API 的用法
+
+在下面的例子中，你可以假设相关的 store 已经创建了：
+
+```js
+// 示例文件路径：
+// ./src/stores/counter.js
+
+import { defineStore } from 'pinia'
+
+export const useCounterStore = defineStore('counter', {
+  state: () => ({
+    count: 0,
+  }),
+  getters: {
+    doubleCount(state) {
+      return state.count * 2
+    },
+  },
+})
+```
+
+---
+
+## Action
+
+Action 相当于组件中的 `method`。它们可以通过 `defineStore()` 中的 `actions` 属性来定义，并且它们也是定义业务逻辑的完美选择。
+
+```js
+export const useCounterStore = defineStore('main', {
+  state: () => ({
+    count: 0,
+  }),
+  actions: {
+    increment() {
+      this.count++
+    },
+    randomizeCounter() {
+      this.count = Math.round(100 * Math.random())
+    },
+  },
+})
+```
+
+类似 ***getter***，action 也可通过 `this` 访问整个 store 实例，并支持完整的类型标注(以及自动补全✨)。不同的是，`action` 可以是异步的，你可以在它们里面 `await` 调用任何 API，以及其他 action！
+下面是一个使用 Mande 的例子。请注意，你使用什么库并不重要，只要你得到的是一个Promise。你甚至可以 (在浏览器中) 使用原生 fetch 函数：
+
+```js
+import { mande } from 'mande'
+
+const api = mande('/api/users')
+
+export const useUsers = defineStore('users', {
+  state: () => ({
+    userData: null,
+    // ...
+  }),
+
+  actions: {
+    async registerUser(login, password) {
+      try {
+        this.userData = await api.post({ login, password })
+        showTooltip(`Welcome back ${this.userData.name}!`)
+      } catch (error) {
+        showTooltip(error)
+        // 让表单组件显示错误
+        return error
+      }
+    },
+  },
+})
+```
+
+你也完全可以自由地设置任何你想要的参数以及返回任何结果。当调用 action 时，一切类型也都是可以被自动推断出来的。
+
+Action 可以像函数或者通常意义上的方法一样被调用：
+
+```ts
+<script setup>
+const store = useCounterStore()
+// 将 action 作为 store 的方法进行调用
+store.randomizeCounter()
+</script>
+<template>
+  <!-- 即使在模板中也可以 -->
+  <button @click="store.randomizeCounter()">Randomize</button>
+</template>
+```
+
+### 访问其他 store 的 action
+
+想要使用另一个 store 的话，那你直接在 ***action*** 中调用就好了：
+
+```ts
+import { useAuthStore } from './auth-store'
+
+export const useSettingsStore = defineStore('settings', {
+  state: () => ({
+    preferences: null,
+    // ...
+  }),
+  actions: {
+    async fetchUserPreferences() {
+      const auth = useAuthStore()
+      if (auth.isAuthenticated) {
+        this.preferences = await fetchPreferences()
+      } else {
+        throw new Error('User must be authenticated')
+      }
+    },
+  },
+})
+```
+
+### 使用选项式 API 的用法
+
+在下面的例子中，你可以假设相关的 store 已经创建了：
+
+```js
+// 示例文件路径：
+// ./src/stores/counter.js
+
+import { defineStore } from 'pinia'
+
+export const useCounterStore = defineStore('main', {
+  state: () => ({
+    count: 0,
+  }),
+  actions: {
+    increment() {
+      this.count++
+    },
+})
+```
+
+### 订阅 action
+
+你可以通过 `store.$onAction()` 来监听 action 和它们的结果。传递给它的回调函数会在 action 本身之前执行。`after` 表示在 promise 解决之后，允许你在 action 解决后执行一个回调函数。同样地，`onError` 允许你在 action 抛出错误或 reject 时执行一个回调函数。这些函数对于追踪运行时错误非常有用.
+
+这里有一个例子，在运行 action 之前以及 action resolve/reject 之后打印日志记录。
+
+```js
+const unsubscribe = someStore.$onAction(
+  ({
+    name, // action 名称
+    store, // store 实例，类似 `someStore`
+    args, // 传递给 action 的参数数组
+    after, // 在 action 返回或解决后的钩子
+    onError, // action 抛出或拒绝的钩子
+  }) => {
+    // 为这个特定的 action 调用提供一个共享变量
+    const startTime = Date.now()
+    // 这将在执行 "store "的 action 之前触发。
+    console.log(`Start "${name}" with params [${args.join(', ')}].`)
+
+    // 这将在 action 成功并完全运行后触发。
+    // 它等待着任何返回的 promise
+    after((result) => {
+      console.log(
+        `Finished "${name}" after ${
+          Date.now() - startTime
+        }ms.\nResult: ${result}.`
+      )
+    })
+
+    // 如果 action 抛出或返回一个拒绝的 promise，这将触发
+    onError((error) => {
+      console.warn(
+        `Failed "${name}" after ${Date.now() - startTime}ms.\nError: ${error}.`
+      )
+    })
+  }
+)
+
+// 手动删除监听器
+unsubscribe()
+```
+
+默认情况下，***action*** 订阅器会被绑定到添加它们的组件上(如果 store 在组件的 `setup()` 内)。这意味着，当该组件被卸载时，它们将被自动删除。如果你想在组件卸载后依旧保留它们，请将 `true` 作为第二个参数传递给 ***action*** 订阅器，以便将其从当前组件中分离：
+
+```js
+<script setup>
+const someStore = useSomeStore()
+// 此订阅器即便在组件卸载之后仍会被保留
+someStore.$onAction(callback, true)
+</script>
+```
+
+## 插件
+
+由于有了底层 API 的支持，Pinia store 现在完全支持扩展。以下是你可以扩展的内容：
+
+ + 为 store 添加新的属性
+ + 定义 store 时增加新的选项
+ + 为 store 增加新的方法
+ + 包装现有的方法
+ + 改变甚至取消 action
+ + 实现副作用，如**本地存储**
+ + 仅应用插件于特定 store
+
+插件是通过 `pinia.use()` 添加到 pinia 实例的。最简单的例子是通过返回一个对象将一个静态属性添加到所有 store。
+
+```js
+import { createPinia } from 'pinia'
+
+// 创建的每个 store 中都会添加一个名为 `secret` 的属性。
+// 在安装此插件后，插件可以保存在不同的文件中
+function SecretPiniaPlugin() {
+  return { secret: 'the cake is a lie' }
+}
+
+const pinia = createPinia()
+// 将该插件交给 Pinia
+pinia.use(SecretPiniaPlugin)
+
+// 在另一个文件中
+const store = useStore()
+store.secret // 'the cake is a lie'
+```
+
+这对添加全局对象很有用，如路由器、modal 或 toast 管理器。
+
+### 简介
+Pinia 插件是一个函数，可以选择性地返回要添加到 store 的属性。它接收一个可选参数，即 context。
+
+```js
+export function myPiniaPlugin(context) {
+  context.pinia // 用 `createPinia()` 创建的 pinia。
+  context.app // 用 `createApp()` 创建的当前应用(仅 Vue 3)。
+  context.store // 该插件想扩展的 store
+  context.options // 定义传给 `defineStore()` 的 store 的可选对象。
+  // ...
+}
+```
+
+然后用 `pinia.use()` 将这个函数传给 `pinia`：
+
+```js
+pinia.use(myPiniaPlugin)
+```
+
+### 扩展 store
+
+你可以通过返回一个对象来向 store 添加新的属性：
+
+```js
+pinia.use(() => ({ hello: 'world' }))
+```
+你也可以直接在 store 上设置该属性，但可以的话，请使用返回对象的方法，这样它们就能被 devtools 自动追踪到：
+
+```js
+pinia.use(({ store }) => {
+  store.hello = 'world'
+})
+```
+
+任何由插件返回的属性都会被 devtools 自动追踪，所以如果你想在 devtools 中调试 hello 属性，为了使 devtools 能追踪到 hello，请确保在 dev 模式下将其添加到 store._customProperties 中：
+
+```js
+// 上文示例
+pinia.use(({ store }) => {
+  store.hello = 'world'
+  // 确保你的构建工具能处理这个问题，webpack 和 vite 在默认情况下应该能处理。
+  if (process.env.NODE_ENV === 'development') {
+    // 添加你在 store 中设置的键值
+    store._customProperties.add('hello')
+  }
+})
+```
+
+
