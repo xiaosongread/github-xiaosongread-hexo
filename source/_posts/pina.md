@@ -1,5 +1,5 @@
 ---
-title: pina
+title: 再读 pinia 官方文档
 categories: js-end
 date: 2025-09-10 16:45:53
 ---
@@ -889,4 +889,282 @@ pinia.use(({ store }) => {
 })
 ```
 
+## 在组件外使用 store
 
+Pinia store 依靠 `pinia` 实例在所有调用中共享同一个 store 实例。大多数时候，只需调用你定义的 `useStore()` 函数，完全开箱即用。例如，在 `setup()` 中，你不需要再做任何事情。但在组件之外，情况就有点不同了。 实际上，`useStore()` 给你的 `app` 自动注入了 `pinia` 实例。这意味着，如果 `pinia` 实例不能自动注入，你必须手动提供给 `useStore()` 函数。 你可以根据不同的应用，以不同的方式解决这个问题。
+
+### 单页面应用
+
+如果你不做任何 SSR(服务器端渲染)，在用 `app.use(pinia)` 安装 pinia 插件后，对 `useStore()` 的任何调用都会正常执行：
+
+```js
+import { useUserStore } from '@/stores/user'
+import { createPinia } from 'pinia'
+import { createApp } from 'vue'
+import App from './App.vue'
+
+// ❌  失败，因为它是在创建 pinia 之前被调用的
+const userStore = useUserStore()
+
+const pinia = createPinia()
+const app = createApp(App)
+app.use(pinia)
+
+// ✅ 成功，因为 pinia 实例现在激活了
+const userStore = useUserStore()
+```
+
+为确保 pinia 实例被激活，最简单的方法就是将 `useStore()` 的调用放在 pinia 安装后才会执行的函数中。
+
+让我们来看看这个在 Vue Router 的导航守卫中使用 store 的例子。
+
+```js
+import { createRouter } from 'vue-router'
+const router = createRouter({
+  // ...
+})
+
+// ❌ 由于引入顺序的问题，这将失败
+const store = useStore()
+
+router.beforeEach((to, from, next) => {
+  // 我们想要在这里使用 store
+  if (store.isLoggedIn) next()
+  else next('/login')
+})
+
+router.beforeEach((to) => {
+  // ✅ 这样做是可行的，因为路由器是在其被安装之后开始导航的，
+  // 而此时 Pinia 也已经被安装。
+  const store = useStore()
+
+  if (to.meta.requiresAuth && !store.isLoggedIn) return '/login'
+})
+```
+### 服务端渲染应用
+
+当处理服务端渲染时，你将必须把 `pinia` 实例传递给 `useStore()`。这可以防止 pinia 在不同的应用实例之间共享全局状态。
+
+## 服务端渲染 (SSR)
+
+只要你只在 `setup` 函数、`getter` 和 `action` 的顶部调用你定义的 `useStore()` 函数，那么使用 Pinia 创建 store 对于 SSR 来说应该是开箱即用的：
+
+```js
+<script setup>
+// 这是可行的，
+// 因为 pinia 知道在 `setup` 中运行的是什么程序。
+const main = useMainStore()
+</script>
+```
+
+### 在 setup() 外部使用 store
+如果你需要在其他地方使用 store，你需要将**原本被传递给应用** 的 `pinia` 实例传递给 `useStore()` 函数：
+
+```js
+const pinia = createPinia()
+const app = createApp(App)
+
+app.use(router)
+app.use(pinia)
+
+router.beforeEach((to) => {
+  // ✅这会正常工作，因为它确保了正确的 store 被用于
+  // 当前正在运行的应用
+  const main = useMainStore(pinia)
+
+  if (to.meta.requiresAuth && !main.isLoggedIn) return '/login'
+})
+```
+
+Pinia 会将自己作为 `$pinia` 添加到你的应用中，所以你可以在 `serverPrefetch()` 等函数中使用它。
+
+```js
+export default {
+  serverPrefetch() {
+    const store = useStore(this.$pinia)
+  },
+}
+```
+
+### State 激活
+为了激活初始 state，你需要确保 rootState 包含在 HTML 中的某个地方，以便 Pinia 稍后能够接收到它。根据你服务端所渲染的内容，为了安全你应该转义 state。我们推荐 Nuxt 目前使用的 [@nuxt/devalue](https://github.com/nuxt-contrib/devalue)：
+
+```js
+import devalue from '@nuxt/devalue'
+import { createPinia } from 'pinia'
+// 检索服务端的 rootState
+const pinia = createPinia()
+const app = createApp(App)
+app.use(router)
+app.use(pinia)
+
+// 渲染页面后，rootState 被建立，
+// 可以直接在 `pinia.state.value`上读取。
+
+// 序列化，转义(如果 state 的内容可以被用户改变，这点就非常重要，几乎都是这样的)
+// 并将其放置在页面的某处
+// 例如，作为一个全局变量。
+devalue(pinia.state.value)
+```
+
+根据你服务端所渲染的内容，你将设置一个初始状态变量，该变量将在 HTML 中被序列化。你还应该保护自己免受 XSS 攻击。例如，在 [vite-ssr](https://github.com/frandiox/vite-ssr)中你可以使用transformState 选项 以及 [@nuxt/devalue](https://github.com/frandiox/vite-ssr#state-serialization)：
+
+```js
+import devalue from '@nuxt/devalue'
+
+export default viteSSR(
+  App,
+  {
+    routes,
+    transformState(state) {
+      return import.meta.env.SSR ? devalue(state) : state
+    },
+  },
+  ({ initialState }) => {
+    // ...
+    if (import.meta.env.SSR) {
+      // 序列化并设置为 window.__INITIAL_STATE__
+      initialState.pinia = pinia.state.value
+    } else {
+      // 在客户端，我们恢复 state
+      pinia.state.value = initialState.pinia
+    }
+  }
+)
+```
+
+你可以根据你的需要使用 `@nuxt/devalue` 的**其他替代品**，例如，你也可以用 `JSON.stringify()/JSON.parse()` 来序列化和解析你的 state，这样你可以把性能提高很多。
+
+也可以根据你的环境调整这个策略。但确保在客户端调用任何 `useStore()` 函数之前，激活 pinia 的 state。例如，如果我们将 state 序列化为一个 `<script>` 标签，并在客户端通过 `window.__pinia` 全局访问它，我们可以这样写：
+
+```js
+const pinia = createPinia()
+const app = createApp(App)
+app.use(pinia)
+
+// 必须由用户设置
+if (isClient) {
+  pinia.state.value = JSON.parse(window.__pinia)
+}
+```
+
+### Nuxt
+
+搭配 **Nuxt** 的 Pinia 更易用，因为 Nuxt 处理了很多与服务器端渲染有关的事情。例如，你不需要关心序列化或 XSS 攻击。Pinia 既支持 Nuxt Bridge 和 Nuxt 3，也支持纯 Nuxt 2。
+
+#### 安装
+
+```bash
+yarn add pinia @pinia/nuxt
+# 或者使用 npm
+npm install pinia @pinia/nuxt
+```
+
+> 如果你正在使用 npm，你可能会遇到 ERESOLVE unable to resolve dependency tree 错误。如果那样的话，将以下内容添加到 package.json 中：
+```json
+{
+  "overrides": {
+    "vue": "latest"
+  }
+}
+```
+
+我们提供了一个 ***module*** 来为你处理一切，你只需要在 `nuxt.config.js` 文件的 `modules` 中添加它。
+
+```js
+// nuxt.config.js
+export default defineNuxtConfig({
+  // ... 其他配置
+  modules: [
+    // ...
+    '@pinia/nuxt',
+  ],
+})
+```
+
+这样配置就完成了，正常使用 store 就好啦!
+
+#### 在 setup() 外部使用 store
+
+如果你想在 `setup()` 外部使用一个 store，记得把 `pinia` 对象传给 `useStore()`。我们会把它添加到**上下文**中，然后你就可以在 `asyncData()` 和 `fetch()` 中访问它了：
+
+```js
+import { useStore } from '~/stores/myStore'
+
+export default {
+  asyncData({ $pinia }) {
+    const store = useStore($pinia)
+  },
+}
+```
+
+与 `onServerPrefetch()` 一样，如果你想在 a`syncData()` 中调用一个存储动作，你不需要做任何特别的事情。
+
+```js
+<script setup>
+const store = useStore()
+const { data } = await useAsyncData('user', () => store.fetchUser())
+</script>
+```
+
+#### 自动引入
+默认情况下，`@pinia/nuxt` 会暴露一个自动引入的方法：`usePinia()`，它类似于 `getActivePinia()`，但在 Nuxt 中效果更好。你可以添加自动引入来减轻你的开发工作：
+
+```js
+// nuxt.config.js
+export default defineNuxtConfig({
+  // ... 其他配置
+  modules: [
+    // ...
+    [
+      '@pinia/nuxt',
+      {
+        autoImports: [
+          // 自动引入 `defineStore()`
+          'defineStore',
+          // 自动引入 `defineStore()` 并重命名为 `definePiniaStore()`
+          ['defineStore', 'definePiniaStore'],
+        ],
+      },
+    ],
+  ],
+})
+```
+
+#### 纯 Nuxt 2
+`@pinia/nuxt` v0.2.1 之前的版本中，Pinia 都支持 Nuxt 2。请确保在安装 pinia 的同时也安装 [@nuxtjs/composition-api](https://composition-api.nuxtjs.org/):
+
+```bash
+yarn add pinia @pinia/nuxt@0.2.1 @nuxtjs/composition-api
+# 使用 npm
+npm install pinia @pinia/nuxt@0.2.1 @nuxtjs/composition-api
+```
+
+我们提供了一个 ***module*** 来为你处理一切工作，你只需要在 `nuxt.config.js` 文件的 `buildModules` 中添加它。
+
+```js
+// nuxt.config.js
+export default {
+  // ... 其他配置
+  buildModules: [
+    // 仅支持 Nuxt 2:
+    // https://composition-api.nuxtjs.org/getting-started/setup#quick-start
+    '@nuxtjs/composition-api/module',
+    '@pinia/nuxt',
+  ],
+}
+```
+
+#### Pinia 搭配 Vuex 使用
+建议避免同时使用 Pinia 和 Vuex，但如果你确实需要同时使用，你需要告诉 Pinia 不要禁用它：
+
+```js
+// nuxt.config.js
+export default {
+  buildModules: [
+    '@nuxtjs/composition-api/module',
+    ['@pinia/nuxt', { disableVuex: false }],
+  ],
+  // ... 其他配置
+}
+```
