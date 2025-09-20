@@ -1,7 +1,7 @@
 ---
 title: 再读 pinia 官方文档
 categories: js-end
-date: 2025-09-10 16:45:53
+date: 2025-06-10 16:45:53
 ---
 ## 安装
 用你喜欢的包管理器安装 `pinia`：
