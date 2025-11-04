@@ -529,6 +529,114 @@ console.log(a); // 1
 
 文档参考：[ES6 入门教程](https://es6.ruanyifeng.com/)
 
+### — 字符窜常用的方法
+
+在 JavaScript 中，处理字符串（通常称为字符串操作或字符串方法）是一项基本且重要的任务。JavaScript 提供了丰富的内置方法来操作字符串。以下是一些常用的字符串方法：
+
+#### length
+
+‌ 描述 ‌：返回字符串的长度。
+
+```javascript
+let text = "Hello";
+console.log(text.length); // 输出：5
+```
+
+#### charAt(index)
+
+‌ 描述 ‌：返回指定索引位置的字符。
+
+```javascript
+let text = "Hello";
+console.log(text.charAt(1)); // 输出："e"
+```
+
+#### charCodeAt(index)
+
+‌ 描述 ‌：返回指定索引位置的字符的 Unicode 编码。
+
+```javascript
+let text = "Hello";
+console.log(text.charCodeAt(1)); // 输出：101
+```
+
+#### concat(...strings)
+
+‌ 描述 ‌：连接两个或多个字符串，并返回新的字符串。
+
+```javascript
+let text1 = "Hello, ";
+let text2 = "World!";
+console.log(text1.concat(text2)); // 输出："Hello, World!"
+```
+
+#### indexOf(searchValue, fromIndex)
+
+‌ 描述 ‌：返回某个指定的字符串值在字符串中首次出现的位置，如果没有找到则返回-1。fromIndex 是开始查找的位置。
+
+```javascript
+let text = "Hello World";
+console.log(text.indexOf("World")); // 输出：6
+```
+
+#### slice(start, end)
+
+‌ 描述 ‌：提取字符串的一部分，并返回一个新字符串，不修改原字符串。start 是开始提取的位置，end 是停止提取的位置（不包括该位置）。
+
+```javascript
+let text = "Hello World";
+console.log(text.slice(0, 5)); // 输出："Hello"
+```
+
+#### substring(start, end)
+
+‌ 描述 ‌：与 slice 类似，但参数不能是负值。
+
+```javascript
+let text = "Hello World";
+console.log(text.substring(0, 5)); // 输出："Hello"
+```
+
+#### substr(start, length)
+
+‌ 描述 ‌：从起始索引号的字符开始提取指定数目的字符。在 ES6 中已被 slice 和 substring 取代。
+‌ 示例 ‌（已过时）：
+
+```javascript
+let text = "Hello World";
+console.log(text.substr(0, 5)); // 输出："Hello" （不推荐使用）
+```
+
+#### toUpperCase() 和 toLowerCase()
+
+‌ 描述 ‌：将字符串转换为全大写或全小写。
+
+```javascript
+let text = "Hello World";
+console.log(text.toUpperCase()); // 输出："HELLO WORLD"
+console.log(text.toLowerCase()); // 输出："hello world"
+```
+
+#### trim()、trimStart() 和 trimEnd() (或在旧版浏览器中使用 trimLeft() 和 trimRight())
+
+‌ 描述 ‌：去除字符串两端的空白字符。trimStart() 和 trimEnd() 是 ES2019 新增的。
+
+```javascript
+let text = " Hello World ";
+console.log(text.trim()); // 输出："Hello World"
+console.log(text.trimStart()); // 输出："Hello World " (ES2019) 或使用 trimLeft() 在旧版浏览器中。
+console.log(text.trimEnd()); // 输出：" Hello World" (ES2019) 或使用 trimRight() 在旧版浏览器中。
+```
+
+#### replace(searchFor, replaceWith)
+
+‌ 描述 ‌：在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
+
+```javascript
+let text = "Hello World";
+console.log(text.replace("World", "Universe")); // 输出："
+```
+
 ### — 数组常用的方法
 
 <h4>增删改</h4>
@@ -2501,20 +2609,26 @@ If(menus.find(menu))
 })
 最后筛选出的路由，通过 addRoute 这个方法，动态添加上去，这一步通常会在路由守卫中完成（router.beforeEach）,遍历这份动态路由（asyncRoutes.forEach），判断当前遍历项是否存在于后端返回的菜单列表中，那返回一个筛选完成的路由数组，最后我们就可以用这份路由数组去渲染菜单栏了。
 
-### vue 的data 为什么是函数，methods 为什么是对象，mounted为什么是函数
+### vue 的 data 为什么是函数，methods 为什么是对象，mounted 为什么是函数
+
 **1.data 是函数，是为了防止多个组件实例之间共用一个 data，造成数据污染，确保数据独立性。**
 在 Vue.js 中，`data`、`methods` 和 `mounted` 的设计差异是由它们在 Vue 实例（或组件）中的不同作用和作用域决定的。下面详细解释每部分的设计原因：
 
 ---
 
 #### **1. `data` 为什么是函数？**
+
 ##### **原因**：防止多个组件实例共享同一份数据对象，确保数据独立性。
+
 - **组件复用时的问题**
+
   - 如果 `data` 是**对象**（在 `Vue.component` 或 `.vue` 文件中的组件定义），所有实例会**共享**同一个数据引用，导致数据意外污染。
   - 例子（假设 `data` 是对象）：
     ```javascript
     // ❌ 错误：所有组件实例会共享 data 对象
-    data: { count: 0 }  // 所有实例的 count 会同步变化
+    data: {
+      count: 0;
+    } // 所有实例的 count 会同步变化
     ```
 
 - **函数返回对象的作用**
@@ -2528,13 +2642,17 @@ If(menus.find(menu))
 - **类比**：类似 JavaScript 中工厂模式（Factory Pattern）的作用。
 
 ##### **注意**
+
 在 `new Vue()`（根实例）中，`data` 可以直接是对象，因为根实例**只初始化一次**，不会复用。
 
 ---
 
 #### **2. `methods` 为什么是对象？**
+
 ##### **原因**：方法不需要隔离，所有实例可以共享同一组方法逻辑。
+
 - **方法是无状态的**
+
   - 方法（函数）本身不会存储数据，操作的始终是实例的 `data` 或 `props`。
   - 共享方法可以节省内存，无需每个实例重新创建一遍函数。
     ```javascript
@@ -2551,8 +2669,11 @@ If(menus.find(menu))
 ---
 
 #### **3. `mounted`（生命周期钩子）为什么是函数？**
+
 ##### **原因**：需要在特定时间点执行自定义逻辑。
+
 - **生命周期的本质**
+
   - 生命周期钩子是 Vue 在实例化过程中**自动调用**的函数，用于在特定阶段（如 DOM 挂载完成后）执行代码。
   - 函数形式可以灵活编写逻辑：
     ```javascript
@@ -2568,20 +2689,19 @@ If(menus.find(menu))
 ---
 
 #### **总结对比**
-| 选项        | 类型     | 原因                                                                 |
-|-------------|---------|----------------------------------------------------------------------|
-| **`data`**  | 函数     | 防止组件复用时的数据共享问题，每次返回新对象。                       |
-| **`methods`** | 对象   | 方法无状态，可共享逻辑，避免重复创建。                               |
-| **`mounted`** | 函数   | 生命周期钩子需要在特定时机执行代码，与组件实例绑定。                |
+
+| 选项          | 类型 | 原因                                                 |
+| ------------- | ---- | ---------------------------------------------------- |
+| **`data`**    | 函数 | 防止组件复用时的数据共享问题，每次返回新对象。       |
+| **`methods`** | 对象 | 方法无状态，可共享逻辑，避免重复创建。               |
+| **`mounted`** | 函数 | 生命周期钩子需要在特定时机执行代码，与组件实例绑定。 |
 
 #### **补充：其他相关设计**
+
 - **`computed`**：是对象，因为计算属性是基于缓存的，需要挂载到实例上。
 - **`watch`**：是对象，监听属性变化时执行回调。
 
 理解这些设计差异能帮助你更好地组织 Vue 组件代码！ 🚀
-
-
-
 
 ### vue2.0 和 vue3.0 的区别
 
