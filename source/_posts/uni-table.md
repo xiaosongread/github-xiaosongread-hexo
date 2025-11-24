@@ -1,7 +1,7 @@
 ---
-title: uni-table
+title: uni-table 支持微信小程序的 table 组件
 categories: js-end
-date: 2025-11-24 16:22:53
+date: 2025-10-18 16:22:53
 ---
 
 微信小程序端的 table 组件，支持列、合并行、列、横向滚动条的功能。
@@ -508,4 +508,4 @@ date: 2025-11-24 16:22:53
 </style>
 ```
 
-<img src="/images/img-folder/1.png">
+<img src="/images/img-folder/unitable.png">
